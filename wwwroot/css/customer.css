@@ -1,0 +1,214 @@
+﻿/* 1. THIẾT LẬP CHUNG */
+html {
+    font-size: 14px;
+}
+
+body {
+    background-color: #f0f2f5; /* Màu nền xám nhạt */
+    padding-top: 100px; /* Đệm cho header (top-nav) */
+    padding-bottom: 70px; /* Đệm cho footer (bottom-nav) */
+}
+
+/* 2. THANH NAV TRÊN (HEADER) VÀ DƯỚI (FOOTER) */
+.top-nav, .bottom-nav {
+    background-image: linear-gradient(to right, #34a853, #5fbe76);
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+    .top-nav .user-info {
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+
+        .top-nav .user-info i {
+            margin-right: 10px;
+        }
+
+        .top-nav .user-info div {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .top-nav .user-info span {
+            font-size: 0.8rem;
+        }
+
+    .top-nav .nav-icons .flag-icon {
+        width: 24px; 
+        height: 24px; 
+        border-radius: 50%; 
+        object-fit: cover; 
+        margin-right: 5px; 
+        vertical-align: middle; 
+    }
+    .top-nav .nav-icons i {
+        margin-left: 5px;
+        margin-right: 10px;
+        font-size: 1.2rem;
+        color: white;
+    }
+
+    .bottom-nav .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.7); /* Màu icon mờ */
+        font-size: 0.8rem;
+    }
+
+        .bottom-nav .nav-item.active {
+            color: white; /* Màu icon khi được chọn */
+        }
+
+/* 3. THANH TÌM KIẾM VÀ LỌC */
+.search-bar {
+    border-radius: 25px;
+    overflow: hidden;
+    height: 38px;
+}
+
+    .search-bar .form-control,
+    .search-bar .input-group-text {
+        border: none !important;
+        background-color: white !important;
+    }
+
+        .search-bar .form-control:focus {
+            box-shadow: none !important;
+        }
+
+        .search-bar .input-group-text i {
+            color: #888;
+        }
+
+.filter-btn {
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    height: 38px;
+}
+
+    .filter-btn i {
+        color: #34a853;
+    }
+
+/* 4. THẺ SÂN (CARD) */
+.court-card-grid {
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .court-card-grid .card-img-top {
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .court-card-grid .card-body {
+        padding: 10px;
+    }
+
+    /* Style cho avatar trong card-body */
+    .court-card-grid .court-card-avatar {
+        width: 40px; /* Kích thước avatar */
+        height: 40px;
+        border-radius: 50%; /* Bo tròn ảnh */
+        object-fit: cover;
+        flex-shrink: 0; /* Không cho avatar bị co lại khi thiếu không gian */
+    }
+
+    /* Style cho chữ */
+    .court-card-grid .card-title {
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 2px; /* Giảm khoảng cách */
+    }
+
+    .court-card-grid .card-text {
+        font-size: 0.85rem;
+        color: #555;
+        margin-bottom: 2px; /* Giảm khoảng cách */
+    }
+
+        .court-card-grid .card-text i {
+            margin-right: 5px;
+            color: #34a853;
+        }
+
+    .court-card-grid .btn-success {
+        background-color: #34a853;
+        border-color: #34a853;
+        font-size: 0.9rem;
+    }
+
+    /* Style cho icon trên ảnh */
+    .court-card-grid .card-icons-top {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 5px;
+    }
+
+    .icon-btn {
+        background-color: #f0f2f5;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #34a853;
+        font-size: 1.1rem;
+        cursor: pointer;
+    }
+
+    .icon-btn:hover {
+        background-color: #e0e0e0;
+    }
+    /* Style nút trái tim to khi được chọn */
+    .icon-btn.fav-btn.favorited {
+        color: #e74c3c;
+        background-color: #fdd;
+    }
+
+    /* Style cho nút nhỏ trên ảnh */
+    .icon-btn-sm {
+        background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ giống badge cũ */
+        border: none;
+        border-radius: 50%; /* Bo tròn */
+        width: 28px; /* Kích thước nhỏ hơn */
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #34a853; /* Màu icon xanh */
+        font-size: 0.8rem; /* Icon nhỏ hơn */
+        cursor: pointer;
+        padding: 0; /* Xóa padding mặc định của button */
+    }
+    /* Hiệu ứng khi di chuột vào nút nhỏ */
+    .icon-btn-sm:hover {
+        background-color: white; /* Nền trắng rõ khi hover */
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Thêm bóng đổ nhẹ */
+    }
+    /* Style nút trái tim NHỎ khi được chọn */
+    .icon-btn-sm.fav-btn.favorited {
+        color: #e74c3c; /* Màu đỏ */
+        background-color: rgba(255, 221, 221, 0.9); /* Nền hồng mờ */
+    }
