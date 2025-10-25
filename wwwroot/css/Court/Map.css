@@ -1,0 +1,83 @@
+﻿body {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.slider::-webkit-scrollbar {
+    display: none;
+}
+
+i.fa-location-dot {
+    color: red;
+}
+
+.corner-btn {
+    position: fixed;
+    bottom: 20px; /* cách mép dưới */
+    right: 20px; /* cách mép trái */
+    display: flex;
+    flex-direction: row; /* xếp dọc */
+    gap: 10px; /* khoảng cách giữa 2 nút */
+    z-index: 1000; /* đảm bảo nổi lên trên */
+}
+
+.btn-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* bo tròn */
+    border: none;
+    background-color: #2e7d32; /* xanh lá */
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+/* Tab danh sách sân */
+.field-tab {
+    position: fixed;
+    bottom: 20px;
+    left: 90px; /* ngay bên cạnh nút */
+    width: 260px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    padding: 15px;
+    opacity: 0;
+    transform: translateX(-20px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* Khi tab được mở */
+.field-tab.show {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.field-tab h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #2e7d32;
+}
+
+.field-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.field-list li {
+    padding: 8px 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.field-list li:hover {
+    background-color: #f5f5f5;
+}
