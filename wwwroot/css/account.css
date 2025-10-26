@@ -5,7 +5,7 @@ body {
     background: url('/images/login_background.jpg') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
-    display: flex;
+    display:flex;
     align-items: center;
     justify-content: center;
     animation: fadeIn 1s ease-in-out;
@@ -14,7 +14,7 @@ body {
 /* ========== CARD QUÊN MẬT KHẨU ========== */
 .forgot-card {
     width: 80%;
-    max-width: 700px;
+    max-width: 640px;
     background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
     border-radius: 18px;
     padding: 48px 40px;
@@ -68,8 +68,8 @@ body {
 
 /* ========== INPUT CHUNG ========== */
 .input-box {
-    width: 70%;
-    min-width: 260px;
+    width: 90%;
+    min-width: 320px;
     margin: 20px auto;
     position: relative;
 }
@@ -190,3 +190,4 @@ body {
         transform: translateY(0);
     }
 }
+
