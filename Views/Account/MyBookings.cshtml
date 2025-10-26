@@ -1,0 +1,63 @@
+﻿@{
+    // BÁO VỚI HỆ THỐNG DÙNG LAYOUT DASHBOARD MỚI
+    Layout = "_DashboardLayout";
+    ViewData["Title"] = "Lịch đã đặt";
+}
+
+<style>
+    .dashboard-content {
+        background-color: #f0f2f5; /* Nền xám nhạt như trong ảnh */
+        border-radius: 10px;
+        padding: 1.5rem;
+        min-height: 600px;
+    }
+
+    .content-header {
+        /* Tiêu đề nền gradient */
+        background: linear-gradient(90deg, #0C6478 0%, #46DFB1 100%);
+        color: #fff;
+        padding: 1.25rem 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+        .content-header h4 {
+            margin: 0;
+        }
+
+    .view-all-btn {
+        background-color: #fff;
+        color: #333;
+        border-radius: 6px;
+        padding: 0.5rem 0.75rem;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .empty-state {
+        text-align: center;
+        margin-top: 5rem;
+        color: #777;
+        font-weight: 500;
+    }
+</style>
+
+<div class="dashboard-content">
+
+    <div class="content-header">
+        <h4>Danh sách đặt lịch</h4>
+        <a href="#" class="view-all-btn">
+            Xem tất cả <i class="fas fa-calendar-alt ms-1"></i>
+        </a>
+    </div>
+
+    <div class="empty-state">
+        <p>bạn chưa có lịch đặt</p>
+    </div>
+
+</div>

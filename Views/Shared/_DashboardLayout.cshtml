@@ -1,0 +1,182 @@
+﻿@{
+    // Layout này sẽ được lồng bên trong _Layout.cshtml chính
+    Layout = "_Layout";
+}
+
+<style>
+    body {
+        /* Dùng lại gradient nền của bạn */
+        background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
+        background-attachment: fixed;
+    }
+
+    /* === CỘT MENU BÊN TRÁI (SIDEBAR) === */
+    .dashboard-sidebar {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    /* Phần thông tin người dùng */
+    .user-info {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        transition: background-color 0.2s;
+    }
+    .user-info:hover {
+        background-color: #f8f8f8;
+    }
+    .user-info img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-right: 0.75rem;
+        object-fit: cover;
+    }
+    .user-info h5 {
+        margin: 0;
+        font-weight: 600;
+        color: #333;
+        font-size: 1.1rem;
+    }
+
+    /* 4 nút hành động nhanh */
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .action-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 0.25rem;
+        /* Nền xanh lá nhạt */
+        background-color: #E6F8F0;
+        /* Viền xanh */
+        border: 1px solid #09D1C7;
+        border-radius: 8px;
+        font-size: 0.75rem;
+        color: #555;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.2s;
+        font-weight: 500;
+    }
+    .action-btn i {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+        color: #0C6478;
+    }
+    .action-btn:hover {
+        opacity: 0.8;
+    }
+
+    /* Menu chính (dùng list-group của Bootstrap) */
+    .dashboard-menu .list-group-item {
+        border: none;
+        padding: 0.9rem 0.25rem;
+        color: #333;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+    }
+    .dashboard-menu .list-group-item i.menu-icon {
+        margin-right: 1rem;
+        width: 20px;
+        text-align: center;
+        color: #555;
+        font-size: 1.1rem;
+    }
+    .dashboard-menu .list-group-item:hover {
+        color: #0C6478;
+    }
+    .dashboard-menu .list-group-item .arrow-icon {
+        color: #aaa;
+    }
+
+</style>
+
+<div class="container py-5">
+    <div class="row">
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="dashboard-sidebar">
+
+                <a asp-action="Profile" asp-controller="Account" class="user-info text-decoration-none">
+                    <img src="https://via.placeholder.com/100" alt="Avatar" />
+                    <h5>Người dùng</h5>
+                    <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                </a>
+
+                <div class="text-muted small mb-2">Hạng thành viên</div>
+                <div class="quick-actions">
+                    <a asp-action="MyBookings" asp-controller="Account" class="action-btn">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Lịch đã đặt</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-bell"></i>
+                        <span>Thông báo</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-wallet"></i>
+                        <span>Thanh toán</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-tags"></i>
+                        <span>Ưu đãi</span>
+                    </a>
+                </div>
+
+                <div class="list-group dashboard-menu">
+                    <small class="text-muted text-uppercase ps-1 my-2">Hoạt động</small>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-heart menu-icon"></i>
+                        <span>Sân yêu thích</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-users menu-icon"></i>
+                        <span>Nhóm của tôi</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+
+                    <small class="text-muted text-uppercase ps-1 my-2 pt-2">Hệ thống</small>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-cog menu-icon"></i>
+                        <span>Cài đặt</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-question-circle menu-icon"></i>
+                        <span>Trung tâm trợ giúp</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-shield-alt menu-icon"></i>
+                        <span>Điều khoản và chính sách</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-sign-out-alt menu-icon"></i>
+                        <span>Đăng xuất</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            @RenderBody()
+        </div>
+    </div>
+</div>
