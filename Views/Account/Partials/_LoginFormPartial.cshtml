@@ -1,0 +1,27 @@
+﻿@model SportCourtManagement.Models.Account.LoginViewModel
+
+<div class="login-card" role="main">
+    <h2>Đăng Nhập</h2>
+
+    <form method="post" class="w-100 d-flex flex-column align-items-center">
+        <div class="input-box">
+            <input type="email" name="email" placeholder="Email của bạn?" required />
+            <span class="icon">
+                <img src="~/images/delete.png" />
+            </span>
+        </div>
+
+        <div class="input-box">
+            <input id="passwordField" type="password" name="password" placeholder="Mật Khẩu(*)" required />
+            <span class="icon toggle-password" title="Hiện/Ẩn mật khẩu"></span>
+        </div>
+
+        <button type="submit" class="btn btn-login">Đăng Nhập</button>
+    </form>
+
+    <div class="links-row">
+        <a href="@Url.Action("LoginByPhone", "Account")">Đăng nhập bằng Số điện thoại</a>
+        <a href="@Url.Action("Register", "Account")">Bạn chưa có tài khoản? <b>Đăng ký</b></a>
+        <a href="@Url.Action("ForgotPassword", "Account")">Bạn quên mật khẩu? <b>Quên mật khẩu?</b></a>
+    </div>
+</div>
