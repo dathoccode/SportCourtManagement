@@ -1,90 +1,7 @@
-﻿@model SportCourtManagement.Models.UserProfileViewModel
-@{
+﻿@{
     ViewData["Title"] = "Chỉnh sửa hồ sơ";
 }
-
-<style>
-    body {
-        background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
-        color: #333; /* Đổi màu chữ mặc định thành màu tối */
-    }
-
-    /* Thêm position relative cho cột chính */
-    .profile-column {
-        position: relative;
-    }
-
-    .profile-banner {   
-        height: 150px;
-        background-image: url('/images/caulong.jpg');
-        background-size: cover;
-        background-position: center;
-    }
-
-    /* CSS CHO AVATAR */
-    .profile-avatar-container {
-        position: absolute;
-        width: 100%;
-        top: 100px; /* Điều chỉnh nếu avatar bị lệch */
-        display: flex;
-        justify-content: center;
-        z-index: 10; /* Đảm bảo avatar nằm trên banner và form */
-    }
-
-    .profile-avatar {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        border: 4px solid #fff;
-        background-color: #fff; /* Nền trắng phòng khi ảnh vỡ hoặc chưa có */
-        /* THÊM DÒNG NÀY ĐỂ AVATAR CŨNG CÓ POSITION RELATIVE */
-        
-    }
-
-    /* CSS CHO ICON MÁY ẢNH */
-    .avatar-camera-icon {
-        position: absolute;
-        bottom: 0; /* Nằm ở dưới cùng của avatar */
-        right: 0; /* Nằm ở bên phải cùng của avatar */
-        background-color: #09D1C7; /* Màu xanh từ bảng màu của bạn */
-        color: white;
-        border-radius: 50%; /* Làm tròn thành hình tròn */
-        width: 25px; /* Kích thước icon */
-        height: 25px; /* Kích thước icon */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 0.8rem;
-        cursor: pointer;
-        border: 2px solid white; /* Viền trắng */
-        z-index: 5;
-    }
-
-    /* CSS CHO CARD FORM */
-    .profile-card {
-        background-color: #fff; /* Đổi thành màu trắng đục */
-        border: none;
-        color: #333;
-        /* Thêm padding-top để chừa chỗ cho avatar */
-        padding-top: 70px !important;
-    }
-
-    .form-horizontal-label {
-        text-align: right;
-        font-weight: bold;
-    }
-
-    @@media (max-width: 767px) {
-        .form-horizontal-label {
-            text-align: left;
-        }
-
-        .profile-avatar-container {
-            /* Đẩy avatar lên 1 chút trên mobile */
-            top: 120px;
-        }
-    }
-</style>
+<link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
 
 <div class="container py-5">
     <div class="row justify-content-center">
@@ -93,12 +10,11 @@
             <div class="profile-banner rounded-top"></div>
 
             <div class="profile-avatar-container">
-
                 <label for="AvatarFileInput"
                        style="cursor: pointer; position: relative; display: inline-block;"
                        title="Nhấn để đổi ảnh đại diện">
 
-                    <img src="@(string.IsNullOrEmpty(Model.ProfileImageUrl) ? "https://via.placeholder.com/100" : Model.ProfileImageUrl)"
+                    <img src="https://via.placeholder.com/100"
                          alt="Ảnh đại diện" class="rounded-circle profile-avatar" id="ProfileAvatarImage" />
 
                     <span class="avatar-camera-icon">
@@ -106,55 +22,48 @@
                     </span>
                 </label>
 
-                <input asp-for="AvatarFile" type="file" id="AvatarFileInput" style="display: none;" accept="image/*" />
+                <input name="AvatarFile" type="file" id="AvatarFileInput" style="display: none;" accept="image/*" />
             </div>
 
-            <form asp-action="Profile" method="post" class="shadow rounded-bottom p-4 p-md-5 profile-card" enctype="multipart/form-data">
-
-              
+            <form action="/Account/Profile" method="post" class="shadow rounded-bottom p-4 p-md-5 profile-card" enctype="multipart/form-data">
 
                 <div class="row mb-3 align-items-center">
-                    <label asp-for="Email" class="col-md-3 col-form-label form-horizontal-label">Email</label>
+                    <label for="email" class="col-md-3 col-form-label form-horizontal-label">Email</label>
                     <div class="col-md-9">
-                        <input asp-for="Email" class="form-control" readonly />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <input id="email" name="Email" class="form-control" placeholder="" />
                     </div>
                 </div>
 
                 <div class="row mb-3 align-items-center">
-                    <label asp-for="PhoneNumber" class="col-md-3 col-form-label form-horizontal-label">Số điện thoại</label>
+                    <label for="phone" class="col-md-3 col-form-label form-horizontal-label">Số điện thoại</label>
                     <div class="col-md-9">
-                        <input asp-for="PhoneNumber" class="form-control" />
-                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        <input id="phone" name="PhoneNumber" class="form-control" placeholder="" />
                     </div>
                 </div>
 
                 <div class="row mb-3 align-items-center">
-                    <label asp-for="FullName" class="col-md-3 col-form-label form-horizontal-label">Tên đầy đủ</label>
+                    <label for="fullname" class="col-md-3 col-form-label form-horizontal-label">Tên đầy đủ</label>
                     <div class="col-md-9">
-                        <input asp-for="FullName" class="form-control" />
-                        <span asp-validation-for="FullName" class="text-danger"></span>
+                        <input id="fullname" name="FullName" class="form-control" placeholder="" />
                     </div>
                 </div>
 
                 <div class="row mb-3 align-items-center">
-                    <label asp-for="Gender" class="col-md-3 col-form-label form-horizontal-label">Giới tính</label>
+                    <label for="gender" class="col-md-3 col-form-label form-horizontal-label">Giới tính</label>
                     <div class="col-md-9">
-                        <select asp-for="Gender" class="form-select">
+                        <select id="gender" name="Gender" class="form-select">
                             <option value="">Chọn giới tính</option>
                             <option value="Nam">Nam</option>
                             <option value="Nữ">Nữ</option>
                             <option value="Khác">Khác</option>
                         </select>
-                        <span asp-validation-for="Gender" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="row mb-3 align-items-center">
-                    <label asp-for="DateOfBirth" class="col-md-3 col-form-label form-horizontal-label">Ngày sinh</label>
+                    <label for="dob" class="col-md-3 col-form-label form-horizontal-label">Ngày sinh</label>
                     <div class="col-md-9">
-                        <input asp-for="DateOfBirth" class="form-control" />
-                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        <input id="dob" name="DateOfBirth" type="date" class="form-control" />
                     </div>
                 </div>
 
@@ -165,23 +74,7 @@
         </div>
     </div>
 </div>
-@section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 1. Tìm input
-            const avatarInput = document.getElementById('AvatarFileInput');
-            // 2. Tìm ảnh để thay
-            const avatarImage = document.getElementById('ProfileAvatarImage');
 
-            // 3. Lắng nghe sự kiện "change" (khi chọn file xong)
-            avatarInput.addEventListener('change', function() {
-                if (avatarInput.files && avatarInput.files[0]) {
-                    // 4. Tạo URL tạm thời
-                    const newImageUrl = URL.createObjectURL(avatarInput.files[0]);
-                    // 5. Gán URL đó cho ảnh
-                    avatarImage.src = newImageUrl;
-                }
-            });
-        });
-    </script>
+@section Scripts {
+    <script src="~/js/profile.js" asp-append-version="true"></script>
 }
