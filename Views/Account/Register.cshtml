@@ -1,0 +1,176 @@
+﻿@{
+    ViewData["Title"] = "Đăng Kí";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Đăng Kí</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        /* Toàn trang nền */
+        body {
+            margin: 0;
+            font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+            background: url('/images/login_background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+       
+
+        /* Thẻ chính chứa form */
+        .login-card {
+            width: 60%;
+            max-width: 640px;
+            background: linear-gradient(180deg, #0C6478 0%, #7EE085 100%);
+            border-radius: 28px;
+            padding: 20px 48px 40px 48px;
+            color: #fff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25), inset 0 0 25px rgba(255,255,255,0.08);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(8px);
+        }
+
+            .login-card h2 {
+                font-size: 34px;
+                font-weight: 700;
+                margin-bottom: 32px;
+                letter-spacing: 0.5px;
+            }
+
+        /* Ô nhập liệu */
+        .input-box {
+            width: 60%;
+            min-width: 280px;
+            margin: 18px 0;
+            position: relative;
+        }
+
+            .input-box input {
+                width: 100%;
+                padding: 14px 44px 14px 18px;
+                border-radius: 12px;
+                border: 1.6px solid rgba(255,255,255,0.4);
+                background: rgba(255,255,255,0.1);
+                color: #fff;
+                outline: none;
+                font-size: 15px;
+                transition: 0.25s;
+            }
+
+                .input-box input:focus {
+                    border-color: #c2ffd4;
+                    background: rgba(255,255,255,0.18);
+                }
+
+                .input-box input::placeholder {
+                    color: rgba(255,255,255,0.85);
+                }
+
+        /* Nút đăng ký */
+        .btn-login {
+            width: 42%;
+            min-width: 200px;
+            margin-top: 20px;
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: rgba(33,58,88,0.9);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            transition: 0.25s;
+        }
+
+            .btn-login:hover {
+                background: rgba(33,58,88,1);
+                transform: translateY(-1px);
+            }
+
+        /* Link Đăng nhập nằm góc phải dưới */
+        .bottom-right-link {
+            position: absolute;
+            bottom: 18px;
+            right: 28px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+        }
+
+            .bottom-right-link:hover {
+                text-decoration: underline;
+            }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .login-card {
+                padding: 28px 20px 60px 20px;
+                max-width: 92%;
+            }
+
+            .input-box {
+                width: 100%;
+                margin: 16px 0;
+            }
+
+            .btn-login {
+                width: 70%;
+            }
+
+            .bottom-right-link {
+                position: static;
+                margin-top: 22px;
+                align-self: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-card">
+        <h2>Đăng Kí</h2>
+
+        <form method="post" class="w-100 d-flex flex-column align-items-center">
+            <div class="input-box">
+                <input type="email" name="Email" placeholder="Nhập địa chỉ Email?" required />
+            </div>
+            <div class="input-box">
+                <input type="text" name="Phone" placeholder="Số điện thoại?" required />
+            </div>
+            <div class="input-box">
+                <input type="text" name="FullName" placeholder="Họ và tên" required />
+            </div>
+            <div class="input-box">
+                <input type="password" name="Password" placeholder="Mật khẩu" required />
+            </div>
+            <div class="input-box">
+                <input type="password" name="ConfirmPassword" placeholder="Nhập lại mật khẩu" required />
+            </div>
+
+            <button type="submit" class="btn btn-login">Đăng Kí</button>
+        </form>
+
+        <a href="@Url.Action("Login", "Account")" class="bottom-right-link">
+            Bạn đã có tài khoản? <b>Đăng nhập</b>
+        </a>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
