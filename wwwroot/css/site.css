@@ -17,11 +17,43 @@ html {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 body {
-  margin: 0px;
+    padding-bottom: 90px; /* Đệm cho footer (bottom-nav) */
+    margin: 0px;
+    overflow: hidden;
+    min-height: 100%; /* Chiếm hết chiều cao html */
 }
+
+/* THANH NAV DƯỚI (BOTTOM) */
+.bottom-nav {
+    background-image: linear-gradient(to right, #34a853, #5fbe76);
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+    .bottom-nav .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.7); /* Màu icon mờ */
+    }
+
+        .bottom-nav .nav-item i {
+            font-size: 1.9rem;
+            margin-bottom: 2px;
+        }
+
+        .bottom-nav .nav-item span {
+            font-size: 1.3rem;
+        }
+
+        .bottom-nav .nav-item.active {
+            color: white; /* Màu icon khi được chọn */
+        }
 
 -----------------Map-------------------
