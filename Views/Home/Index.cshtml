@@ -1,8 +1,326 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+    ViewData["Title"] = "Trang chủ";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Styles{
+    <link rel="stylesheet" href="~/css/customer.css" />
+
+}
+
+<nav class="navbar top-nav fixed-top">
+    <div class="container-fluid">
+
+        <div class="d-flex justify-content-between w-100 mb-3">
+            <div class="user-info">
+                <img src="~/images/userAvatar.jpg" alt="User Avatar" class="user-avatar" />
+
+                <div>
+                    <span>@DateTime.Now.ToString("dddd, 'Ngày' dd/MM/yyyy", new System.Globalization.CultureInfo("vi-VN"))</span>
+                    <strong>User name</strong>
+                </div>
+            </div>
+
+            <div class="nav-icons d-flex align-items-start">
+                <img src="~/images/vietnam_flag.jpg" alt="Vietnam Flag" class="flag-icon" />
+                <i class="fas fa-bell"></i>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column flex-md-row align-items-md-center gap-3 w-100">
+            <div class="input-group shadow-sm search-bar w-100 w-md-auto flex-grow-1 mb-2 mb-md-0">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Tìm kiếm">
+                <span class="input-group-text"><i class="fas fa-times"></i></span>
+            </div>
+
+            <div class="d-flex justify-content-center justify-content-md-end gap-2 w-100">
+                <a class="btn filter-btn flex-fill" asp-controller="Court" asp-action="Map">
+                    <i class="fas fa-map-marked-alt"></i> Bản đồ
+                </a>
+                <button class="btn filter-btn flex-fill"><i class="fas fa-list-ul"></i> Sân đã đặt</button>
+                <button class="btn filter-btn flex-fill"><i class="fas fa-heart"></i> Yêu thích</button>
+            </div>
+        </div>
+    </div> 
+</nav>
+<div id="court-card-container">
+    <div class="container">
+        <div class="row g-3 justify-content-center justify-content-sm-start">
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                <div class="card court-card-grid shadow-sm">
+                    <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <img src="~/images/map_demo_image.png" alt="Avatar sân" class="court-card-avatar" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="card-title">Tên sân</h6>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> 36 Bích Câu</p>
+                                <p class="card-text"><i class="far fa-clock"></i> 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                    </div>
+                    <div class="card-icons-top">
+                        <button class="icon-btn-sm fav-btn">
+                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart" style="display:none;"></i>
+                        </button>
+                        <button class="icon-btn-sm dir-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                <div class="card court-card-grid shadow-sm">
+                    <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <img src="~/images/map_demo_image.png" alt="Avatar sân" class="court-card-avatar" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="card-title">Tên sân</h6>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> 36 Bích Câu</p>
+                                <p class="card-text"><i class="far fa-clock"></i> 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                    </div>
+                    <div class="card-icons-top">
+                        <button class="icon-btn-sm fav-btn">
+                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart" style="display:none;"></i>
+                        </button>
+                        <button class="icon-btn-sm dir-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                <div class="card court-card-grid shadow-sm">
+                    <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <img src="~/images/map_demo_image.png" alt="Avatar sân" class="court-card-avatar" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="card-title">Tên sân</h6>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> 36 Bích Câu</p>
+                                <p class="card-text"><i class="far fa-clock"></i> 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                    </div>
+                    <div class="card-icons-top">
+                        <button class="icon-btn-sm fav-btn">
+                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart" style="display:none;"></i>
+                        </button>
+                        <button class="icon-btn-sm dir-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                <div class="card court-card-grid shadow-sm">
+                    <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <img src="~/images/map_demo_image.png" alt="Avatar sân" class="court-card-avatar" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="card-title">Tên sân</h6>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> 36 Bích Câu</p>
+                                <p class="card-text"><i class="far fa-clock"></i> 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                    </div>
+                    <div class="card-icons-top">
+                        <button class="icon-btn-sm fav-btn">
+                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart" style="display:none;"></i>
+                        </button>
+                        <button class="icon-btn-sm dir-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                <div class="card court-card-grid shadow-sm">
+                    <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <img src="~/images/map_demo_image.png" alt="Avatar sân" class="court-card-avatar" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="card-title">Tên sân</h6>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> 36 Bích Câu</p>
+                                <p class="card-text"><i class="far fa-clock"></i> 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                    </div>
+                    <div class="card-icons-top">
+                        <button class="icon-btn-sm fav-btn">
+                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart" style="display:none;"></i>
+                        </button>
+                        <button class="icon-btn-sm dir-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                <div class="card court-card-grid shadow-sm">
+                    <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <img src="~/images/map_demo_image.png" alt="Avatar sân" class="court-card-avatar" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="card-title">Tên sân</h6>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> 36 Bích Câu</p>
+                                <p class="card-text"><i class="far fa-clock"></i> 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                    </div>
+                    <div class="card-icons-top">
+                        <button class="icon-btn-sm fav-btn">
+                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart" style="display:none;"></i>
+                        </button>
+                        <button class="icon-btn-sm dir-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                <div class="card court-card-grid shadow-sm">
+                    <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <img src="~/images/map_demo_image.png" alt="Avatar sân" class="court-card-avatar" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="card-title">Tên sân</h6>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> 36 Bích Câu</p>
+                                <p class="card-text"><i class="far fa-clock"></i> 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                    </div>
+                    <div class="card-icons-top">
+                        <button class="icon-btn-sm fav-btn">
+                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart" style="display:none;"></i>
+                        </button>
+                        <button class="icon-btn-sm dir-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                <div class="card court-card-grid shadow-sm">
+                    <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <img src="~/images/map_demo_image.png" alt="Avatar sân" class="court-card-avatar" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="card-title">Tên sân</h6>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> 36 Bích Câu</p>
+                                <p class="card-text"><i class="far fa-clock"></i> 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                    </div>
+                    <div class="card-icons-top">
+                        <button class="icon-btn-sm fav-btn">
+                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart" style="display:none;"></i>
+                        </button>
+                        <button class="icon-btn-sm dir-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                <div class="card court-card-grid shadow-sm">
+                    <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <img src="~/images/map_demo_image.png" alt="Avatar sân" class="court-card-avatar" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="card-title">Tên sân</h6>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> 36 Bích Câu</p>
+                                <p class="card-text"><i class="far fa-clock"></i> 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                    </div>
+                    <div class="card-icons-top">
+                        <button class="icon-btn-sm fav-btn">
+                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart" style="display:none;"></i>
+                        </button>
+                        <button class="icon-btn-sm dir-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+                <div class="card court-card-grid shadow-sm">
+                    <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
+                    <div class="card-body">
+                        <div class="d-flex gap-2">
+                            <div>
+                                <img src="~/images/map_demo_image.png" alt="Avatar sân" class="court-card-avatar" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="card-title">Tên sân</h6>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> 36 Bích Câu</p>
+                                <p class="card-text"><i class="far fa-clock"></i> 8:00 - 22:00</p>
+                            </div>
+                        </div>
+                        <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                    </div>
+                    <div class="card-icons-top">
+                        <button class="icon-btn-sm fav-btn">
+                            <i class="far fa-heart"></i>
+                            <i class="fas fa-heart" style="display:none;"></i>
+                        </button>
+                        <button class="icon-btn-sm dir-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/Home/Home.css" asp-append-version="true" />
+}
