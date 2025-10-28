@@ -22,12 +22,44 @@
         });
     }
 
+    // Cập nhật chiều cao navbar động
+    const sidebar = document.getElementById('sidebar');
+    const navbar = document.getElementById('navbar');
+    const searchbox = document.getElementById('searchbox');
     const menuBtn = document.getElementById('menu-btn');
-    const fieldTab = document.getElementById('field-tab');
 
-    if (menuBtn && fieldTab) {
-        menuBtn.addEventListener('click', () => {
-            fieldTab.classList.toggle('show');
-        });
+    menuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('hidden');
+    });
+
+    function largeScreenSidebar() {
+        const height = navbar.offsetHeight + 'px';
+        sidebar.style.top = height;
+        searchbox.style.background = 'white';
+        menuBtn.addEventListener('click', changeSearchboxBg);
     }
+
+    function changeSearchboxBg() {
+        if (sidebar.classList.contains('hidden')) {
+            searchbox.style.background = 'transparent';
+        } else {
+            searchbox.style.background = 'white';
+        }
+    }
+
+    window.onresize = function () {
+        if (window.innerWidth > 992) largeScreenSidebar();
+        else smallScreenSidebar();
+    }
+    window.onload = window.onresize();
+    function smallScreenSidebar() {
+        sidebar.style.top = 'auto';
+        menuBtn.removeEventListener('click', changeSearchboxBg);
+        searchbox.style.background = 'transparent';
+        console.log('small screen');
+    }
+
+    
 });
+
+
