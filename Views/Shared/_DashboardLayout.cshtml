@@ -1,0 +1,82 @@
+﻿@{
+    // Layout này sẽ được lồng bên trong _Layout.cshtml chính
+    Layout = "_Layout";
+}
+<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+
+<div class="container py-5">
+    <div class="row">
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="dashboard-sidebar">
+
+                <a asp-action="Profile" asp-controller="Account" class="user-info text-decoration-none">
+                    <img src="https://via.placeholder.com/100" alt="Avatar" />
+                    <h5>Người dùng</h5>
+                    <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                </a>
+
+                <div class="text-muted small mb-2">Hạng thành viên</div>
+                <div class="quick-actions">
+                    <a asp-action="MyBookings" asp-controller="Account" class="action-btn">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Lịch đã đặt</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-bell"></i>
+                        <span>Thông báo</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-wallet"></i>
+                        <span>Thanh toán</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-tags"></i>
+                        <span>Ưu đãi</span>
+                    </a>
+                </div>
+
+                <div class="list-group dashboard-menu">
+                    <small class="text-muted text-uppercase ps-1 my-2">Hoạt động</small>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-heart menu-icon"></i>
+                        <span>Sân yêu thích</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-users menu-icon"></i>
+                        <span>Nhóm của tôi</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+
+                    <small class="text-muted text-uppercase ps-1 my-2 pt-2">Hệ thống</small>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-cog menu-icon"></i>
+                        <span>Cài đặt</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-question-circle menu-icon"></i>
+                        <span>Trung tâm trợ giúp</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-shield-alt menu-icon"></i>
+                        <span>Điều khoản và chính sách</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="fas fa-sign-out-alt menu-icon"></i>
+                        <span>Đăng xuất</span>
+                        <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            @RenderBody()
+        </div>
+    </div>
+</div>

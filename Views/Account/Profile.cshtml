@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Chỉnh sửa hồ sơ";
+}
+<link rel="stylesheet" href="~/css/profile.css" asp-append-version="true" />
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8 profile-column">
+
+            <div class="profile-banner rounded-top"></div>
+
+            <div class="profile-avatar-container">
+                <label for="AvatarFileInput"
+                       style="cursor: pointer; position: relative; display: inline-block;"
+                       title="Nhấn để đổi ảnh đại diện">
+
+                    <img src="https://via.placeholder.com/100"
+                         alt="Ảnh đại diện" class="rounded-circle profile-avatar" id="ProfileAvatarImage" />
+
+                    <span class="avatar-camera-icon">
+                        <i class="fas fa-camera"></i>
+                    </span>
+                </label>
+
+                <input name="AvatarFile" type="file" id="AvatarFileInput" style="display: none;" accept="image/*" />
+            </div>
+
+            <form action="/Account/Profile" method="post" class="shadow rounded-bottom p-4 p-md-5 profile-card" enctype="multipart/form-data">
+
+                <div class="row mb-3 align-items-center">
+                    <label for="email" class="col-md-3 col-form-label form-horizontal-label">Email</label>
+                    <div class="col-md-9">
+                        <input id="email" name="Email" class="form-control" placeholder="" />
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <label for="phone" class="col-md-3 col-form-label form-horizontal-label">Số điện thoại</label>
+                    <div class="col-md-9">
+                        <input id="phone" name="PhoneNumber" class="form-control" placeholder="" />
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <label for="fullname" class="col-md-3 col-form-label form-horizontal-label">Tên đầy đủ</label>
+                    <div class="col-md-9">
+                        <input id="fullname" name="FullName" class="form-control" placeholder="" />
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <label for="gender" class="col-md-3 col-form-label form-horizontal-label">Giới tính</label>
+                    <div class="col-md-9">
+                        <select id="gender" name="Gender" class="form-select">
+                            <option value="">Chọn giới tính</option>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <label for="dob" class="col-md-3 col-form-label form-horizontal-label">Ngày sinh</label>
+                    <div class="col-md-9">
+                        <input id="dob" name="DateOfBirth" type="date" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/profile.js" asp-append-version="true"></script>
+}
