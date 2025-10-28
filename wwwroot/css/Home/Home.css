@@ -6,7 +6,7 @@ html {
 body {
     background-color: #f0f2f5; /* Màu nền xám nhạt */
     padding-top: 210px; /* Đệm cho header (top-nav) trên mobile */
-    padding-bottom: 90px; /* Đệm cho footer (bottom-nav) */
+    overflow: hidden !important;
 }
 @media (min-width: 768px) {
     body {
@@ -15,13 +15,12 @@ body {
     }
 }
 
-/* THANH NAV TRÊN (HEADER) VÀ DƯỚI (FOOTER) */
-.top-nav, .bottom-nav {
+/* THANH NAV TRÊN (HEADER) */
+.top-nav {
     background-image: linear-gradient(to right, #34a853, #5fbe76);
     color: white;
     padding-top: 10px;
     padding-bottom: 10px;
-    
 }
 
     .top-nav .user-info {
@@ -69,27 +68,6 @@ body {
         color: white;
     }
 
-    .bottom-nav .nav-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-decoration: none;
-        color: rgba(255, 255, 255, 0.7); /* Màu icon mờ */
-    }
-
-        .bottom-nav .nav-item i {
-            font-size: 1.9rem; 
-            margin-bottom: 2px; 
-        }
-        
-        .bottom-nav .nav-item span {
-            font-size: 1.3rem; 
-        }
-
-        .bottom-nav .nav-item.active {
-            color: white; /* Màu icon khi được chọn */
-        }
-
 /*THANH TÌM KIẾM VÀ LỌC */
 .search-bar {
     border-radius: 25px;
@@ -132,6 +110,31 @@ body {
         color: #34a853;
         font-size: 1.5rem;
     }
+/*CONTAINER CHỨA CÁC THẺ SÂN*/
+
+/* Chiều cao cho mobile (dưới 768px) */
+#court-card-container {
+    width: 100%;
+    /* Giới hạn chiều cao tối đa của container */
+    /* 100vh: Chiều cao toàn màn hình */
+    /* Chiều cao top-nav: 150px trên PC, 210px trên mobile */
+    /* Chiều cao bottom-nav: 90px*/
+    /* Khoảng đệm thêm: 20px */
+    max-height: calc(100vh - 210px - 80px - 0px);
+    overflow-y: auto; /* Hiển thị thanh cuộn dọc khi cần thiết */
+    position: absolute;
+    top: 210px;
+    left: 0;
+    right: 0;
+    bottom: 80px;
+}
+/* Chiều cao cho pc */
+@media (min-width: 768px) {
+    #court-card-container {
+        max-height: calc(100vh - 150px - 80px - 0px);
+        top: 150px;
+    }
+}
 
 /* THẺ SÂN (CARD) */
 .court-card-grid {
