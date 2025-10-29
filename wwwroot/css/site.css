@@ -17,9 +17,11 @@ html {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 body {
-  margin: 0px;
+    padding-bottom: 90px; /* Đệm cho footer (bottom-nav) */
+    margin: 0px;
+    overflow: hidden;
+    min-height: 100%; /* Chiếm hết chiều cao html */
 }
