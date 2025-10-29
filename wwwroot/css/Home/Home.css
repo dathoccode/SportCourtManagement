@@ -1,9 +1,6 @@
-﻿html {
-    font-size: 14px;
-}
 
-body {
-    background-color: #f0f2f5; /* Xám nhạt */
+﻿body {
+    background-color: #f0f2f5; /* Màu nền xám nhạt */
     padding-top: 210px; /* Đệm cho header (top-nav) trên mobile */
     overflow: hidden !important;
 }
@@ -16,7 +13,7 @@ body {
 
 /* THANH NAV TRÊN (HEADER) */
 .top-nav {
-    background-image: linear-gradient(to right, #34a853, #5fbe76);
+    background: linear-gradient(180deg, #0C6478 0%,#8DEE98 100%);
     color: white;
     padding-top: 10px;
     padding-bottom: 10px;

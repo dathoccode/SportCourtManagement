@@ -1,0 +1,24 @@
+﻿@model SportCourtManagement.Models.Account.LoginByPhoneViewModel
+<div class="login-card" role="main">
+    <h2>Đăng Nhập</h2>
+
+    <form method="post" class="w-100 d-flex flex-column align-items-center">
+        <div class="input-box">
+            <input type="tel" name="phone" placeholder="Số điện thoại của bạn?" required pattern="[0-9]{10}" />
+            <span class="icon"></span>
+        </div>
+
+        <div class="input-box">
+            <input id="passwordField" type="password" name="password" placeholder="Mật khẩu (*)" required />
+            <span class="icon toggle-password" title="Hiện/Ẩn mật khẩu">👁️</span>
+        </div>
+
+        <button type="submit" class="btn btn-login">Đăng Nhập</button>
+    </form>
+
+    <div class="links-row">
+        <a href="@Url.Action("Login", "Account")">Đăng nhập bằng Email</a>
+        <a href="@Url.Action("Register", "Account")">Chưa có tài khoản? <b>Đăng ký</b></a>
+        <a href="@Url.Action("ForgotPassword", "Account")">Quên mật khẩu?</a>
+    </div>
+</div>
