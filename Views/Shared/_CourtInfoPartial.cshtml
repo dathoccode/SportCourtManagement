@@ -1,0 +1,19 @@
+﻿@* Views/Shared/_CourtInfoPartial.cshtml *@
+@* Giả sử bạn có một Model tên là Court trong namespace Data.Models *@
+@model SportCourtManagement.Data.Models.TCourt
+
+@* Kiểm tra xem Model có dữ liệu không *@
+@if (Model != null)
+{
+    <img src="@Url.Content(Model.Img ?? "~/images/map_demo_image.png")" alt="Avatar sân" class="img-fluid rounded mb-3" style="max-height: 50px; border-radius: 50% !important;">
+    <h6>@Model.CourtName</h6>
+    <p><i class="fas fa-map-marker-alt text-success me-2"></i><strong>@Model.CourtAddress</strong></p>
+    <p><i class="far fa-clock text-success me-2"></i><strong>@Model.OpenTime?.ToString(@"hh\:mm") - @Model.CloseTime?.ToString(@"hh\:mm")</strong></p>
+    <p><i class="fas fa-phone text-success me-2"></i><strong>@Model.Contact</strong></p>
+    <p><i class="fas fa-star text-warning me-2"></i><strong>@Model.Rating?.ToString("0.0") / 5.0</strong></p>
+
+}
+else
+{
+    <p class="text-danger">Không tìm thấy thông tin sân.</p>
+} 

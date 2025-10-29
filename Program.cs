@@ -1,4 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using SportCourtManagement.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer("Server=ADMIN\\SQLEXPRESS01;Database=QuanLySanTheThao;Trusted_Connection=True;TrustServerCertificate=True;"));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

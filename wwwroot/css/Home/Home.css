@@ -1,10 +1,9 @@
-﻿/* THIẾT LẬP CHUNG */
-html {
+﻿html {
     font-size: 14px;
 }
 
 body {
-    background-color: #f0f2f5; /* Màu nền xám nhạt */
+    background-color: #f0f2f5; /* Xám nhạt */
     padding-top: 210px; /* Đệm cho header (top-nav) trên mobile */
     overflow: hidden !important;
 }
@@ -110,9 +109,8 @@ body {
         color: #34a853;
         font-size: 1.5rem;
     }
-/*CONTAINER CHỨA CÁC THẺ SÂN*/
 
-/* Chiều cao cho mobile (dưới 768px) */
+/*CONTAINER CHỨA CÁC THẺ SÂN*/
 #court-card-container {
     width: 100%;
     /* Giới hạn chiều cao tối đa của container */
@@ -121,14 +119,14 @@ body {
     /* Chiều cao bottom-nav: 90px*/
     /* Khoảng đệm thêm: 20px */
     max-height: calc(100vh - 210px - 80px - 0px);
-    overflow-y: auto; /* Hiển thị thanh cuộn dọc khi cần thiết */
+    overflow-y: auto;
     position: absolute;
     top: 210px;
     left: 0;
     right: 0;
     bottom: 80px;
 }
-/* Chiều cao cho pc */
+
 @media (min-width: 768px) {
     #court-card-container {
         max-height: calc(100vh - 150px - 80px - 0px);
@@ -155,9 +153,9 @@ body {
 
     /* Style cho avatar trong card-body */
     .court-card-grid .court-card-avatar {
-        width: 40px; /* Kích thước avatar */
+        width: 40px; 
         height: 40px;
-        border-radius: 50%; /* Bo tròn ảnh */
+        border-radius: 50%; 
         object-fit: cover;
         flex-shrink: 0; /* Không cho avatar bị co lại khi thiếu không gian */
     }
@@ -166,13 +164,13 @@ body {
     .court-card-grid .card-title {
         font-weight: bold;
         font-size: 1rem;
-        margin-bottom: 2px; /* Giảm khoảng cách */
+        margin-bottom: 2px; 
     }
 
     .court-card-grid .card-text {
         font-size: 0.85rem;
         color: #555;
-        margin-bottom: 2px; /* Giảm khoảng cách */
+        margin-bottom: 2px; 
     }
 
         .court-card-grid .card-text i {
@@ -222,7 +220,7 @@ body {
     .icon-btn-sm {
         background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ giống badge cũ */
         border: none;
-        border-radius: 50%; /* Bo tròn */
+        border-radius: 50%; 
         width: 28px; /* Kích thước nhỏ hơn */
         height: 28px;
         display: flex;
