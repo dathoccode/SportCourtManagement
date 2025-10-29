@@ -1,0 +1,193 @@
+﻿/* ========== NỀN CHUNG ========== */
+body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+    background: url('/images/login_background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* ========== CARD QUÊN MẬT KHẨU ========== */
+.forgot-card {
+    width: 80%;
+    max-width: 640px;
+    background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
+    border-radius: 18px;
+    padding: 48px 40px;
+    color: #fff;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    text-align: center;
+    position: relative;
+}
+
+    .forgot-card h2 {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 16px;
+    }
+
+    .forgot-card p {
+        font-size: 15px;
+        opacity: 0.9;
+        margin-bottom: 28px;
+    }
+
+/* ========== CARD ĐĂNG NHẬP ========== */
+.login-card {
+    width: 100%;
+    max-width: 800px;
+    background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
+    border-radius: 20px;
+    padding: 48px 40px;
+    color: #fff;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+    .login-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 18px;
+        box-shadow: 0 0 0 3px rgba(9,132,146,0.12) inset;
+        pointer-events: none;
+    }
+
+    .login-card h2 {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+
+/* ========== INPUT CHUNG ========== */
+.input-box {
+    width: 90%;
+    min-width: 320px;
+    margin: 20px auto;
+    position: relative;
+}
+
+    .input-box input {
+        width: 100%;
+        padding: 14px 44px 14px 18px;
+        border-radius: 12px;
+        border: 1.6px solid rgba(255,255,255,0.45);
+        background: rgba(255,255,255,0.06);
+        color: #fff;
+        outline: none;
+        font-size: 15px;
+        transition: 0.25s;
+    }
+
+        .input-box input:focus {
+            border-color: #c2ffd4;
+            background: rgba(255,255,255,0.18);
+        }
+
+        .input-box input::placeholder {
+            color: rgba(255,255,255,0.85);
+        }
+
+    .input-box .icon {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255,255,255,0.8);
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+/* ========== NÚT CHUNG ========== */
+.btn-login, .btn-send {
+    width: 45%;
+    min-width: 200px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: rgba(33,58,88,0.9);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    margin-top: 16px;
+    transition: 0.25s;
+}
+
+    .btn-login:hover, .btn-send:hover {
+        background: rgba(33,58,88,1);
+        transform: translateY(-1px);
+    }
+
+/* ========== LINK CHUNG ========== */
+.links-row, .back-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 25px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+}
+
+    .links-row a, .back-login {
+        color: rgba(255,255,255,0.9);
+        text-decoration: none;
+    }
+
+        .links-row a:hover, .back-login:hover {
+            text-decoration: underline;
+        }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .forgot-card, .login-card {
+        max-width: 100%;
+        padding: 32px 24px;
+    }
+
+    .input-box {
+        width: 100%;
+    }
+
+    .btn-login, .btn-send {
+        width: 70%;
+    }
+
+    .links-row {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 420px) {
+    .forgot-card h2, .login-card h2 {
+        font-size: 22px;
+    }
+
+    .btn-login, .btn-send {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* ========== HIỆU ỨNG ========== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

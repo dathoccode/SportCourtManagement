@@ -17,11 +17,16 @@ html {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 body {
-  margin: 0px;
+    padding-bottom: 12vh; /* Đệm cho footer (bottom-nav) */
+    margin: 0px;
+    overflow: hidden;
+    min-height: 100%; /* Chiếm hết chiều cao html */
 }
 
------------------Map-------------------
+.bottom-nav {
+    height: 12vh;
+    background: linear-gradient(180deg,#8DEE98 0%, #0C6478 100%);
+}

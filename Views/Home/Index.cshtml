@@ -1,44 +1,50 @@
 ﻿@{
     Layout = "_Layout";
-    ViewData["Title"] = "Trang chủ";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/Home/Home.css" asp-append-version="true" />
 }
 
 <nav class="navbar top-nav fixed-top">
     <div class="container-fluid">
 
-        <div class="d-flex justify-content-between w-100 mb-2">
+        <div class="d-flex justify-content-between w-100 mb-3">
             <div class="user-info">
-                <i class="fas fa-user-circle fa-2x"></i>
+                <img src="~/images/userAvatar.jpg" alt="User Avatar" class="user-avatar" />
+
                 <div>
-                    <span>Thứ 5, Ngày 23/10/2025</span>
+                    <span>@DateTime.Now.ToString("dddd, 'Ngày' dd/MM/yyyy", new System.Globalization.CultureInfo("vi-VN"))</span>
                     <strong>User name</strong>
                 </div>
             </div>
-            <div class="nav-icons d-flex align-items-center">
+
+            <div class="nav-icons d-flex align-items-start">
                 <img src="~/images/vietnam_flag.jpg" alt="Vietnam Flag" class="flag-icon" />
                 <i class="fas fa-bell"></i>
             </div>
         </div>
 
-        <div class="d-flex align-items-center gap-3 w-100">
-            <div class="input-group shadow-sm search-bar flex-grow-1 mb-0">
+        <div class="d-flex flex-column flex-md-row align-items-md-center gap-3 w-100">
+            <div class="input-group shadow-sm search-bar w-100 w-md-auto flex-grow-1 mb-2 mb-md-0">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>
                 <input type="text" class="form-control" placeholder="Tìm kiếm">
                 <span class="input-group-text"><i class="fas fa-times"></i></span>
             </div>
 
-            <div class="d-flex gap-2">
-                <button class="btn filter-btn"><i class="fas fa-map-marked-alt"></i> Bản đồ</button>
-                <button class="btn filter-btn"><i class="fas fa-list-ul"></i> Sân đã đặt</button>
-                <button class="btn filter-btn"><i class="fas fa-heart"></i> Yêu thích</button>
+            <div class="d-flex justify-content-center justify-content-md-end gap-2 w-100">
+                <a class="btn filter-btn flex-fill" asp-controller="Court" asp-action="Map">
+                    <i class="fas fa-map-marked-alt"></i> Bản đồ
+                </a>
+                <button class="btn filter-btn flex-fill"><i class="fas fa-list-ul"></i> Sân đã đặt</button>
+                <button class="btn filter-btn flex-fill"><i class="fas fa-heart"></i> Yêu thích</button>
             </div>
         </div>
-    </div>
+    </div> 
 </nav>
 
 <div class="container">
     <div class="row g-3">
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card court-card-grid shadow-sm">
                 <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
                 <div class="card-body">
@@ -65,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card court-card-grid shadow-sm">
                 <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
                 <div class="card-body">
@@ -92,7 +98,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card court-card-grid shadow-sm">
                 <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
                 <div class="card-body">
@@ -119,7 +125,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card court-card-grid shadow-sm">
                 <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
                 <div class="card-body">
@@ -146,7 +152,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card court-card-grid shadow-sm">
                 <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
                 <div class="card-body">
@@ -173,7 +179,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card court-card-grid shadow-sm">
                 <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
                 <div class="card-body">
@@ -200,7 +206,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card court-card-grid shadow-sm">
                 <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
                 <div class="card-body">
@@ -227,7 +233,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card court-card-grid shadow-sm">
                 <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
                 <div class="card-body">
@@ -254,7 +260,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card court-card-grid shadow-sm">
                 <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
                 <div class="card-body">
@@ -281,7 +287,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card court-card-grid shadow-sm">
                 <img src="~/images/san_cau.png" class="card-img-top" alt="Hình ảnh sân">
                 <div class="card-body">
@@ -310,3 +316,5 @@
         </div>
     </div>
 </div>
+
+
