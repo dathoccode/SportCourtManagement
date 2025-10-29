@@ -20,8 +20,13 @@ html {
 }
 
 body {
-    padding-bottom: 90px; /* Đệm cho footer (bottom-nav) */
+    padding-bottom: 12vh; /* Đệm cho footer (bottom-nav) */
     margin: 0px;
     overflow: hidden;
     min-height: 100%; /* Chiếm hết chiều cao html */
+}
+
+.bottom-nav {
+    height: 12vh;
+    background: linear-gradient(180deg,#8DEE98 0%, #0C6478 100%);
 }

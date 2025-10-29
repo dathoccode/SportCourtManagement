@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SportCourtManagement</title>
 
-    <!--Bootstrap 5-->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SportCourtManagement.styles.css" asp-append-version="true" />
+
+    <!--Bootstrap 5-->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    
     <!--Tailwin-->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -25,7 +27,7 @@
     <!-- Owl Carousel JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-    @RenderSection("Styles", required: false)
+	@await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     <div>
@@ -35,7 +37,6 @@
     </div>
     <!-- Footer Begin -->
 	<partial name="Footer" />
-	<a href="c:\university\5thsemester\webdevelopment\sportcourtmanagement\views\home\index.cshtml">c:\university\5thsemester\webdevelopment\sportcourtmanagement\views\home\index.cshtml</a>
     <!-- Footer End -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/5e965db3d5.js" crossorigin="anonymous"></script>

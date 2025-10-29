@@ -1,8 +1,11 @@
-﻿<style >
-body {
+﻿body {
     /* Dùng lại gradient nền của bạn */
     background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
     background-attachment: fixed;
+}
+
+div.row {
+    height: calc(88vh - 3rem);
 }
 
 /* === CỘT MENU BÊN TRÁI (SIDEBAR) === */
@@ -11,18 +14,23 @@ body {
     border-radius: 10px;
     padding: 1.5rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    height: inherit;
+    overflow-y: scroll;
 }
- 
-/* Phần thông tin người dùng */
-.user-info {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    transition: background-color 0.2s;
-}
+
+    .dashboard-sidebar::-webkit-scrollbar {
+        display: none;
+    }
+    /* Phần thông tin người dùng */
+    .user-info {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        transition: background-color 0.2s;
+    }
 
     .user-info:hover {
         background-color: #f8f8f8;
@@ -112,7 +120,7 @@ body {
     background-color: #f0f2f5; /* Nền xám nhạt như trong ảnh */
     border-radius: 10px;
     padding: 1.5rem;
-    min-height: 600px;
+    height: calc(88vh - 3rem);
 }
 
 .content-header {
@@ -148,5 +156,3 @@ body {
     color: #777;
     font-weight: 500;
 }
-
-</style >
