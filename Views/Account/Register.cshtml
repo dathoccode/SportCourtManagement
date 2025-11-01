@@ -1,4 +1,6 @@
-﻿@using SportCourtManagement.Models.Account
+﻿
+
+@using SportCourtManagement.Models.Account
 @model RegisterViewModel
 @{
     ViewData["Title"] = "Đăng ký";
@@ -6,3 +8,9 @@
 }
 
 @await Html.PartialAsync("Partials/_RegisterFormPartial", Model)
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger text-center mt-3">
+        @ViewBag.Error
+    </div>
+}

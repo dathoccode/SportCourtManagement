@@ -72,6 +72,7 @@ body {
     min-width: 320px;
     margin: 20px auto;
     position: relative;
+    min-height: 70px;
 }
 
     .input-box input {
@@ -94,6 +95,15 @@ body {
         .input-box input::placeholder {
             color: rgba(255,255,255,0.85);
         }
+    .input-box .text-danger {
+        position: absolute;
+        bottom: -18px; /* hiển thị ngay dưới ô input */
+        left: -25px;
+        font-size: 13px;
+        color: #ff4d4f;
+        line-height: 1;
+        white-space: nowrap; /* không xuống dòng */
+    }
 
     
 
