@@ -1,31 +1,51 @@
 ﻿@model SportCourtManagement.Models.Account.RegisterViewModel
+@{
+    ViewData["Title"] = "Đăng kí";
+    Layout = "_AccountLayout";
+}
 
 <div class="login-card">
     <h2>Đăng Kí</h2>
 
-    <form method="post" asp-action="Register" class="d-flex flex-column align-items-center ms-auto me-5" style="max-width:px; width: 100%;">
+    <!-- Thêm novalidate để tắt validation mặc định của trình duyệt -->
+    <form asp-action="Register" method="post"  novalidate autocomplete="off" class="d-flex flex-column align-items-center ms-auto me-5" style="width: 100%;">
+        <!-- Hiển thị lỗi tổng hợp -->
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-
         <div class="input-box">
-            <input type="email" name="email" placeholder="Nhập địa chỉ Email?" required />
-        </div>
-        <div class="input-box">
-            <input type="text" name="phone" placeholder="Số điện thoại?" required />
-        </div>
-        <div class="input-box">
-            <input type="text" name="name" placeholder="Họ và tên" required />
-        </div>
-        <div class="input-box">
-            <input type="password" name="password" placeholder="Mật khẩu" required />
-        </div>
-        <div class="input-box">
-            <input type="password" name="confirmpassword" placeholder="Nhập lại mật khẩu" required />
+            <input asp-for="Email" type="text" class="form-control" placeholder="Nhập địa chỉ Email?" />
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-login">Đăng Kí</button>
+        <div class="input-box">
+            <input asp-for="Phone" type="text" class="form-control" placeholder="Số điện thoại?" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+
+        <div class="input-box">
+            <input asp-for="FullName" type="text" class="form-control" placeholder="Họ và tên" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div class="input-box">
+            <input asp-for="Password" type="password" class="form-control" placeholder="Mật khẩu" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="input-box">
+            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Nhập lại mật khẩu" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-login mt-3">Đăng Kí</button>
     </form>
 
     <a href="@Url.Action("Login", "Account")" class="bottom-right-link text-white mt-4">
         Bạn đã có tài khoản? <b>Đăng nhập</b>
     </a>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

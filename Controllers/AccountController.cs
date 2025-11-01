@@ -27,9 +27,9 @@ namespace SportCourtManagement.Controllers
 
         // ======= [POST] XỬ LÝ ĐĂNG NHẬP =======
         [HttpPost]
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(string TaiKhoan, string Password)
         {
-            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(TaiKhoan) || string.IsNullOrWhiteSpace(Password))
             {
                 ViewBag.Error = "Vui lòng nhập đầy đủ Email và Mật khẩu!";
                 return View();
@@ -37,8 +37,8 @@ namespace SportCourtManagement.Controllers
 
             // Tìm tài khoản theo email hoặc số điện thoại
             var acc = _context.TAccounts
-                .FirstOrDefault(a => (a.Email == email || a.Phone == email)
-                                  && a.AccPassword == password);
+                .FirstOrDefault(a => (a.Email == TaiKhoan || a.Phone == TaiKhoan)
+                                  && a.AccPassword == Password);
 
             if (acc == null)
             {
@@ -67,6 +67,7 @@ namespace SportCourtManagement.Controllers
                 return RedirectToAction("Login");
             }
 
+
             var acc = _context.TAccounts.FirstOrDefault(a => a.AccountId == accountId);
             if (acc == null)
             {
@@ -81,22 +82,16 @@ namespace SportCourtManagement.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            
             return View();
         }
 
         // ======= [POST] XỬ LÝ ĐĂNG KÝ =======
         [HttpPost]
+        
         public IActionResult Register(string name, string email, string phone, string password)
         {
-            // Kiểm tra đầu vào
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) ||
-                string.IsNullOrWhiteSpace(password))
-            {
-                ViewBag.Error = "Vui lòng nhập đầy đủ thông tin!";
-                return View();
-            }
-
-            // Kiểm tra trùng email hoặc sđt
+           
             bool exists = _context.TAccounts.Any(a => a.Email == email || a.Phone == phone);
             if (exists)
             {
@@ -104,7 +99,7 @@ namespace SportCourtManagement.Controllers
                 return View();
             }
 
-            // Tạo ID tự động đơn giản (ví dụ: ACC001)
+            
             string newId = $"ACC{_context.TAccounts.Count() + 1:D3}";
 
             var acc = new TAccount
@@ -120,7 +115,7 @@ namespace SportCourtManagement.Controllers
             _context.TAccounts.Add(acc);
             _context.SaveChanges();
 
-            TempData["Success"] = "Đăng ký thành công! Hãy đăng nhập.";
+           
             return RedirectToAction("Login");
         }
 
