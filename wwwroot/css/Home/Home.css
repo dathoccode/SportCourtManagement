@@ -10,6 +10,15 @@
     }
 }
 
+.container {
+    height: calc(88vh - 70px) !important;
+    padding-bottom: 12vh;
+    overflow: scroll !important;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
 /* THANH NAV TRÊN (HEADER) */
 .top-nav {
     background: linear-gradient(180deg, #0C6478 0%,#8DEE98 100%);
