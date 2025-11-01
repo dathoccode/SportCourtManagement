@@ -22,7 +22,7 @@
         });
     }
 
-    // Cập nhật chiều cao navbar động
+    // Sidebar toggle and responsive behavior
     const sidebar = document.getElementById('sidebar');
     const navbar = document.getElementById('navbar');
     const searchbox = document.getElementById('searchbox');
@@ -59,7 +59,36 @@
         console.log('small screen');
     }
 
-    
-});
+    //Leaflet map
+    var map = L.map('map').setView([51.505, -0.09], 13);
+    var locateBtn = document.getElementById('locate-btn');
 
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Khi tìm thấy vị trí
+    map.on('locationfound', function (e) {
+        var radius = e.accuracy / 2;
+
+        L.marker(e.latlng).addTo(map)
+            .bindPopup("Bạn đang ở đây.").openPopup();
+
+        L.circle(e.latlng, radius).addTo(map);
+    });
+
+    // Khi không thể lấy vị trí
+    map.on('locationerror', function (e) {
+        alert("Không thể xác định vị trí: " + e.message);
+    });
+
+    locateBtn.addEventListener('click', function () {
+        map.locate({ setView: true, maxZoom: 16 });
+        console.log("click button triggered");
+        L.marker(e.latlng).addTo(map)
+            .bindPopup("Bạn đang ở vị trí này").openPopup();
+    });
+});
 

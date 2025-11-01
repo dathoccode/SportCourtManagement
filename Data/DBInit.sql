@@ -83,4 +83,3 @@ create table tFavoriteCourt(
 	foreign key(CourtID) references tCourt(CourtID),
 	foreign key(AccountID) references tAccount(AccountID)
 )
-

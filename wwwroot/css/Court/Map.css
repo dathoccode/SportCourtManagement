@@ -64,6 +64,12 @@ li.sidebar-item {
                 bottom: 0;
             }
             .corner-btn {
-                bottom: 20px;
+                bottom: 12.5vh;
             }
         }
+/*--------------MAP--------------------*/
+#map {
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
