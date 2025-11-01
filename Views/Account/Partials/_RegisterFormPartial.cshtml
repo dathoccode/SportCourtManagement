@@ -3,23 +3,23 @@
 <div class="login-card">
     <h2>Đăng Kí</h2>
 
-    <form method="post" class="d-flex flex-column align-items-center ms-auto me-5" style="max-width:px; width: 100%;">
+    <form method="post" asp-action="Register" class="d-flex flex-column align-items-center ms-auto me-5" style="max-width:px; width: 100%;">
 
 
         <div class="input-box">
-            <input type="email" name="Email" placeholder="Nhập địa chỉ Email?" required />
+            <input type="email" name="email" placeholder="Nhập địa chỉ Email?" required />
         </div>
         <div class="input-box">
-            <input type="text" name="Phone" placeholder="Số điện thoại?" required />
+            <input type="text" name="phone" placeholder="Số điện thoại?" required />
         </div>
         <div class="input-box">
-            <input type="text" name="FullName" placeholder="Họ và tên" required />
+            <input type="text" name="name" placeholder="Họ và tên" required />
         </div>
         <div class="input-box">
-            <input type="password" name="Password" placeholder="Mật khẩu" required />
+            <input type="password" name="password" placeholder="Mật khẩu" required />
         </div>
         <div class="input-box">
-            <input type="password" name="ConfirmPassword" placeholder="Nhập lại mật khẩu" required />
+            <input type="password" name="confirmpassword" placeholder="Nhập lại mật khẩu" required />
         </div>
 
         <button type="submit" class="btn btn-login">Đăng Kí</button>

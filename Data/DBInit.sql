@@ -1,4 +1,4 @@
-use QuanLySanTheThao
+
 create table tCourt(
 	CourtID nvarchar(10),
 	CourtName nvarchar(10),
@@ -34,13 +34,12 @@ create table tRole(
 	RoleName nvarchar(20),
 	primary key(RoleID)
 )
-
 create table tAccount(
 	AccountID NVARCHAR(10) PRIMARY KEY,
 	RoleID INT,
 	AccName NVARCHAR(50),
 	AccPassword NVARCHAR(100),
-	AccImg NVARCHAR(255),
+	AccImg image,
 	Email NVARCHAR(100) UNIQUE,      
 	Phone NVARCHAR(15),             
 	FOREIGN KEY(RoleID) REFERENCES tRole(RoleID)
