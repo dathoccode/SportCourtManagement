@@ -95,15 +95,7 @@ body {
             color: rgba(255,255,255,0.85);
         }
 
-    .input-box .icon {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: rgba(255,255,255,0.8);
-        cursor: pointer;
-        font-size: 16px;
-    }
+    
 
 /* ========== NÚT CHUNG ========== */
 .btn-login, .btn-send {
@@ -141,6 +133,7 @@ body {
     .links-row a, .back-login {
         color: rgba(255,255,255,0.9);
         text-decoration: none;
+        font-size: 14px;
     }
 
         .links-row a:hover, .back-login:hover {
