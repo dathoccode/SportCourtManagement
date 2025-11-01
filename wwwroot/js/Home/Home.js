@@ -56,13 +56,46 @@
 
     // --- KẾT THÚC CODE MỚI ---
 
+    // --- BẮT ĐẦU CODE MỚI CHO CHỨC NĂNG TÌM KIẾM ---
 
-    // --- CODE CŨ (Giữ nguyên) ---
+    // Bắt sự kiện 'keyup' (khi người dùng gõ phím và nhả ra) 
+    // trên ô input có id 'searchInput'
+    $('#searchInput').on('keyup', function () {
+
+        // 1. Lấy nội dung người dùng gõ vào, chuyển thành chữ thường
+        // (để tìm kiếm không phân biệt chữ hoa/thường)
+        var searchText = $(this).val().toLowerCase();
+
+        // 2. Lặp qua TẤT CẢ các thẻ sân
+        // (Chúng ta chọn tất cả các 'div' là con trực tiếp của '.row.g-3'
+        // bên trong container cuộn)
+        $('#court-card-container .row.g-3 > div').each(function () {
+
+            // `this` ở đây là từng thẻ .col-* (ví dụ: .col-10.col-sm-6...)
+            var currentCard = $(this);
+
+            // 3. Lấy tên sân từ thẻ h6.card-title bên trong card
+            var courtName = currentCard.find('.card-title').text().toLowerCase();
+
+            // 4. So sánh tên sân với nội dung tìm kiếm
+            if (courtName.includes(searchText)) {
+                // Nếu tên sân CHỨA nội dung tìm kiếm -> HIỆN thẻ card
+                currentCard.show();
+            } else {
+                // Nếu KHÔNG CHỨA -> ẨN thẻ card
+                currentCard.hide();
+            }
+        });
+    });
+
+    // --- KẾT THÚC CODE MỚI ---
+
     // --- CODE CHO NÚT XÓA TÌM KIẾM ---
     $('.search-bar').on('click', '.clear-search-btn', function () {
         var searchInput = $(this).siblings('.form-control');
         searchInput.val('');
         searchInput.focus();
+        searchInput.trigger('keyup');
     });
 
     // --- CODE CHO ICON SEARCH ---
