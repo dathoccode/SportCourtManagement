@@ -1,5 +1,4 @@
 use QuanLySanTheThao
-
 create table tCourt(
 	CourtID nvarchar(10),
 	CourtName nvarchar(10),
@@ -27,7 +26,7 @@ create table tPrice(
 	EndTime time,
 	UnitPrice money,
 	primary key(CourtID, SlotID),
-	foreign key(CourtID) references tCourt(CourtID),
+	foreign key(CourtID) references tCourt(CourtID)
 )
 
 create table tRole(
@@ -37,13 +36,14 @@ create table tRole(
 )
 
 create table tAccount(
-	AccountID nvarchar(10),
-	RoleID int,
-	AccName nvarchar(30),
-	AccPassword nvarchar(20),
-	AccImg nvarchar(50),
-	primary key(AccountID),
-	foreign key(RoleID) references tRole(RoleID)
+	AccountID NVARCHAR(10) PRIMARY KEY,
+	RoleID INT,
+	AccName NVARCHAR(50),
+	AccPassword NVARCHAR(100),
+	AccImg NVARCHAR(255),
+	Email NVARCHAR(100) UNIQUE,      
+	Phone NVARCHAR(15),             
+	FOREIGN KEY(RoleID) REFERENCES tRole(RoleID)
 )
 
 create table tStatus(
@@ -73,7 +73,7 @@ create table tBookingDetail(
 	EndTime time,
 	primary key(DetailID),
 	foreign key(BookingID) references tBooking(BookingID),
-	foreign key(CourtID) references tCourt(CourtID),
+	foreign key(CourtID) references tCourt(CourtID)
 )
 
 create table tFavoriteCourt(
