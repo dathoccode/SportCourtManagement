@@ -53,7 +53,9 @@ namespace SportCourtManagement.Controllers
             HttpContext.Session.SetString("Email", acc.Email ?? "");
 
             // Chuyển hướng sau đăng nhập thành công
-            return RedirectToAction("Index", "Home");
+            // Sau khi đăng nhập thành công
+            return RedirectToAction("Loading", "Account", new { target = Url.Action("Index", "Home") });
+
         }
 
         // ======= [GET] TRANG HỒ SƠ CÁ NHÂN =======
@@ -76,6 +78,11 @@ namespace SportCourtManagement.Controllers
             }
 
             return View(acc);
+        }
+        public IActionResult Loading(string target)
+        {
+            ViewBag.TargetUrl = target;
+            return View();
         }
 
         // ======= [GET] TRANG ĐĂNG KÝ =======
@@ -115,8 +122,10 @@ namespace SportCourtManagement.Controllers
             _context.TAccounts.Add(acc);
             _context.SaveChanges();
 
-           
-            return RedirectToAction("Login");
+
+            // Sau khi đăng ký thành công
+            return RedirectToAction("Loading", "Account", new { target = Url.Action("Login", "Account") });
+
         }
 
         // ======= [GET] QUÊN MẬT KHẨU =======

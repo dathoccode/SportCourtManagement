@@ -6,13 +6,23 @@ namespace SportCourtManagement.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Loading", "Account", new { target = Url.Action("CourtIndex", "Court") });
         }
 
+        public IActionResult CourtIndex()
+        {
+            return View("Index");
+        }
+
+        // ====== [GET] TRANG BẢN ĐỒ ======
         public IActionResult Map()
         {
+            return RedirectToAction("Loading", "Account", new { target = Url.Action("CourtMap", "Court") });
+        }
 
-            return View();
+        public IActionResult CourtMap()
+        {
+            return View("Map");
         }
     }
 }
