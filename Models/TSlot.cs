@@ -9,9 +9,7 @@ public partial class TSlot
 
     public string CourtId { get; set; } = null!;
 
-    public string? SlotType { get; set; }
-
-    public string? SlotName { get; set; }
+    public string SlotName { get; set; } = null!;
 
     public virtual TCourt Court { get; set; } = null!;
 }

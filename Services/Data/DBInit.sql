@@ -1,84 +1,93 @@
+CREATE DATABASE QuanLySanTheThao
 
-create table tCourt(
-	CourtID nvarchar(10),
-	CourtName nvarchar(10),
-	CourtAddress nvarchar(50),
-	Contact nvarchar(11),
-	OpenTime time,
-	CloseTime time,
-	Img nvarchar(50),
-	Rating float,
-	primary key(CourtID)
-)
+use QuanLySanTheThao
 
-create table tSlot(
-	SlotID nvarchar(10),
-	CourtID nvarchar(10),
-	SlotType nvarchar(100),
-	primary key(SlotID, CourtID),
-	foreign key(CourtID) references tCourt(CourtID)
-)
+CREATE TABLE tSport(
+    SportID NVARCHAR(10) NOT NULL PRIMARY KEY,
+    SportName NVARCHAR(50) NOT NULL
+);
 
-create table tPrice(
-	CourtID nvarchar(10),
-	SlotID nvarchar(10),
-	StartTime time,
-	EndTime time,
-	UnitPrice money,
-	primary key(CourtID, SlotID),
-	foreign key(CourtID) references tCourt(CourtID)
-)
+CREATE TABLE tCourt(
+    CourtID NVARCHAR(10) NOT NULL PRIMARY KEY,
+    CourtName NVARCHAR(50) NOT NULL,
+    CourtAddress NVARCHAR(100) NOT NULL,
+    Contact NVARCHAR(11) NULL,
+    SportID NVARCHAR(10) NOT NULL,
+    OpenTime TIME NOT NULL,
+    CloseTime TIME NOT NULL,
+	Latitude float null,
+	Longtitude float null,
+    Img NVARCHAR(200) NULL,
+    Rating FLOAT NULL,
+    FOREIGN KEY (SportID) REFERENCES tSport(SportID)
+);
 
-create table tRole(
-	RoleID int,
-	RoleName nvarchar(20),
-	primary key(RoleID)
-)
-create table tAccount(
-	AccountID NVARCHAR(10) PRIMARY KEY,
-	RoleID INT,
-	AccName NVARCHAR(50),
-	AccPassword NVARCHAR(100),
-	AccImg image,
-	Email NVARCHAR(100) UNIQUE,      
-	Phone NVARCHAR(15),             
-	FOREIGN KEY(RoleID) REFERENCES tRole(RoleID)
-)
+CREATE TABLE tSlot(
+    SlotID NVARCHAR(10) NOT NULL,
+    CourtID NVARCHAR(10) NOT NULL,
+    PRIMARY KEY (SlotID, CourtID),
+    FOREIGN KEY (CourtID) REFERENCES tCourt(CourtID)
+);
 
-create table tStatus(
-	StatusID int not null,
-	StatusName nvarchar(30),
-	primary key(StatusID)
-)
+CREATE TABLE tPrice(
+    CourtID NVARCHAR(10) NOT NULL,
+    SlotID NVARCHAR(10) NOT NULL,
+    StartTime TIME NOT NULL,
+    EndTime TIME NOT NULL,
+    UnitPrice MONEY NOT NULL,
+    PRIMARY KEY (CourtID, SlotID),
+    FOREIGN KEY (CourtID) REFERENCES tCourt(CourtID)
+);
 
-create table tBooking(
-	BookingID nvarchar(10),
-	AccountID nvarchar(10),
-	BookingDate datetime,
-	Sale float null,
-	StatusID int,
-	Price money,
-	primary key(BookingID),
-	foreign key(AccountID) references tAccount(AccountID),
-	foreign key(StatusID) references tStatus(StatusID)
-)
+CREATE TABLE tRole(
+    RoleID INT NOT NULL PRIMARY KEY,
+    RoleName NVARCHAR(20) NOT NULL
+);
 
-create table tBookingDetail(
-	DetailID nvarchar(10),
-	BookingID nvarchar(10),
-	CourtID nvarchar(10),
-	SlotID nvarchar(10),
-	StartTime time,
-	EndTime time,
-	primary key(DetailID),
-	foreign key(BookingID) references tBooking(BookingID),
-	foreign key(CourtID) references tCourt(CourtID)
-)
+CREATE TABLE tAccount(
+    AccountID NVARCHAR(10) NOT NULL PRIMARY KEY,
+    RoleID INT NOT NULL,
+    AccName NVARCHAR(50) NOT NULL,
+    AccPassword NVARCHAR(100) NOT NULL,
+    AccImg IMAGE NULL,
+    DateOfBirth DATE NULL,
+    Gender NVARCHAR(10) NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    Phone NVARCHAR(15) NOT NULL,
+    FOREIGN KEY (RoleID) REFERENCES tRole(RoleID)
+);
 
-create table tFavoriteCourt(
-	CourtID nvarchar(10),
-	AccountID nvarchar(10),
-	primary key(CourtID, AccountID),
-	foreign key(CourtID) references tCourt(CourtID),
-	foreign key(AccountID) references tAccount(AccountID)
-)
+CREATE TABLE tStatus(
+    StatusID INT NOT NULL PRIMARY KEY,
+    StatusName NVARCHAR(30) NOT NULL
+);
+
+CREATE TABLE tBooking(
+    BookingID NVARCHAR(10) NOT NULL PRIMARY KEY,
+    AccountID NVARCHAR(10) NOT NULL,
+    BookingDate DATETIME NOT NULL,
+    Sale FLOAT NULL,
+    StatusID INT NOT NULL,
+    Price MONEY NOT NULL,
+    FOREIGN KEY (AccountID) REFERENCES tAccount(AccountID),
+    FOREIGN KEY (StatusID) REFERENCES tStatus(StatusID)
+);
+
+CREATE TABLE tBookingDetail(
+    DetailID NVARCHAR(10) NOT NULL PRIMARY KEY,
+    BookingID NVARCHAR(10) NOT NULL,
+    CourtID NVARCHAR(10) NOT NULL,
+    SlotID NVARCHAR(10) NOT NULL,
+    StartTime TIME NOT NULL,
+    EndTime TIME NOT NULL,
+    FOREIGN KEY (BookingID) REFERENCES tBooking(BookingID),
+    FOREIGN KEY (CourtID) REFERENCES tCourt(CourtID)
+);
+
+CREATE TABLE tFavoriteCourt(
+    CourtID NVARCHAR(10) NOT NULL,
+    AccountID NVARCHAR(10) NOT NULL,
+    PRIMARY KEY (CourtID, AccountID),
+    FOREIGN KEY (CourtID) REFERENCES tCourt(CourtID),
+    FOREIGN KEY (AccountID) REFERENCES tAccount(AccountID)
+);

@@ -113,7 +113,7 @@ namespace SportCourtManagement.Controllers
             var acc = new TAccount
             {
                 AccountId = newId,
-                RoleId = 1, 
+                RoleId = "R001", 
                 AccName = FullName,
                 Email = email,
                 Phone = phone,

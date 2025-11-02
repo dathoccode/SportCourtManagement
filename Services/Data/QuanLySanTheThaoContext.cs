@@ -42,11 +42,11 @@ public partial class QuanLySanTheThaoContext : DbContext
     {
         modelBuilder.Entity<TAccount>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__tAccount__349DA586908BE9A5");
+            entity.HasKey(e => e.AccountId).HasName("PK__tAccount__349DA58679366BE5");
 
             entity.ToTable("tAccount");
 
-            entity.HasIndex(e => e.Email, "UQ__tAccount__A9D10534F2004948").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__tAccount__A9D1053435F3EDE6").IsUnique();
 
             entity.Property(e => e.AccountId)
                 .HasMaxLength(10)
@@ -55,17 +55,21 @@ public partial class QuanLySanTheThaoContext : DbContext
             entity.Property(e => e.AccName).HasMaxLength(50);
             entity.Property(e => e.AccPassword).HasMaxLength(100);
             entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.Gender).HasMaxLength(10);
             entity.Property(e => e.Phone).HasMaxLength(15);
-            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.RoleId)
+                .HasMaxLength(10)
+                .HasColumnName("RoleID");
 
             entity.HasOne(d => d.Role).WithMany(p => p.TAccounts)
                 .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK__tAccount__RoleID__5441852A");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tAccount__RoleID__5CD6CB2B");
         });
 
         modelBuilder.Entity<TBooking>(entity =>
         {
-            entity.HasKey(e => e.BookingId).HasName("PK__tBooking__73951ACD60BD055E");
+            entity.HasKey(e => e.BookingId).HasName("PK__tBooking__73951ACDA798E28A");
 
             entity.ToTable("tBooking");
 
@@ -77,20 +81,24 @@ public partial class QuanLySanTheThaoContext : DbContext
                 .HasColumnName("AccountID");
             entity.Property(e => e.BookingDate).HasColumnType("datetime");
             entity.Property(e => e.Price).HasColumnType("money");
-            entity.Property(e => e.StatusId).HasColumnName("StatusID");
+            entity.Property(e => e.StatusId)
+                .HasMaxLength(10)
+                .HasColumnName("StatusID");
 
             entity.HasOne(d => d.Account).WithMany(p => p.TBookings)
                 .HasForeignKey(d => d.AccountId)
-                .HasConstraintName("FK__tBooking__Accoun__59063A47");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tBooking__Accoun__619B8048");
 
             entity.HasOne(d => d.Status).WithMany(p => p.TBookings)
                 .HasForeignKey(d => d.StatusId)
-                .HasConstraintName("FK__tBooking__Status__59FA5E80");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tBooking__Status__628FA481");
         });
 
         modelBuilder.Entity<TBookingDetail>(entity =>
         {
-            entity.HasKey(e => e.DetailId).HasName("PK__tBooking__135C314D2A2C2A96");
+            entity.HasKey(e => e.DetailId).HasName("PK__tBooking__135C314D5E8CA309");
 
             entity.ToTable("tBookingDetail");
 
@@ -109,16 +117,18 @@ public partial class QuanLySanTheThaoContext : DbContext
 
             entity.HasOne(d => d.Booking).WithMany(p => p.TBookingDetails)
                 .HasForeignKey(d => d.BookingId)
-                .HasConstraintName("FK__tBookingD__Booki__5CD6CB2B");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tBookingD__Booki__656C112C");
 
             entity.HasOne(d => d.Court).WithMany(p => p.TBookingDetails)
                 .HasForeignKey(d => d.CourtId)
-                .HasConstraintName("FK__tBookingD__Court__5DCAEF64");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tBookingD__Court__66603565");
         });
 
         modelBuilder.Entity<TCourt>(entity =>
         {
-            entity.HasKey(e => e.CourtId).HasName("PK__tCourt__C3A67CFA8ECA0D2A");
+            entity.HasKey(e => e.CourtId).HasName("PK__tCourt__C3A67CFAB2EBA3AC");
 
             entity.ToTable("tCourt");
 
@@ -126,12 +136,17 @@ public partial class QuanLySanTheThaoContext : DbContext
                 .HasMaxLength(10)
                 .HasColumnName("CourtID");
             entity.Property(e => e.Contact).HasMaxLength(11);
-            entity.Property(e => e.CourtAddress).HasMaxLength(50);
-            entity.Property(e => e.CourtName).HasMaxLength(100);
-            entity.Property(e => e.Img).HasColumnType("image");
-            entity.Property(e => e.Kind)
-                .HasMaxLength(50)
-                .HasDefaultValue("Cầu lông");
+            entity.Property(e => e.CourtAddress).HasMaxLength(100);
+            entity.Property(e => e.CourtName).HasMaxLength(50);
+            entity.Property(e => e.Img).HasMaxLength(200);
+            entity.Property(e => e.SportId)
+                .HasMaxLength(10)
+                .HasColumnName("SportID");
+
+            entity.HasOne(d => d.Sport).WithMany(p => p.TCourts)
+                .HasForeignKey(d => d.SportId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__tCourt__SportID__4BAC3F29");
 
             entity.HasMany(d => d.Accounts).WithMany(p => p.Courts)
                 .UsingEntity<Dictionary<string, object>>(
@@ -139,14 +154,14 @@ public partial class QuanLySanTheThaoContext : DbContext
                     r => r.HasOne<TAccount>().WithMany()
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__tFavorite__Accou__619B8048"),
+                        .HasConstraintName("FK__tFavorite__Accou__6A30C649"),
                     l => l.HasOne<TCourt>().WithMany()
                         .HasForeignKey("CourtId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK__tFavorite__Court__60A75C0F"),
+                        .HasConstraintName("FK__tFavorite__Court__693CA210"),
                     j =>
                     {
-                        j.HasKey("CourtId", "AccountId").HasName("PK__tFavorit__B0EFA6A2E60F1A10");
+                        j.HasKey("CourtId", "AccountId").HasName("PK__tFavorit__B0EFA6A2A711ED86");
                         j.ToTable("tFavoriteCourt");
                         j.IndexerProperty<string>("CourtId")
                             .HasMaxLength(10)
@@ -159,7 +174,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TPrice>(entity =>
         {
-            entity.HasKey(e => new { e.CourtId, e.SlotId }).HasName("PK__tPrice__2307585E0F6E5686");
+            entity.HasKey(e => new { e.CourtId, e.SlotId }).HasName("PK__tPrice__2307585ED5CA6DE4");
 
             entity.ToTable("tPrice");
 
@@ -174,24 +189,24 @@ public partial class QuanLySanTheThaoContext : DbContext
             entity.HasOne(d => d.Court).WithMany(p => p.TPrices)
                 .HasForeignKey(d => d.CourtId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__tPrice__CourtID__4E88ABD4");
+                .HasConstraintName("FK__tPrice__CourtID__5165187F");
         });
 
         modelBuilder.Entity<TRole>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__tRole__8AFACE3A861C380C");
+            entity.HasKey(e => e.RoleId).HasName("PK__tRole__8AFACE3A3F7C5CBA");
 
             entity.ToTable("tRole");
 
             entity.Property(e => e.RoleId)
-                .ValueGeneratedNever()
+                .HasMaxLength(10)
                 .HasColumnName("RoleID");
             entity.Property(e => e.RoleName).HasMaxLength(20);
         });
 
         modelBuilder.Entity<TSlot>(entity =>
         {
-            entity.HasKey(e => new { e.SlotId, e.CourtId }).HasName("PK__tSlot__B6282D8069D48F0D");
+            entity.HasKey(e => new { e.SlotId, e.CourtId }).HasName("PK__tSlot__B6282D80FCA6568B");
 
             entity.ToTable("tSlot");
 
@@ -201,18 +216,17 @@ public partial class QuanLySanTheThaoContext : DbContext
             entity.Property(e => e.CourtId)
                 .HasMaxLength(10)
                 .HasColumnName("CourtID");
-            entity.Property(e => e.SlotName).HasMaxLength(50);
-            entity.Property(e => e.SlotType).HasMaxLength(100);
+            entity.Property(e => e.SlotName).HasMaxLength(20);
 
             entity.HasOne(d => d.Court).WithMany(p => p.TSlots)
                 .HasForeignKey(d => d.CourtId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__tSlot__CourtID__4BAC3F29");
+                .HasConstraintName("FK__tSlot__CourtID__4E88ABD4");
         });
 
         modelBuilder.Entity<TSport>(entity =>
         {
-            entity.HasKey(e => e.SportId).HasName("PK__tSport__7A41AF1CA9E1D937");
+            entity.HasKey(e => e.SportId).HasName("PK__tSport__7A41AF1C93612B10");
 
             entity.ToTable("tSport");
 
@@ -224,12 +238,12 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TStatus>(entity =>
         {
-            entity.HasKey(e => e.StatusId).HasName("PK__tStatus__C8EE204394345B76");
+            entity.HasKey(e => e.StatusId).HasName("PK__tStatus__C8EE2043BC5819AD");
 
             entity.ToTable("tStatus");
 
             entity.Property(e => e.StatusId)
-                .ValueGeneratedNever()
+                .HasMaxLength(10)
                 .HasColumnName("StatusID");
             entity.Property(e => e.StatusName).HasMaxLength(30);
         });

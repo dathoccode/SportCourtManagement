@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using SportCourtManagement.Models;
+using SportCourtManagement.Services.Data;
 using System.Diagnostics;
 
 namespace SportCourtManagement.Controllers

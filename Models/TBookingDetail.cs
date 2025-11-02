@@ -7,17 +7,17 @@ public partial class TBookingDetail
 {
     public string DetailId { get; set; } = null!;
 
-    public string? BookingId { get; set; }
+    public string BookingId { get; set; } = null!;
 
-    public string? CourtId { get; set; }
+    public string CourtId { get; set; } = null!;
 
-    public string? SlotId { get; set; }
+    public string SlotId { get; set; } = null!;
 
-    public TimeOnly? StartTime { get; set; }
+    public TimeOnly StartTime { get; set; }
 
-    public TimeOnly? EndTime { get; set; }
+    public TimeOnly EndTime { get; set; }
 
-    public virtual TBooking? Booking { get; set; }
+    public virtual TBooking Booking { get; set; } = null!;
 
-    public virtual TCourt? Court { get; set; }
+    public virtual TCourt Court { get; set; } = null!;
 }

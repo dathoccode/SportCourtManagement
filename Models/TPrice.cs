@@ -9,11 +9,11 @@ public partial class TPrice
 
     public string SlotId { get; set; } = null!;
 
-    public TimeOnly? StartTime { get; set; }
+    public TimeOnly StartTime { get; set; }
 
-    public TimeOnly? EndTime { get; set; }
+    public TimeOnly EndTime { get; set; }
 
-    public decimal? UnitPrice { get; set; }
+    public decimal UnitPrice { get; set; }
 
     public virtual TCourt Court { get; set; } = null!;
 }

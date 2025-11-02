@@ -5,9 +5,9 @@ namespace SportCourtManagement.Models;
 
 public partial class TRole
 {
-    public int RoleId { get; set; }
+    public string RoleId { get; set; } = null!;
 
-    public string? RoleName { get; set; }
+    public string RoleName { get; set; } = null!;
 
     public virtual ICollection<TAccount> TAccounts { get; set; } = new List<TAccount>();
 }

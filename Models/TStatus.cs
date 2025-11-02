@@ -5,9 +5,9 @@ namespace SportCourtManagement.Models;
 
 public partial class TStatus
 {
-    public int StatusId { get; set; }
+    public string StatusId { get; set; } = null!;
 
-    public string? StatusName { get; set; }
+    public string StatusName { get; set; } = null!;
 
     public virtual ICollection<TBooking> TBookings { get; set; } = new List<TBooking>();
 }

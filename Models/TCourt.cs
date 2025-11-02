@@ -7,25 +7,27 @@ public partial class TCourt
 {
     public string CourtId { get; set; } = null!;
 
-    public string? CourtName { get; set; }
+    public string CourtName { get; set; } = null!;
 
-    public string? CourtAddress { get; set; }
+    public string CourtAddress { get; set; } = null!;
 
     public string? Contact { get; set; }
 
-    public TimeOnly? OpenTime { get; set; }
+    public string SportId { get; set; } = null!;
 
-    public TimeOnly? CloseTime { get; set; }
+    public TimeOnly OpenTime { get; set; }
 
-    public byte[]? Img { get; set; }
-
-    public double? Rating { get; set; }
+    public TimeOnly CloseTime { get; set; }
 
     public double? Latitude { get; set; }
 
     public double? Longitude { get; set; }
 
-    public string? Kind { get; set; }
+    public string? Img { get; set; }
+
+    public double? Rating { get; set; }
+
+    public virtual TSport Sport { get; set; } = null!;
 
     public virtual ICollection<TBookingDetail> TBookingDetails { get; set; } = new List<TBookingDetail>();
 
