@@ -22,15 +22,15 @@
                         <i class="fas fa-calendar-check"></i>
                         <span>Lịch đã đặt</span>
                     </a>
-                    <a href="#" class="action-btn">
+                <a href="#" class="action-btn" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
                         <i class="fas fa-bell"></i>
                         <span>Thông báo</span>
                     </a>
-                    <a href="#" class="action-btn">
+                <a href="#" class="action-btn" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
                         <i class="fas fa-wallet"></i>
                         <span>Thanh toán</span>
                     </a>
-                    <a href="#" class="action-btn">
+                <a href="#" class="action-btn" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
                         <i class="fas fa-tags"></i>
                         <span>Ưu đãi</span>
                     </a>
@@ -65,7 +65,7 @@
                         <span>Điều khoản và chính sách</span>
                         <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a asp-controller="Account" asp-action="Login" class="list-group-item list-group-item-action">
                         <i class="fas fa-sign-out-alt menu-icon"></i>
                         <span>Đăng xuất</span>
                         <i class="fas fa-chevron-right ms-auto text-muted small arrow-icon"></i>
@@ -77,5 +77,24 @@
         <div class="col-lg-8">
             @RenderBody()
         </div>
+        <div class="modal fade" id="comingSoonModal" tabindex="-1" aria-labelledby="comingSoonModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-custom">
+                        <h5 class="modal-title" id="comingSoonModalLabel">Thông báo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Tính năng này đang được phát triển. Vui lòng quay lại sau!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary-custom" data-bs-dismiss="modal">Đã hiểu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @section Scripts {
+            @await RenderSectionAsync("Scripts", required: false)
+        }
     </div>
 </div>

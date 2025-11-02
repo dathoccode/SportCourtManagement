@@ -1,4 +1,6 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
+
+    //top navbar slider
     const slider = document.querySelector(".slider");
     if (slider) {
         let isDown = false;
@@ -32,6 +34,7 @@
         sidebar.classList.toggle('hidden');
     });
 
+    // Responsive sidebar behavior
     function largeScreenSidebar() {
         const height = navbar.offsetHeight + 'px';
         sidebar.style.top = height;
@@ -69,15 +72,17 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
+    
+
     // Khi tìm thấy vị trí
     map.on('locationfound', function (e) {
         var radius = e.accuracy / 2;
 
         L.marker(e.latlng).addTo(map)
-            .bindPopup("Bạn đang ở đây.").openPopup();
-
+            .bindPopup("Bạn đang ở đây: " + e.latlng).openPopup();
         L.circle(e.latlng, radius).addTo(map);
     });
+
 
     // Khi không thể lấy vị trí
     map.on('locationerror', function (e) {
@@ -86,9 +91,44 @@
 
     locateBtn.addEventListener('click', function () {
         map.locate({ setView: true, maxZoom: 16 });
-        console.log("click button triggered");
-        L.marker(e.latlng).addTo(map)
-            .bindPopup("Bạn đang ở vị trí này").openPopup();
     });
+
+    var markers = [];
+
+    // Add a marker at a every court's location
+    fetch('/Court/GetCourts')
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(court => {
+            const marker = L.marker([court.latitude, court.longitude])
+                .addTo(map)
+                .bindPopup(`<b>${court.courtName}</b><br>${court.courtAddress}`);
+
+            marker.courtID = court.courtID  
+            marker.on('dbclick', function (e) {
+                window.location.href = `/Court/Booking?courtID=${court.courtId}`
+            })
+
+            markers.push(marker);
+        });
+    }).catch(err => console.error('Lỗi khi lấy dữ liệu:', err));
+
+
+    $("#searchInput").on("keyup", function () {
+        var keyword = $(this).val().toLowerCase();
+
+        $.ajax({
+            url: '/Court/FilterByKeyword',
+            type: 'GET',
+            data: { keyword: keyword },
+            success: function (data) {
+                $("#courtList").html(data); // Cập nhật danh sách
+            },
+            error: function (xhr, status, error) {
+                console.error("Lỗi AJAX:", error);
+            }
+        });
+    });
+
 });
 

@@ -1,0 +1,172 @@
+﻿use QuanLySanTheThao
+
+INSERT INTO tSport (SportID, SportName)
+VALUES
+('SP001', N'Cầu lông'),
+('SP002', N'Bóng đá mini'),
+('SP003', N'Bóng rổ'),
+('SP004', N'Tennis'),
+('SP005', N'Padel'),
+('SP006', N'Pickleball'),
+('SP007', N'Bóng chuyền'),
+('SP008', N'Bóng bàn'),
+('SP009', N'Futsal'),
+('SP010', N'Bóng ném'),
+('SP011', N'Bơi lội')
+
+delete from tRole
+INSERT INTO tRole(RoleID, RoleName) values
+('R001', N'User'),
+('R002', N'Owner'),
+('R003', N'Admin')
+
+INSERT INTO tCourt(CourtID, CourtName, CourtAddress, SportID, Contact, OpenTime, CloseTime, Img, Rating)
+VALUES
+('C001', N'Hoàng Mai Court', N'25 Định Công, Hoàng Mai, Hà Nội', 'SP001', '0938124576', '07:00', '22:00', NULL, 3.5),
+('C002', N'Thanh Xuân Sports', N'12 Nguyễn Trãi, Thanh Xuân, Hà Nội', 'SP002', '0905123456', '06:00', '23:00', NULL, 4.2),
+('C003', N'Đống Đa Arena', N'45 Tôn Đức Thắng, Đống Đa, Hà Nội', 'SP003', '0987332233', '07:00', '21:00', NULL, 4.6),
+('C004', N'Cầu Giấy Tennis Club', N'9 Trần Thái Tông, Cầu Giấy, Hà Nội', 'SP004', '0945238899', '06:30', '22:00', NULL, 4.8),
+('C005', N'Tây Hồ Padel', N'88 Lạc Long Quân, Tây Hồ, Hà Nội', 'SP005', '0912457777', '07:00', '21:30', NULL, 4.0),
+('C006', N'Hoàn Kiếm Pickleball Center', N'15 Lê Thái Tổ, Hoàn Kiếm, Hà Nội', 'SP006', '0903111999', '08:00', '22:00', NULL, 3.9),
+('C007', N'Long Biên Volleyball Gym', N'62 Nguyễn Văn Cừ, Long Biên, Hà Nội', 'SP007', '0978336677', '07:00', '21:00', NULL, 4.3),
+('C008', N'Hà Đông Badminton House', N'14 Quang Trung, Hà Đông, Hà Nội', 'SP001', '0938445566', '06:00', '22:00', NULL, 4.1),
+('C009', N'Trâu Quỳ Football Field', N'Khu đô thị Ecopark, Gia Lâm, Hà Nội', 'SP002', '0912888999', '05:30', '23:00', NULL, 4.7),
+('C010', N'Mỹ Đình Basketball Court', N'Sân vận động Mỹ Đình, Nam Từ Liêm, Hà Nội', 'SP003', '0927881122', '07:00', '22:00', NULL, 4.5),
+('C011', N'Phúc Tân Tennis Club', N'89 Nguyễn Khoái, Hai Bà Trưng, Hà Nội', 'SP004', '0974331144', '06:30', '21:30', NULL, 4.6),
+('C012', N'Kim Liên Badminton Center', N'21 Xã Đàn, Đống Đa, Hà Nội', 'SP001', '0945226677', '06:00', '22:00', NULL, 4.0),
+('C013', N'Yên Sở Football Park', N'Khu công viên Yên Sở, Hoàng Mai, Hà Nội', 'SP002', '0919223344', '05:00', '23:00', NULL, 4.8),
+('C014', N'Bắc Từ Liêm Volleyball Court', N'78 Phạm Văn Đồng, Bắc Từ Liêm, Hà Nội', 'SP007', '0964115566', '07:00', '21:00', NULL, 4.4),
+('C015', N'Nam Trung Yên Tennis', N'KĐT Nam Trung Yên, Cầu Giấy, Hà Nội', 'SP004', '0932445511', '06:30', '22:00', NULL, 4.5),
+('C016', N'Ngọc Khánh Pickleball Arena', N'123 Nguyễn Chí Thanh, Ba Đình, Hà Nội', 'SP006', '0987551122', '08:00', '22:00', NULL, 4.1),
+('C017', N'Hà Đông Volleyball House', N'55 Tô Hiệu, Hà Đông, Hà Nội', 'SP007', '0945112233', '07:00', '21:30', NULL, 4.0),
+('C018', N'Long Biên Football Club', N'22 Ngọc Lâm, Long Biên, Hà Nội', 'SP002', '0938123399', '06:00', '23:00', NULL, 4.3),
+('C019', N'Tây Hồ Badminton', N'11 Xuân Diệu, Tây Hồ, Hà Nội', 'SP001', '0978446677', '07:00', '21:30', NULL, 4.2),
+('C020', N'Mai Dịch Basketball', N'33 Hồ Tùng Mậu, Cầu Giấy, Hà Nội', 'SP003', '0912334455', '07:00', '22:00', NULL, 4.6),
+('C021', N'Linh Đàm Football', N'KĐT Linh Đàm, Hoàng Mai, Hà Nội', 'SP002', '0905667788', '05:30', '23:00', NULL, 4.7),
+('C022', N'Trung Hòa Volleyball', N'65 Nguyễn Thị Định, Thanh Xuân, Hà Nội', 'SP007', '0977334455', '07:00', '21:00', NULL, 4.1),
+('C023', N'Cầu Giấy Badminton', N'98 Duy Tân, Cầu Giấy, Hà Nội', 'SP001', '0945123344', '06:00', '22:00', NULL, 4.3),
+('C024', N'Hoàng Quốc Việt Tennis', N'76 Hoàng Quốc Việt, Cầu Giấy, Hà Nội', 'SP004', '0918667788', '06:30', '21:30', NULL, 4.7),
+('C025', N'Kim Mã Basketball Court', N'95 Kim Mã, Ba Đình, Hà Nội', 'SP003', '0903556677', '07:00', '22:00', NULL, 4.4);
+
+INSERT INTO tSlot (SlotID, CourtID, SlotName)
+VALUES
+(N'S001', 'C001', N'Sân 1'),
+(N'S002', 'C001', N'Sân 2'),
+(N'S003', 'C001', N'Sân 3'),
+(N'S001', 'C002', N'Sân 1'),
+(N'S002', 'C002', N'Sân 2'),
+(N'S003', 'C002', N'Sân 3'),
+(N'S001', 'C003', N'Sân 1'),
+(N'S002', 'C003', N'Sân 2'),
+(N'S003', 'C003', N'Sân 3'),
+(N'S001', 'C004', N'Sân 1'),
+(N'S002', 'C004', N'Sân 2'),
+(N'S003', 'C004', N'Sân 3'),
+(N'S001', 'C005', N'Sân 1'),
+(N'S002', 'C005', N'Sân 2'),
+(N'S003', 'C005', N'Sân 3'),
+(N'S001', 'C006', N'Sân 1'),
+(N'S002', 'C006', N'Sân 2'),
+(N'S003', 'C006', N'Sân 3'),
+(N'S001', 'C007', N'Sân 1'),
+(N'S002', 'C007', N'Sân 2'),
+(N'S003', 'C007', N'Sân 3'),
+(N'S001', 'C008', N'Sân 1'),
+(N'S002', 'C008', N'Sân 2'),
+(N'S003', 'C008', N'Sân 3'),
+(N'S001', 'C009', N'Sân 1'),
+(N'S002', 'C009', N'Sân 2'),
+(N'S003', 'C009', N'Sân 3'),
+(N'S001', 'C010', N'Sân 1'),
+(N'S002', 'C010', N'Sân 2'),
+(N'S003', 'C010', N'Sân 3'),
+(N'S001', 'C011', N'Sân 1'),
+(N'S002', 'C011', N'Sân 2'),
+(N'S003', 'C011', N'Sân 3'),
+(N'S001', 'C012', N'Sân 1'),
+(N'S002', 'C012', N'Sân 2'),
+(N'S003', 'C012', N'Sân 3'),
+(N'S001', 'C013', N'Sân 1'),
+(N'S002', 'C013', N'Sân 2'),
+(N'S003', 'C013', N'Sân 3'),
+(N'S001', 'C014', N'Sân 1'),
+(N'S002', 'C014', N'Sân 2'),
+(N'S003', 'C014', N'Sân 3'),
+(N'S001', 'C015', N'Sân 1'),
+(N'S002', 'C015', N'Sân 2'),
+(N'S003', 'C015', N'Sân 3'),
+(N'S001', 'C016', N'Sân 1'),
+(N'S002', 'C016', N'Sân 2'),
+(N'S003', 'C016', N'Sân 3'),
+(N'S001', 'C017', N'Sân 1'),
+(N'S002', 'C017', N'Sân 2'),
+(N'S003', 'C017', N'Sân 3'),
+(N'S001', 'C018', N'Sân 1'),
+(N'S002', 'C018', N'Sân 2'),
+(N'S003', 'C018', N'Sân 3'),
+(N'S001', 'C019', N'Sân 1'),
+(N'S002', 'C019', N'Sân 2'),
+(N'S003', 'C019', N'Sân 3'),
+(N'S001', 'C020', N'Sân 1'),
+(N'S002', 'C020', N'Sân 2'),
+(N'S003', 'C020', N'Sân 3'),
+(N'S001', 'C021', N'Sân 1'),
+(N'S002', 'C021', N'Sân 2'),
+(N'S003', 'C021', N'Sân 3'),
+(N'S001', 'C022', N'Sân 1'),
+(N'S002', 'C022', N'Sân 2'),
+(N'S003', 'C022', N'Sân 3'),
+(N'S001', 'C023', N'Sân 1'),
+(N'S002', 'C023', N'Sân 2'),
+(N'S003', 'C023', N'Sân 3'),
+(N'S001', 'C024', N'Sân 1'),
+(N'S002', 'C024', N'Sân 2'),
+(N'S003', 'C024', N'Sân 3'),
+(N'S001', 'C025', N'Sân 1'),
+(N'S002', 'C025', N'Sân 2'),
+(N'S003', 'C025', N'Sân 3');
+
+INSERT INTO tStatus(StatusID, StatusName) values
+('STT001', N'Đã thanh toán'),
+('STT002', N'Đang chờ thanh toán'),
+('STT003', N'Đã hủy')
+
+INSERT INTO tAccount(AccountID, AccName, Email, Phone, AccPassword, RoleID) VALUES
+('ACC001', N'Nguyễn Văn An', 'an.nguyen@example.com', '0912345678', '123456', 'R001'),
+('ACC002', N'Trần Thị Bình', 'binh.tran@example.com', '0923456789', '123456', 'R002'),
+('ACC003', N'Lê Văn Cường', 'cuong.le@example.com', '0934567890', '123456', 'R001'),
+('ACC004', N'Phạm Thị Dung', 'dung.pham@example.com', '0945678901', '123456', 'R002'),
+('ACC005', N'Hoàng Minh Đức', 'duc.hoang@example.com', '0956789012', '123456','R001'),
+('ACC006', N'Vũ Thị Hạnh', 'hanh.vu@example.com', '0967890123', '123456','R001'),
+('ACC007', N'Ngô Văn Khánh', 'khanh.ngo@example.com', '0978901234', '123456', 'R002'),
+('ACC008', N'Phan Thị Lan', 'lan.phan@example.com', '0989012345', '123456', 'R001'),
+('ACC009', N'Đỗ Minh Nam', 'nam.do@example.com', '0990123456', '123456', 'R001'),
+('ACC010', N'Bùi Thị Oanh', 'oanh.bui@example.com', '0901234567', '123456', 'R001');
+
+
+
+INSERT INTO tBooking (BookingID, AccountID, BookingDate, StatusID, Price) VALUES
+('B001', 'ACC001', '2025-10-02', 'STT001', 0),
+('B002', 'ACC002', '2025-10-03', 'STT001', 0),
+('B003', 'ACC003', '2025-10-05', 'STT001', 0),
+('B004', 'ACC001', '2025-10-07', 'STT002', 0),
+('B005', 'ACC004', '2025-10-10', 'STT002', 0),
+('B006', 'ACC002', '2025-10-12', 'STT001', 0),
+('B007', 'ACC001', '2025-10-14', 'STT001', 0),
+('B008', 'ACC001', '2025-10-15', 'STT002', 0),
+('B009', 'ACC001', '2025-10-17', 'STT001', 0),
+('B010', 'ACC001', '2025-10-20', 'STT001', 0);
+
+
+--------------------
+INSERT INTO tBookingDetail (DetailID, BookingID, CourtID, SlotID, StartTime, EndTime) VALUES
+('BD001', 'B001', 'C001', 'S001', '08:00', '09:00'),
+('BD002', 'B001', 'C001', 'S001', '09:00', '10:00'),
+('BD003', 'B002', 'C004', 'S002', '10:00', '11:30'),
+('BD004', 'B002', 'C004', 'S003', '11:30', '14:00'),
+('BD005', 'B003', 'C010', 'S001', '07:30', '09:00'),
+('BD006', 'B003', 'C010', 'S002', '09:00', '10:30'),
+('BD007', 'B004', 'C015', 'S001', '17:00', '18:30'),
+('BD008', 'B004', 'C015', 'S003', '18:30', '20:00'),
+('BD009', 'B005', 'C020', 'S002', '15:00', '16:30'),
+('BD010', 'B005', 'C020', 'S003', '16:30', '18:00');

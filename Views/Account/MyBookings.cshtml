@@ -8,13 +8,49 @@
 
     <div class="content-header">
         <h4>Danh sách đặt lịch</h4>
-        <a href="#" class="view-all-btn">
-            Xem tất cả <i class="fas fa-calendar-alt ms-1"></i>
-        </a>
+        <div class="dropdown">
+
+            <a href="#" class="view-all-btn dropdown-toggle"
+               id="date-filter-anchor"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">
+                Xem tất cả <i class="fas fa-calendar-alt ms-1"></i>
+            </a>
+
+            <ul class="dropdown-menu date-filter-dropdown">
+                <li>
+                    <a class="dropdown-item date-filter-item" href="#" id="btn-chon-ngay">
+                        <strong>Chọn khoảng ngày</strong>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item date-filter-item" href="#" id="btn-chon-thang">
+                        <strong>Chọn tháng</strong>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item date-filter-item" href="#" id="btn-chon-nam">
+                        <strong>Chọn năm</strong>
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item date-filter-item" href="#" id="btn-xem-tat-ca">
+                        Xem tất cả
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="empty-state">
         <p>bạn chưa có lịch đặt</p>
     </div>
+    <input type="text" id="date-range-picker" style="display: none;" />
+    <input type="text" id="month-picker" style="display: none;" />
+    <input type="text" id="year-picker" style="display: none;" />
 
 </div>
+@section Scripts {
+    <script src="~/js/dashboard.js" asp-append-version="true"></script>
+}

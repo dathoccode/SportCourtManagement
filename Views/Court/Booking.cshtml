@@ -1,0 +1,132 @@
+﻿@model TCourt
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Court Booking";
+}
+@section Styles {
+	<link rel="stylesheet" href="~/css/Court/Booking.css" asp-append-version="true" />
+}
+
+<div class="container-fluid p-0">
+	<div class="top-banner p-4">
+		<div class="banner-upper text-white">
+			<button class="return-btn">
+				<a href="~/Home/Index">
+					<i class="fa-solid fa-arrow-left"></i>
+				</a>
+			</button>
+			<h1 class="center"><b id="courtName">Court Name displace here</b></h1>
+		</div>
+		<div class="banner-lower">
+			<div class="annotation w-50 align-content-end">
+				<span class="mx-3">
+					<i class="fa-solid fa-square rounded-3" style="color: #ffffff;"></i> Trống
+				</span>
+				<span class="mx-3">
+					<i class="fa-solid fa-square rounded-3" style="color: #ff0000;"></i> Đã Đặt
+				</span>
+				<span class="mx-3">
+					<i class="fa-solid fa-square rounded-3" style="color: #c4c4c4;"></i> Khóa
+				</span>
+				<a class="mx-3"><u>Bảng giá</u></a>
+			</div>
+			<div class="datetime-picker" id="schedule" onchange="updateData()">
+				<label for="date">Chọn ngày:</label>
+				<input type="date" id="date" name="date">
+			</div>
+		</div>
+	</div>
+	<div class="timeline-container">
+		<div class="timeline-header-wrapper" id="timelineHeaderWrapper">
+			<div class="timeline-header" id="timelineHeader"></div>
+		</div>
+
+		<div class="timeline-body-wrapper" id="timelineBodyWrapper">
+			<div class="timeline-body" id="timelineBody"></div>
+		</div>
+	</div>
+
+</div>
+
+<script>
+	const timeSlots = [];
+	for (let h = 6; h < 24; h++) {
+		timeSlots.push(`${h.toString().padStart(2, "0")}:00`);
+		timeSlots.push(`${h.toString().padStart(2, "0")}:30`);
+	}
+	timeSlots.push("24:00");
+
+	//datetime picker
+	const schedule = document.getElementById('schedule');
+	schedule.value = new Date();
+	// Lấy dữ liệu
+	fetch('/Court/GetSlotsDetails/@Model.CourtId')
+		.then(res => res.json())
+		.then(data => {
+			//change header title
+			document.getElementById('courtName').textContent = data.courtName;
+			data.slots.forEach(slot => {
+				const row = document.createElement("div");
+				row.className = "timeline-row";
+
+				// slot name column
+				const nameCell = document.createElement("div");
+				nameCell.textContent = slot.slotName;
+				nameCell.className = "court-name";
+				row.appendChild(nameCell);
+
+				// Split time line into grid
+				for (let i = 0; i < timeSlots.length - 1; i++) {
+					const timePack = document.createElement("div");
+					const start = timeSlots[i];
+					const end = timeSlots[i + 1];
+
+					// Check slot status with booking schedules
+					const booked = slot.bookings.find(b =>
+						b.start <= start && b.end > start);
+					if (booked) {
+						timePack.className = "slot busy";
+					}
+					else if (new Date(`${schedule.value}T${start}:00`) >= new Date()) {
+						timePack.className = "slot locked";
+					}
+					else {
+						timePack.className = "slot";
+					}
+
+					row.appendChild(timePack);
+				}
+
+				timelineBody.appendChild(row);
+			})
+		});
+
+		function updateData(){
+			[timelineBody.children].forEach(row => {
+				console.log("timelinebody worked");
+				[row.children].forEach(timePack => {
+					for (let i = 0; i < timeSlots.length - 1; i++){
+						const start = timeSlots[i];
+						const end = timeSlots[i + 1];
+
+						// Check slot status with booking schedules
+						const booked = slot.bookings.find(b =>
+							b.start <= start && b.end > start);
+						if (booked) {
+							timePack.className = "slot busy";
+						}
+						else if (new Date(`${schedule.value}T${start}:00`) >= new Date()) {
+							timePack.className = "slot locked";
+						}
+						else {
+							timePack.className = "slot";
+						}
+					}
+				})
+			});
+		}
+</script>
+
+@section Scripts {
+	<script src="~/js/Court/Booking.js"></script>
+}

@@ -1,0 +1,100 @@
+﻿body{
+    margin: 0;
+}
+main{
+    height: 100vh;
+    width: 100vw;
+}
+
+.top-banner {
+    height: 20vh;
+    background: linear-gradient(#0C6478 0%, #8DEE98 100%);
+    display:flex;
+    flex-direction: column;
+}
+
+.banner-upper {
+    display: flex;
+    font-size: 28px;
+}
+
+.banner-lower{
+    display: flex;
+    flex-direction: row;
+    flex:auto;
+    font-size: 18px
+}
+.banner-lower a{
+    color: yellow;
+    cursor: default;
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.datetime-picker{
+    width:fit-content;
+    align-self:flex-end;
+    margin-left:auto;
+}
+
+
+/*-----------TIMELINE------------*/
+.timeline-container {
+    width: 100%;
+    height: 68vh;
+    border: 1px solid #ccc;
+}
+
+.timeline-header-wrapper {
+    overflow-x: hidden; /* header không tự cuộn */
+    background: #c8f2f8;
+    position: sticky;
+    top: 0; /* header luôn dính trên cùng khi scroll dọc */
+    z-index: 10;
+    height: 8vh;
+}
+
+.timeline-body-wrapper {
+    overflow-x: scroll; /* scroll ngang tại đây */
+    max-width: 100%;
+    height: 60vh;
+}
+
+
+.timeline-header, .timeline-row {
+    display: grid;
+    grid-template-columns: 100px repeat(37, 1fr);
+    min-width: 1800px; /* để buộc phải có scroll ngang */
+    height: inherit;
+    min-height: 6vh;
+    align-content: center;
+}
+
+.timeline-body .timeline-row {
+    border-bottom: 1px solid #ccc;
+}
+
+.court-name {
+    text-align: center;
+    padding: 1vh;
+    height: 6vh;
+    border-right: 1px solid gray;
+}
+
+.slot{
+    height: 6vh;
+    border-right: 1px solid white;
+}
+
+.busy{
+    background-color:orangered;
+}
+
+.locked {
+    background-color: dimgray;
+}
+

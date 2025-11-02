@@ -1,0 +1,13 @@
+﻿@model IEnumerable<TCourt>
+@foreach(var c in Model)
+{
+    <li class="sidebar-item p-3 align-items-center w-100"
+    onclick="window.location.href='@Url.Action("Booking", "Court", new { courtId = @c.CourtId })'">
+        <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
+        <div class="d-block sidebar-item-content px-3">
+            <p>@c.CourtName</p>
+            <p>@c.CourtAddress</p>
+        </div>
+        <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
+    </li>
+}
