@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using SportCourtManagement.Models; // Namespace chứa QuanLySanTheThaoContext
+using SportCourtManagement.Models; 
 using System.Linq;
+using SportCourtManagement.Services.Data;
 
 namespace SportCourtManagement.Controllers
 {

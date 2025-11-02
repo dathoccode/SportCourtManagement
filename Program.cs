@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SportCourtManagement.Models; // namespace chứa QuanLySanTheThaoContext
+using SportCourtManagement.Services.API;
+using SportCourtManagement.Services.Data; // namespace chứa QuanLySanTheThaoContext
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ========== 1️⃣ Kết nối DATABASE ==========
+// Database connection
 builder.Services.AddDbContext<QuanLySanTheThaoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ========== 2️⃣ Add MVC + Session ==========
+// Sessions and MVC
 builder.Services.AddControllersWithViews();
 
 // Cấu hình Session
@@ -20,6 +21,9 @@ builder.Services.AddSession(options =>
 
 // Để sử dụng HttpContext trong View/Layout
 builder.Services.AddHttpContextAccessor();
+
+// Đăng ký GeocodingService với HttpClient
+builder.Services.AddHttpClient<GeoCodingService>();
 
 var app = builder.Build();
 
@@ -41,6 +45,9 @@ app.UseAuthorization();
 // ========== 4️⃣ Cấu hình Route mặc định ==========
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+
 
 app.Run();

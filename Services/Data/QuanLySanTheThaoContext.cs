@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using SportCourtManagement.Models;
 
-namespace SportCourtManagement.Models;
+namespace SportCourtManagement.Services.Data;
 
 public partial class QuanLySanTheThaoContext : DbContext
 {
@@ -33,17 +34,17 @@ public partial class QuanLySanTheThaoContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DUCK;Initial Catalog=QuanLySanTheThao;Persist Security Info=True;User ID=sa;Password=2208;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=DATPHUNG;Initial Catalog=QuanLySanTheThao;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TAccount>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__tAccount__349DA5869EFE2C2D");
+            entity.HasKey(e => e.AccountId).HasName("PK__tAccount__349DA586908BE9A5");
 
             entity.ToTable("tAccount");
 
-            entity.HasIndex(e => e.Email, "UQ__tAccount__A9D10534B739CD66").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__tAccount__A9D10534F2004948").IsUnique();
 
             entity.Property(e => e.AccountId)
                 .HasMaxLength(10)
@@ -62,7 +63,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TBooking>(entity =>
         {
-            entity.HasKey(e => e.BookingId).HasName("PK__tBooking__73951ACDACA9D6C1");
+            entity.HasKey(e => e.BookingId).HasName("PK__tBooking__73951ACD60BD055E");
 
             entity.ToTable("tBooking");
 
@@ -87,7 +88,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TBookingDetail>(entity =>
         {
-            entity.HasKey(e => e.DetailId).HasName("PK__tBooking__135C314D1B14FCF7");
+            entity.HasKey(e => e.DetailId).HasName("PK__tBooking__135C314D2A2C2A96");
 
             entity.ToTable("tBookingDetail");
 
@@ -115,7 +116,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TCourt>(entity =>
         {
-            entity.HasKey(e => e.CourtId).HasName("PK__tCourt__C3A67CFAB26060A1");
+            entity.HasKey(e => e.CourtId).HasName("PK__tCourt__C3A67CFA8ECA0D2A");
 
             entity.ToTable("tCourt");
 
@@ -124,8 +125,8 @@ public partial class QuanLySanTheThaoContext : DbContext
                 .HasColumnName("CourtID");
             entity.Property(e => e.Contact).HasMaxLength(11);
             entity.Property(e => e.CourtAddress).HasMaxLength(50);
-            entity.Property(e => e.CourtName).HasMaxLength(10);
-            entity.Property(e => e.Img).HasMaxLength(50);
+            entity.Property(e => e.CourtName).HasMaxLength(100);
+            entity.Property(e => e.Img).HasColumnType("image");
 
             entity.HasMany(d => d.Accounts).WithMany(p => p.Courts)
                 .UsingEntity<Dictionary<string, object>>(
@@ -140,7 +141,7 @@ public partial class QuanLySanTheThaoContext : DbContext
                         .HasConstraintName("FK__tFavorite__Court__60A75C0F"),
                     j =>
                     {
-                        j.HasKey("CourtId", "AccountId").HasName("PK__tFavorit__B0EFA6A210A9202F");
+                        j.HasKey("CourtId", "AccountId").HasName("PK__tFavorit__B0EFA6A2E60F1A10");
                         j.ToTable("tFavoriteCourt");
                         j.IndexerProperty<string>("CourtId")
                             .HasMaxLength(10)
@@ -153,7 +154,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TPrice>(entity =>
         {
-            entity.HasKey(e => new { e.CourtId, e.SlotId }).HasName("PK__tPrice__2307585EF1B37AA7");
+            entity.HasKey(e => new { e.CourtId, e.SlotId }).HasName("PK__tPrice__2307585E0F6E5686");
 
             entity.ToTable("tPrice");
 
@@ -173,7 +174,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TRole>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__tRole__8AFACE3A0276155E");
+            entity.HasKey(e => e.RoleId).HasName("PK__tRole__8AFACE3A861C380C");
 
             entity.ToTable("tRole");
 
@@ -185,7 +186,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TSlot>(entity =>
         {
-            entity.HasKey(e => new { e.SlotId, e.CourtId }).HasName("PK__tSlot__B6282D80C80AD854");
+            entity.HasKey(e => new { e.SlotId, e.CourtId }).HasName("PK__tSlot__B6282D8069D48F0D");
 
             entity.ToTable("tSlot");
 
@@ -195,6 +196,7 @@ public partial class QuanLySanTheThaoContext : DbContext
             entity.Property(e => e.CourtId)
                 .HasMaxLength(10)
                 .HasColumnName("CourtID");
+            entity.Property(e => e.SlotName).HasMaxLength(50);
             entity.Property(e => e.SlotType).HasMaxLength(100);
 
             entity.HasOne(d => d.Court).WithMany(p => p.TSlots)
@@ -205,7 +207,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TStatus>(entity =>
         {
-            entity.HasKey(e => e.StatusId).HasName("PK__tStatus__C8EE2043DED7805B");
+            entity.HasKey(e => e.StatusId).HasName("PK__tStatus__C8EE204394345B76");
 
             entity.ToTable("tStatus");
 
