@@ -96,7 +96,7 @@ namespace SportCourtManagement.Controllers
         // ======= [POST] XỬ LÝ ĐĂNG KÝ =======
         [HttpPost]
         
-        public IActionResult Register(string name, string email, string phone, string password)
+        public IActionResult Register(string FullName, string email, string phone, string password)
         {
            
             bool exists = _context.TAccounts.Any(a => a.Email == email || a.Phone == phone);
@@ -113,7 +113,7 @@ namespace SportCourtManagement.Controllers
             {
                 AccountId = newId,
                 RoleId = 1, 
-                AccName = name,
+                AccName = FullName,
                 Email = email,
                 Phone = phone,
                 AccPassword = password
