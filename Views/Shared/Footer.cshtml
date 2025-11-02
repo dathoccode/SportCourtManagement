@@ -1,17 +1,21 @@
-﻿<nav class="absolute navbar bottom-nav fixed-bottom">
+﻿@{
+    var curController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+}
+
+<nav class="absolute navbar bottom-nav fixed-bottom">
     <div class="container-fluid d-flex justify-content-around">
 
-        <a class="nav-item active" asp-controller="Home" asp-action="Index">
+        <a class="nav-item @(curController.Equals("Home", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-controller="Home" asp-action="Index">
             <i class="fas fa-home"></i>
             <span>Trang chủ</span>
         </a>
 
-        <a class="nav-item" asp-controller="Court" asp-action="Map">
+        <a class="nav-item @(curController.Equals("Court", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-controller="Court" asp-action="Map">
             <i class="fas fa-map-marked-alt"></i>
             <span>Bản đồ</span>
         </a>
 
-        <a class="nav-item" asp-controller="Account" asp-action="MyBookings">
+        <a class="nav-item @(curController.Equals("Account", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-controller="Account" asp-action="MyBookings">
             <i class="fas fa-user"></i>
             <span>Tài khoản</span>
         </a>

@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Đang tải...";
+    Layout = "_AccountLayout"; // hoặc "_Layout" nếu bạn muốn dùng layout chính
+}
+
+<partial name="_LoadingPartial" />
+
+<script>
+    // Chuyển hướng sau 0.8 giây
+    setTimeout(function () {
+        window.location.href = '@ViewBag.TargetUrl';
+    }, 800);
+</script>
