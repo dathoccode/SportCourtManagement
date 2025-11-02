@@ -1,8 +1,8 @@
-﻿@{
-	Layout = "~/Views/Shared/_Layout.cshtml";
-	ViewBag.Title = "Map";
+﻿@model IEnumerable<SportCourtManagement.Models.TCourt>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Map";
 }
-
 @section Styles {
     <link rel="stylesheet" href="~/css/Court/Map.css" asp-append-version="true" />
 }
@@ -71,119 +71,7 @@
 
     <div class="sidebar z-9" id="sidebar">
         <ul>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-					<p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>           
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-            <li class="sidebar-item p-3 align-items-center w-100">
-                <i class="fa-solid fa-clock-rotate-left fa-xl align-middle"></i>
-                <div class="d-block sidebar-item-content px-3">
-                    <p>Sân Cầu Lông Số 1</p>
-                    <p>123 Đường Thể Thao, Quận 1, TP.HCM</p>
-                </div>
-                <i class="fa-solid fa-diamond-turn-right fa-2xl ms-auto"></i>
-            </li>
-
+			@await Component.InvokeAsync("CourtList")
         </ul>
     </div>
 

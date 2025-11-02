@@ -7,10 +7,7 @@
     <Nullable>enable</Nullable>
 
     <ImplicitUsings>enable</ImplicitUsings>
-
-    <UserSecretsId>994532b5-bbcf-40f8-80af-fa06e3417e21
-</UserSecretsId>
-
+    <UserSecretsId>994532b5-bbcf-40f8-80af-fa06e3417e21</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 
 </Project>

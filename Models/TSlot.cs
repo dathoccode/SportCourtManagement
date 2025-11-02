@@ -11,5 +11,7 @@ public partial class TSlot
 
     public string? SlotType { get; set; }
 
+    public string? SlotName { get; set; }
+
     public virtual TCourt Court { get; set; } = null!;
 }
