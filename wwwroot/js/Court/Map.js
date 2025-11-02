@@ -72,6 +72,8 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
+    
+
     // Khi tìm thấy vị trí
     map.on('locationfound', function (e) {
         var radius = e.accuracy / 2;
@@ -80,6 +82,7 @@
             .bindPopup("Bạn đang ở đây: " + e.latlng).openPopup();
         L.circle(e.latlng, radius).addTo(map);
     });
+
 
     // Khi không thể lấy vị trí
     map.on('locationerror', function (e) {
@@ -90,17 +93,42 @@
         map.locate({ setView: true, maxZoom: 16 });
     });
 
+    var markers = [];
+
     // Add a marker at a every court's location
     fetch('/Court/GetCourts')
     .then(res => res.json())
     .then(data => {
         data.forEach(court => {
-            L.marker([court.latitude, court.longitude])
+            const marker = L.marker([court.latitude, court.longitude])
                 .addTo(map)
-                .bindPopup(`<b>${court.courtName}</b><br>${court.address}`);
+                .bindPopup(`<b>${court.courtName}</b><br>${court.courtAddress}`);
+
+            marker.courtID = court.courtID  
+            marker.on('dbclick', function (e) {
+                window.location.href = `/Court/Booking?courtID=${court.courtId}`
+            })
+
+            markers.push(marker);
         });
-    })
-    .catch(err => console.error('Lỗi khi lấy dữ liệu:', err));        ;
+    }).catch(err => console.error('Lỗi khi lấy dữ liệu:', err));
+
+
+    $("#searchInput").on("keyup", function () {
+        var keyword = $(this).val().toLowerCase();
+
+        $.ajax({
+            url: '/Court/FilterByKeyword',
+            type: 'GET',
+            data: { keyword: keyword },
+            success: function (data) {
+                $("#courtList").html(data); // Cập nhật danh sách
+            },
+            error: function (xhr, status, error) {
+                console.error("Lỗi AJAX:", error);
+            }
+        });
+    });
 
 });
 

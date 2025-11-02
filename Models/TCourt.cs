@@ -25,6 +25,8 @@ public partial class TCourt
 
     public double? Longitude { get; set; }
 
+    public string? Kind { get; set; }
+
     public virtual ICollection<TBookingDetail> TBookingDetails { get; set; } = new List<TBookingDetail>();
 
     public virtual ICollection<TPrice> TPrices { get; set; } = new List<TPrice>();

@@ -27,6 +27,11 @@ namespace SportCourtManagement.Controllers
             return View();
         }
 
+        public IActionResult FilterByKeyword(string keyword)
+        {
+            return ViewComponent("CourtList", keyword);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetCourts()
         {
@@ -48,6 +53,7 @@ namespace SportCourtManagement.Controllers
                 var result = courts
                     .Where(c => c.Latitude.HasValue && c.Longitude.HasValue)
                     .Select(c => new {
+                        c.CourtId,
                         c.CourtName,
                         c.CourtAddress,
                         c.Latitude,

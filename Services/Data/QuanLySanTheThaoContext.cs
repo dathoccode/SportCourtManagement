@@ -30,6 +30,8 @@ public partial class QuanLySanTheThaoContext : DbContext
 
     public virtual DbSet<TSlot> TSlots { get; set; }
 
+    public virtual DbSet<TSport> TSports { get; set; }
+
     public virtual DbSet<TStatus> TStatuses { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -127,6 +129,9 @@ public partial class QuanLySanTheThaoContext : DbContext
             entity.Property(e => e.CourtAddress).HasMaxLength(50);
             entity.Property(e => e.CourtName).HasMaxLength(100);
             entity.Property(e => e.Img).HasColumnType("image");
+            entity.Property(e => e.Kind)
+                .HasMaxLength(50)
+                .HasDefaultValue("Cầu lông");
 
             entity.HasMany(d => d.Accounts).WithMany(p => p.Courts)
                 .UsingEntity<Dictionary<string, object>>(
@@ -203,6 +208,18 @@ public partial class QuanLySanTheThaoContext : DbContext
                 .HasForeignKey(d => d.CourtId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__tSlot__CourtID__4BAC3F29");
+        });
+
+        modelBuilder.Entity<TSport>(entity =>
+        {
+            entity.HasKey(e => e.SportId).HasName("PK__tSport__7A41AF1CA9E1D937");
+
+            entity.ToTable("tSport");
+
+            entity.Property(e => e.SportId)
+                .HasMaxLength(10)
+                .HasColumnName("SportID");
+            entity.Property(e => e.SportName).HasMaxLength(50);
         });
 
         modelBuilder.Entity<TStatus>(entity =>

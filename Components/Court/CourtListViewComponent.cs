@@ -11,9 +11,11 @@ namespace SportCourtManagement.Components.Court
         {
             db = context;
         }
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(string? keyword)
         {
-            var courts = db.TCourts.ToList();
+           var courts = db.TCourts
+                .Where(c => string.IsNullOrEmpty(keyword) || c.CourtName.ToLower().Contains(keyword))
+                .ToList();
             return View("CourtList", courts);
         }
     }

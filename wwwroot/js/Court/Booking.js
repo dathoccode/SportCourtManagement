@@ -1,6 +1,4 @@
-﻿
-
-// Tạo timeline header
+﻿// Tạo timeline header
 const header = document.getElementById("timelineHeader");
 
 const headerName = document.createElement("div");

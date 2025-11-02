@@ -30,7 +30,7 @@
 				</span>
 				<a class="mx-3"><u>Bảng giá</u></a>
 			</div>
-			<div class="datetime-picker" id="schedule">
+			<div class="datetime-picker" id="schedule" onchange="updateData()">
 				<label for="date">Chọn ngày:</label>
 				<input type="date" id="date" name="date">
 			</div>
@@ -58,7 +58,7 @@
 
 	//datetime picker
 	const schedule = document.getElementById('schedule');
-
+	schedule.value = new Date();
 	// Lấy dữ liệu
 	fetch('/Court/GetSlotsDetails/@Model.CourtId')
 		.then(res => res.json())
@@ -100,6 +100,31 @@
 				timelineBody.appendChild(row);
 			})
 		});
+
+		function updateData(){
+			[timelineBody.children].forEach(row => {
+				console.log("timelinebody worked");
+				[row.children].forEach(timePack => {
+					for (let i = 0; i < timeSlots.length - 1; i++){
+						const start = timeSlots[i];
+						const end = timeSlots[i + 1];
+
+						// Check slot status with booking schedules
+						const booked = slot.bookings.find(b =>
+							b.start <= start && b.end > start);
+						if (booked) {
+							timePack.className = "slot busy";
+						}
+						else if (new Date(`${schedule.value}T${start}:00`) >= new Date()) {
+							timePack.className = "slot locked";
+						}
+						else {
+							timePack.className = "slot";
+						}
+					}
+				})
+			});
+		}
 </script>
 
 @section Scripts {

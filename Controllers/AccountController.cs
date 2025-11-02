@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using SportCourtManagement.Models; 
+using SportCourtManagement.Models;
 using System.Linq;
 using SportCourtManagement.Services.Data;
 

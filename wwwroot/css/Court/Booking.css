@@ -94,3 +94,7 @@ main{
     background-color:orangered;
 }
 
+.locked {
+    background-color: dimgray;
+}
+
