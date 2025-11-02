@@ -9,11 +9,11 @@
         @* Thông tin user *@
         <div class="d-flex justify-content-between w-100 mb-3">
             <div class="user-info">
-                <img src="~/images/userAvatar.jpg" alt="User Avatar" class="user-avatar" />
+                <img src="@ViewBag.UserAvatar" alt="User Avatar" class="user-avatar" />
 
                 <div>
                     <span>@DateTime.Now.ToString("dddd, 'Ngày' dd/MM/yyyy", new System.Globalization.CultureInfo("vi-VN"))</span>
-                    <strong>@(Context.Session.GetString("AccName") ?? "Khách")</strong>
+                    <strong>@(ViewBag.UserName ?? "Khách")</strong>
                 </div>
             </div>
 
@@ -38,8 +38,12 @@
                 <a class="btn filter-btn flex-fill" asp-controller="Court" asp-action="Map">
                     <i class="fas fa-map-marked-alt"></i> Bản đồ
                 </a>
-                <button class="btn filter-btn flex-fill"><i class="fas fa-list-ul"></i> Sân đã đặt</button>
-                <button class="btn filter-btn flex-fill"><i class="fas fa-heart"></i> Yêu thích</button>
+                <a class="btn filter-btn flex-fill" asp-controller="Account" asp-action="MyBookings">
+                    <i class="fas fa-list-ul"></i> Sân đã đặt
+                </a>
+                <button id="filter-favorites-btn" class="btn filter-btn flex-fill">
+                    <i class="fas fa-heart"></i> Yêu thích
+                </button>
             </div>
         </div>
     </div> 
@@ -59,23 +63,23 @@
                     <div class="card court-card-grid shadow-sm">
 
                         @* Ảnh bìa thẻ *@
-                        <img src="@Url.Content(court.Img ?? "~/images/san_cau.png")" class="card-img-top" alt="Hình ảnh sân">
+                        <img src="~/images/@(court.Img ?? "san_cau.png")" class="card-img-top" alt="Hình ảnh sân">
 
                         @* Thông tin sân *@
                         <div class="card-body">
                             <div class="d-flex gap-2">
                                 <div>
-                                        <img src="@Url.Content(court.Img ?? "~/images/map_demo_image.png")" alt="Avatar sân" class="court-card-avatar" />
+                                        <img src="~/images/@(court.Img ?? "caulong.jpg")" alt="Avatar sân" class="court-card-avatar" />
                                 </div>
                                 <div class="flex-grow-1">
                                         <h6 class="card-title">@court.CourtName</h6>
                                         <p class="card-text"><i class="fas fa-map-marker-alt"></i> @court.CourtAddress</p>
-                                        <p class="card-text"><i class="far fa-clock"></i> @court.OpenTime?.ToString(@"hh\:mm") - @court.CloseTime?.ToString(@"hh\:mm")</p>
+                                        <p class="card-text"><i class="far fa-clock"></i> @court.OpenTime?.ToString(@"HH\:mm") - @court.CloseTime?.ToString(@"HH\:mm")</p>
                                 </div>
                             </div>
 
                             @* Nút đặt sân *@
-                            <a asp-controller="Booking" asp-action="Create" asp-route-courtId="1" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                            <a asp-controller="Booking" asp-action="Create" asp-route-courtId="@court.CourtId" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
                         </div>
 
                         @* Các nút hỗ trợ *@
