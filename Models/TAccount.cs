@@ -13,11 +13,11 @@ public partial class TAccount
 
     public string? AccPassword { get; set; }
 
+    public byte[]? AccImg { get; set; }
+
     public string? Email { get; set; }
 
     public string? Phone { get; set; }
-
-    public byte[]? AccImg { get; set; }
 
     public virtual TRole? Role { get; set; }
 

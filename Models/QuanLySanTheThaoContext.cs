@@ -39,11 +39,11 @@ public partial class QuanLySanTheThaoContext : DbContext
     {
         modelBuilder.Entity<TAccount>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__tAccount__349DA5869EFE2C2D");
+            entity.HasKey(e => e.AccountId).HasName("PK__tAccount__349DA5863459BF5F");
 
             entity.ToTable("tAccount");
 
-            entity.HasIndex(e => e.Email, "UQ__tAccount__A9D10534B739CD66").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__tAccount__A9D105345163A25A").IsUnique();
 
             entity.Property(e => e.AccountId)
                 .HasMaxLength(10)
@@ -62,7 +62,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TBooking>(entity =>
         {
-            entity.HasKey(e => e.BookingId).HasName("PK__tBooking__73951ACDACA9D6C1");
+            entity.HasKey(e => e.BookingId).HasName("PK__tBooking__73951ACDF528DCB8");
 
             entity.ToTable("tBooking");
 
@@ -87,7 +87,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TBookingDetail>(entity =>
         {
-            entity.HasKey(e => e.DetailId).HasName("PK__tBooking__135C314D1B14FCF7");
+            entity.HasKey(e => e.DetailId).HasName("PK__tBooking__135C314DBF3CAE06");
 
             entity.ToTable("tBookingDetail");
 
@@ -115,7 +115,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TCourt>(entity =>
         {
-            entity.HasKey(e => e.CourtId).HasName("PK__tCourt__C3A67CFAB26060A1");
+            entity.HasKey(e => e.CourtId).HasName("PK__tCourt__C3A67CFA46C44B5B");
 
             entity.ToTable("tCourt");
 
@@ -124,7 +124,7 @@ public partial class QuanLySanTheThaoContext : DbContext
                 .HasColumnName("CourtID");
             entity.Property(e => e.Contact).HasMaxLength(11);
             entity.Property(e => e.CourtAddress).HasMaxLength(50);
-            entity.Property(e => e.CourtName).HasMaxLength(10);
+            entity.Property(e => e.CourtName).HasMaxLength(50);
             entity.Property(e => e.Img).HasMaxLength(50);
 
             entity.HasMany(d => d.Accounts).WithMany(p => p.Courts)
@@ -140,7 +140,7 @@ public partial class QuanLySanTheThaoContext : DbContext
                         .HasConstraintName("FK__tFavorite__Court__60A75C0F"),
                     j =>
                     {
-                        j.HasKey("CourtId", "AccountId").HasName("PK__tFavorit__B0EFA6A210A9202F");
+                        j.HasKey("CourtId", "AccountId").HasName("PK__tFavorit__B0EFA6A2BB89F1CE");
                         j.ToTable("tFavoriteCourt");
                         j.IndexerProperty<string>("CourtId")
                             .HasMaxLength(10)
@@ -153,7 +153,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TPrice>(entity =>
         {
-            entity.HasKey(e => new { e.CourtId, e.SlotId }).HasName("PK__tPrice__2307585EF1B37AA7");
+            entity.HasKey(e => new { e.CourtId, e.SlotId }).HasName("PK__tPrice__2307585E22BACA8E");
 
             entity.ToTable("tPrice");
 
@@ -173,7 +173,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TRole>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__tRole__8AFACE3A0276155E");
+            entity.HasKey(e => e.RoleId).HasName("PK__tRole__8AFACE3A00E31B02");
 
             entity.ToTable("tRole");
 
@@ -185,7 +185,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TSlot>(entity =>
         {
-            entity.HasKey(e => new { e.SlotId, e.CourtId }).HasName("PK__tSlot__B6282D80C80AD854");
+            entity.HasKey(e => new { e.SlotId, e.CourtId }).HasName("PK__tSlot__B6282D80769C3AA3");
 
             entity.ToTable("tSlot");
 
@@ -205,7 +205,7 @@ public partial class QuanLySanTheThaoContext : DbContext
 
         modelBuilder.Entity<TStatus>(entity =>
         {
-            entity.HasKey(e => e.StatusId).HasName("PK__tStatus__C8EE2043DED7805B");
+            entity.HasKey(e => e.StatusId).HasName("PK__tStatus__C8EE204322E72405");
 
             entity.ToTable("tStatus");
 

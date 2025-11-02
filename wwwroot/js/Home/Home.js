@@ -1,7 +1,29 @@
 ﻿$(document).ready(function () {
+    // Load icon yêu thích cho thẻ sân đã chọn yêu thích
+    $.ajax({
+        type: 'GET',
+        url: '/Home/GetFavoriteCourtIds',
+        success: function (favoriteCourtIds) {
+            if (favoriteCourtIds && favoriteCourtIds.length > 0) {
+                favoriteCourtIds.forEach(function (courtId) {
+                    var $button = $('[data-court-id="' + courtId + '"] .fav-btn');
+
+                    $button.addClass('favorited');
+                    $button.find('.fas.fa-heart').show();
+                    $button.find('.far.fa-heart').hide();
+                });
+            }
+        },
+        error: function () {
+            console.error("Không thể tải danh sách yêu thích.");
+        }
+    });
 
     // Chi tiết sân bóng trong modal
-    $('.container').on('click', '.show-court-details', function () {
+    $('.container').on('click', '.show-court-details', function (e) {
+        // Nếu click vào nút hoặc link bên trong thì bỏ qua
+        if ($(e.target).closest('button, a').length) return;
+
         var courtId = $(this).data('court-id');
         var modal = $('#courtInfoModal');
         var modalBody = modal.find('.modal-body');
@@ -68,19 +90,91 @@
     });
 
     // Nút yêu thích
-    $('.container').on('click', '.fav-btn', function (e) {
+    $('#court-card-container').on('click', '.fav-btn', function (e) {
         e.preventDefault();
+
         var $button = $(this);
-        $button.toggleClass('favorited');
-        let courtName = $button.closest('.card').find('h6').first().text();
-        if ($button.hasClass('favorited')) {
-            $button.find('.fas.fa-heart').show();
-            $button.find('.far.fa-heart').hide();
-            alert('Đã thêm "' + courtName + '" vào danh sách yêu thích!');
+        var courtId = $button.closest('.show-court-details').data('court-id');
+
+        $button.prop('disabled', true);
+
+        $.ajax({
+            type: 'POST',
+            url: '/Home/ToggleFavorite',
+            data: { courtId: courtId },
+            success: function (response) {
+                if (response.requiresLogin) {
+                    window.location.href = response.loginUrl;
+                    return;
+                }
+                if (response.success) {
+                    if (response.isFavorited) {
+                        $button.addClass('favorited');
+                        $button.find('.fas.fa-heart').show();
+                        $button.find('.far.fa-heart').hide();
+                    } else {
+                        $button.removeClass('favorited');
+                        $button.find('.fas.fa-heart').hide();
+                        $button.find('.far.fa-heart').show();
+                    }
+                } else {
+                    alert('Lỗi: ' + response.error);
+                }
+                $button.prop('disabled', false); // Kích hoạt lại nút
+            },
+            error: function () {
+                alert('Không thể kết nối đến máy chủ.');
+                $button.prop('disabled', false); 
+            }
+        });
+    });
+
+    // Filter Yêu thích
+    $('#filter-favorites-btn').on('click', function (e) {
+        e.preventDefault();
+
+        var $this = $(this);
+        var allCards = $('#court-card-container .row.g-3 > div[class*="col-"]');
+
+        // Xóa text trong thanh tìm kiếm để tránh xung đột filter
+        $('#searchInput').val('');
+
+        if ($this.hasClass('active')) {
+            $this.removeClass('active');
+            allCards.show();
         } else {
-            $button.find('.fas.fa-heart').hide();
-            $button.find('.far.fa-heart').show();
-            alert('Đã xóa "' + courtName + '" khỏi danh sách yêu thích.');
+            $this.addClass('active');
+            allCards.hide();
+
+            $.ajax({
+                type: 'GET',
+                url: '/Home/GetFavoriteCourtIds',
+                success: function (response) {
+                    if (response.requiresLogin) {
+                        window.location.href = response.loginUrl;
+                        return;
+                    }
+                    var favoriteIds = response;
+                    if (favoriteIds && favoriteIds.length > 0) {
+                        allCards.each(function () {
+                            var currentCard = $(this);
+                            var currentCardId = currentCard.data('court-id').toString();
+
+                            if (favoriteIds.includes(currentCardId)) {
+                                currentCard.show(); 
+                            }
+                        });
+                    } else {
+                        console.log("Bạn chưa yêu thích sân nào.");
+                    }
+                },
+                error: function (response) {
+                    alert('Lỗi khi tải danh sách yêu thích. Vui lòng đăng nhập và thử lại.');
+                    console.error(response);
+                    $this.removeClass('active');
+                    allCards.show();
+                }
+            });
         }
     });
 
