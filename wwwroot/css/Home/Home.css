@@ -1,14 +1,22 @@
 
 ﻿body {
-    background-color: #f0f2f5; /* Màu nền xám nhạt */
-    padding-top: 210px; /* Đệm cho header (top-nav) trên mobile */
+    background-color: #f0f2f5;
+    padding-top: 210px;
     overflow: hidden !important;
 }
 @media (min-width: 768px) {
     body {
-        /* Đệm cho header (top-nav) trên pc*/
         padding-top: 150px;
     }
+}
+
+.container {
+    height: calc(88vh - 70px) !important;
+    padding-bottom: 12vh;
+    overflow: scroll !important;
+}
+::-webkit-scrollbar {
+    display: none;
 }
 
 /* THANH NAV TRÊN (HEADER) */
@@ -110,11 +118,6 @@
 /*CONTAINER CHỨA CÁC THẺ SÂN*/
 #court-card-container {
     width: 100%;
-    /* Giới hạn chiều cao tối đa của container */
-    /* 100vh: Chiều cao toàn màn hình */
-    /* Chiều cao top-nav: 150px trên PC, 210px trên mobile */
-    /* Chiều cao bottom-nav: 90px*/
-    /* Khoảng đệm thêm: 20px */
     max-height: calc(100vh - 210px - 80px - 0px);
     overflow-y: auto;
     position: absolute;
@@ -131,7 +134,7 @@
     }
 }
 
-/* THẺ SÂN (CARD) */
+/* THẺ SÂN */
 .court-card-grid {
     border: none;
     border-radius: 10px;
@@ -148,7 +151,7 @@
         padding: 10px;
     }
 
-    /* Style cho avatar trong card-body */
+    /* Avatar trong card-body */
     .court-card-grid .court-card-avatar {
         width: 40px; 
         height: 40px;
@@ -157,7 +160,7 @@
         flex-shrink: 0; /* Không cho avatar bị co lại khi thiếu không gian */
     }
 
-    /* Style cho chữ */
+    /* Chữ */
     .court-card-grid .card-title {
         font-weight: bold;
         font-size: 1rem;
@@ -181,7 +184,7 @@
         font-size: 0.9rem;
     }
 
-    /* Style cho icon trên ảnh */
+    /* Icon trên ảnh */
     .court-card-grid .card-icons-top {
         position: absolute;
         top: 10px;
@@ -207,34 +210,34 @@
     .icon-btn:hover {
         background-color: #e0e0e0;
     }
-    /* Style nút trái tim to khi được chọn */
+    /* Nút trái tim to khi được chọn */
     .icon-btn.fav-btn.favorited {
         color: #e74c3c;
         background-color: #fdd;
     }
 
-    /* Style cho nút nhỏ trên ảnh */
+    /* Nút nhỏ trên ảnh */
     .icon-btn-sm {
-        background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ giống badge cũ */
+        background-color: rgba(255, 255, 255, 0.8); 
         border: none;
         border-radius: 50%; 
-        width: 28px; /* Kích thước nhỏ hơn */
+        width: 28px; 
         height: 28px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #34a853; /* Màu icon xanh */
-        font-size: 0.8rem; /* Icon nhỏ hơn */
+        color: #34a853; 
+        font-size: 0.8rem; 
         cursor: pointer;
-        padding: 0; /* Xóa padding mặc định của button */
+        padding: 0; 
     }
-    /* Hiệu ứng khi di chuột vào nút nhỏ */
+
     .icon-btn-sm:hover {
-        background-color: white; /* Nền trắng rõ khi hover */
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Thêm bóng đổ nhẹ */
+        background-color: white; 
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
     }
-    /* Style nút trái tim NHỎ khi được chọn */
+    /* Nút trái tim nhỏ khi được chọn */
     .icon-btn-sm.fav-btn.favorited {
-        color: #e74c3c; /* Màu đỏ */
-        background-color: rgba(255, 221, 221, 0.9); /* Nền hồng mờ */
+        color: #e74c3c; 
+        background-color: rgba(255, 221, 221, 0.9); 
     }

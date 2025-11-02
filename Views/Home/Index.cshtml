@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SportCourtManagement.Data.Models.TCourt>
+﻿@model IEnumerable<SportCourtManagement.Models.TCourt>
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Trang chủ";
@@ -15,7 +15,7 @@
 
                 <div>
                     <span>@DateTime.Now.ToString("dddd, 'Ngày' dd/MM/yyyy", new System.Globalization.CultureInfo("vi-VN"))</span>
-                    <strong>User name</strong>
+                    <strong>@(Context.Session.GetString("AccName") ?? "Khách")</strong>
                 </div>
             </div>
 
