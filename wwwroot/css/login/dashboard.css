@@ -156,3 +156,63 @@ div.row {
     color: #777;
     font-weight: 500;
 }
+/* === CSS CHO DROPDOWN LỌC NGÀY (ẢNH 3) === */
+.date-filter-dropdown {
+    background-color: #FEF9E7; /* Nền vàng nhạt */
+    border: 1px solid #F7DC6F;
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.date-filter-item {
+    color: #1A5276; /* Màu chữ xanh đậm */
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+    .date-filter-item:hover {
+        background-color: #F9E79F; /* Nền vàng đậm hơn khi hover */
+        color: #1A5276;
+    }
+
+.date-filter-dropdown .dropdown-divider {
+    border-top-color: #F7DC6F;
+}
+/* === CSS CHO LỊCH CHỌN NĂM === */
+
+/* Ẩn các tháng, chỉ hiện bảng chọn năm */
+.year-picker-container .flatpickr-monthSelect-months {
+    display: none !important;
+}
+
+/* Ẩn chữ "Select Month" (nếu có) */
+.year-picker-container .flatpickr-monthSelect-sub-header {
+    display: none !important;
+}
+/* === CSS CHO MODAL "TÍNH NĂNG SẮP RA MẮT" === */
+.modal-header-custom {
+    background: linear-gradient(90deg, #0C6478 0%, #46DFB1 100%);
+    color: white;
+}
+
+    .modal-header-custom .modal-title {
+        font-weight: 600;
+    }
+
+    .modal-header-custom .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
+    }
+
+.btn-primary-custom {
+    background-color: #0C6478; /* Màu xanh đậm */
+    border-color: #0C6478;
+    color: white;
+}
+
+    .btn-primary-custom:hover {
+        background-color: #15919B; /* Màu xanh nhạt hơn */
+        border-color: #15919B;
+        color: white;
+    }

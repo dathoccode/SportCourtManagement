@@ -10,12 +10,12 @@ public partial class QuanLySanTheThaoContext : DbContext
     {
     }
 
-    public QuanLySanTheThaoContext(DbContextOptions<QuanLySanTheThaoContext> options)
+    public QuanLySanTheThaoContext(DbContextOptionsounts { get; set; <QuanLySanTheThaoContext> options)
         : base(options)
     {
     }
 
-    public virtual DbSet<TAccount> TAccounts { get; set; }
+    public virtual DbSet<TAccount> TAcc}
 
     public virtual DbSet<TBooking> TBookings { get; set; }
 
