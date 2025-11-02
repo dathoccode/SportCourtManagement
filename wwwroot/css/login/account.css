@@ -17,7 +17,7 @@ body {
     max-width: 640px;
     background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
     border-radius: 18px;
-    padding: 48px 40px;
+    padding: 40px 40px;
     color: #fff;
     box-shadow: 0 12px 40px rgba(0,0,0,0.25);
     text-align: center;
@@ -27,13 +27,12 @@ body {
     .forgot-card h2 {
         font-size: 30px;
         font-weight: 700;
-        margin-bottom: 16px;
     }
 
     .forgot-card p {
+        padding: 0 20px;
         font-size: 15px;
-        opacity: 0.9;
-        margin-bottom: 28px;
+        margin: 20px 0px;
     }
 
 /* ========== CARD ĐĂNG NHẬP ========== */
@@ -42,7 +41,7 @@ body {
     max-width: 800px;
     background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
     border-radius: 20px;
-    padding: 48px 40px;
+    padding: 40px 32px;
     color: #fff;
     box-shadow: 0 12px 40px rgba(0,0,0,0.25);
     display: flex;
@@ -63,21 +62,21 @@ body {
     .login-card h2 {
         font-size: 30px;
         font-weight: 700;
-        margin-bottom: 30px;
+        margin-bottom: 20px
     }
 
 /* ========== INPUT CHUNG ========== */
 .input-box {
     width: 90%;
     min-width: 320px;
-    margin: 20px auto;
+    margin: 14px auto;
     position: relative;
     min-height: 70px;
 }
 
     .input-box input {
         width: 100%;
-        padding: 14px 44px 14px 18px;
+        padding: 15px;
         border-radius: 12px;
         border: 1.6px solid rgba(255,255,255,0.45);
         background: rgba(255,255,255,0.06);

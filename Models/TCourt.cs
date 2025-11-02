@@ -17,9 +17,13 @@ public partial class TCourt
 
     public TimeOnly? CloseTime { get; set; }
 
-    public string? Img { get; set; }
+    public byte[]? Img { get; set; }
 
     public double? Rating { get; set; }
+
+    public double? Latitude { get; set; }
+
+    public double? Longitude { get; set; }
 
     public virtual ICollection<TBookingDetail> TBookingDetails { get; set; } = new List<TBookingDetail>();
 
