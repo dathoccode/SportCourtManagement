@@ -150,6 +150,12 @@ fetch('/Court/GetCourts')
     }
 
 
+    function toggleMarkers(type){
+        if (map.hasLayer(markerGroup[type])) map.removeLayer(markerGroup[type])
+        else map.addLayer(markerGroup[type])
+    }
+
+
 
 $("#searchInput").on("keyup", function () {
     var keyword = $(this).val().toLowerCase();
