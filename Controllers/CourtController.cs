@@ -44,7 +44,7 @@ namespace SportCourtManagement.Controllers
                 int updatedCount = 0;
                 foreach (var c in courts)
                 {
-                    if (c.Latitude == null || c.Longtitude == null)
+                    if (c.Latitude == null || c.Longitude == null)
                     {
                         var res = await geoCoding.GetCoordinatesAsync(c.CourtAddress);
                         if (res == null) continue;
@@ -62,14 +62,14 @@ namespace SportCourtManagement.Controllers
 
 
                 var result = courts
-                    .Where(c => c.Latitude.HasValue && c.Longtitude.HasValue)
+                    .Where(c => c.Latitude.HasValue && c.Longitude.HasValue)
                     .Select(c => new {
                         c.CourtId,
                         c.SportId,
                         c.CourtName,
                         c.CourtAddress,
                         c.Latitude,
-                        c.Longtitude
+                        c.Longitude
                     })
                     .ToList();
 
