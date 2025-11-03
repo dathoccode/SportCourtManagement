@@ -79,7 +79,20 @@
                             </div>
 
                             @* Nút đặt sân *@
-                            <a asp-controller="Booking" asp-action="Create" asp-route-courtId="@court.CourtId" class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                            @{
+                                var isLoggedIn = !string.IsNullOrEmpty(Context.Session.GetString("AccountID"));
+                            }
+
+                            @if (isLoggedIn)
+                            {
+                                <a asp-controller="Court" asp-action="Booking" asp-route-courtId="@court.CourtId"
+                                   class="btn btn-success btn-sm w-100 mt-2">Đặt sân</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Account" asp-action="Login"
+                                   class="btn btn-secondary btn-sm w-100 mt-2">Đăng nhập để đặt sân</a>
+                            }
                         </div>
 
                         @* Các nút hỗ trợ *@
@@ -116,7 +129,17 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <a href="#" id="modalBookButton" class="btn btn-success disabled">Đặt sân này</a>
+                @{
+                    var isLoggedIn2 = !string.IsNullOrEmpty(Context.Session.GetString("AccountID"));
+                }
+                @if (isLoggedIn2)
+                {
+                    <a href="#" id="modalBookButton" class="btn btn-success disabled">Đặt sân này</a>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-success">Đăng nhập để đặt sân</a>
+                }
             </div>
         </div>
     </div>
