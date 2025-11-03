@@ -1,0 +1,203 @@
+﻿/* Reset cơ bản */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
+    color: #fff;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    
+}
+
+/* Full screen container */
+.page-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+
+}
+
+/* ===== HEADER ===== */
+.bk-header {
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.bk-back {
+    color: #fff;
+    font-size: 26px;
+    text-decoration: none;
+}
+
+.bk-title {
+    flex: 1;
+    text-align: center;
+}
+
+/* ===== MAIN ===== */
+.bk-main {
+    flex: 1;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+/* ===== CARD ===== */
+.card {
+    width: 100%;
+    padding: 18px 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    
+}
+.card-body {
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Viền trắng mờ nhẹ */
+    border-radius: 10px;
+    padding: 18px 20px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Đổ bóng nhẹ để nổi lên */
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffecb3;
+}
+
+.card-body p {
+    margin: 6px 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.price {
+    color: #ffd24d;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.total-line {
+    font-weight: 700;
+    margin-top: 8px;
+    color: #fff;
+}
+
+.total-amount {
+    color: #ffd24d;
+    font-size: 17px;
+}
+/* ===== FORM ===== */
+.bk-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    width: 100%;
+    
+}
+
+.lbl {
+    font-weight: 700;
+    font-size: 15px;
+    margin-top: 6px;
+    color: #fff;
+}
+
+.input, .textarea {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    background: #fff;
+    color: #111;
+}
+
+.phone-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.phone-flag {
+    padding: 13px;
+    background: #f0f0f0;
+    border-radius: 6px;
+    border: none;
+    font-size: 15px;
+}
+
+.phone-input {
+    flex: 1;
+}
+
+/* ===== NOTE ===== */
+.note-box {
+    
+    padding: 14px;
+    border-radius: 6px;
+    color: #fff;
+    line-height: 1.5;
+    
+}
+
+.note-title {
+    color: #ffd24d;
+    font-weight: 700;
+    margin-bottom: 6px;
+
+}
+ul{
+    list-style:none;
+}
+
+.note-box a {
+    color: #ffd24d;
+    text-decoration: underline;
+}
+
+/* ===== BUTTON ===== */
+.btn-confirm {
+    width: 100%;
+    padding: 18px;
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: 800;
+    background: #213A58E6;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius:20px;
+}
+
+    .btn-confirm:hover {
+        background: rgba(33,58,88,1);
+        transform: translateY(-1px);
+    }
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 768px) {
+    .card-body p,
+    .lbl, .input, .textarea, .btn-confirm {
+        font-size: 18px;
+    }
+}

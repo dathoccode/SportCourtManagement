@@ -16,7 +16,7 @@ CREATE TABLE tCourt(
     OpenTime TIME NOT NULL,
     CloseTime TIME NOT NULL,
 	Latitude float null,
-	Longtitude float null,
+	Longitude float null,
     Img NVARCHAR(200) NULL,
     Rating FLOAT NULL,
     FOREIGN KEY (SportID) REFERENCES tSport(SportID)
