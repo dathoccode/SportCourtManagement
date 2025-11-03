@@ -61,91 +61,102 @@
         console.log('small screen');
     }
 
-    //Leaflet map
-    var map = L.map('map').setView([51.505, -0.09], 13);
-    var locateBtn = document.getElementById('locate-btn');
+});
 
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    
-
-    // Khi tìm thấy vị trí
-    map.on('locationfound', function (e) {
-        var radius = e.accuracy / 2;
-
-        L.marker(e.latlng).addTo(map)
-            .bindPopup("Bạn đang ở đây: " + e.latlng).openPopup();
-        L.circle(e.latlng, radius).addTo(map);
-    });
+//Leaflet map
+var map = L.map('map').setView([51.505, -0.09], 13);
+var locateBtn = document.getElementById('locate-btn');
 
 
-    // Khi không thể lấy vị trí
-    map.on('locationerror', function (e) {
-        alert("Không thể xác định vị trí: " + e.message);
-    });
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
 
-    locateBtn.addEventListener('click', function () {
-        map.locate({ setView: true, maxZoom: 16 });
-    });
-    
-    // Add layergroup to manage markers
-    var markerGroup ={};
 
-    //get sport list
-    fetch('Court/GetSportTypes')
+
+// Khi tìm thấy vị trí
+map.on('locationfound', function (e) {
+    var radius = e.accuracy / 2;
+
+    L.marker(e.latlng).addTo(map)
+        .bindPopup("Bạn đang ở đây: " + e.latlng).openPopup();
+    L.circle(e.latlng, radius).addTo(map);
+});
+
+
+// Khi không thể lấy vị trí
+map.on('locationerror', function (e) {
+    alert("Không thể xác định vị trí: " + e.message);
+});
+
+locateBtn.addEventListener('click', function () {
+    map.locate({ setView: true, maxZoom: 16 });
+});
+
+
+// Add layergroup to manage markers
+// Add layergroup to manage markers
+var markerGroup = {};
+
+// Lấy danh sách loại thể thao
+fetch('/Court/GetSportTypes')
     .then(res => res.json())
-    .then(data  => {
+    .then(data => {
         data.forEach(type => {
-            markerGroup[type.SportId] = L.layerGroup();
-        })
+            markerGroup[type.sportId] = L.layerGroup();
+        });
+        console.log("Sport types loaded:", markerGroup);
     });
 
-    // Add a marker at a every court's location
-    fetch('/Court/GetCourts')
+// Hàm toggle bật/tắt nhóm marker
+function toggleMarkers(type) {
+    const group = markerGroup[type];
+    if (!group) {
+        console.warn("markerGroup not found for type:", type);
+        return;
+    }
+
+    if (map.hasLayer(group)) map.removeLayer(group);
+    else map.addLayer(group);
+}
+
+// Lấy danh sách sân
+fetch('/Court/GetCourts')
     .then(res => res.json())
     .then(data => {
         data.forEach(court => {
             const marker = L.marker([court.latitude, court.longitude])
-                .addTo(map)
                 .bindPopup(`<b>${court.courtName}</b><br>${court.courtAddress}`);
 
-            marker.on('dbclick', function (e) {
-                window.location.href = `/Court/Booking?courtID=${court.courtId}`
-            })
+            marker.on('dblclick', function (e) {
+                window.location.href = `/Court/Booking?courtID=${court.courtId}`;
+            });
 
-            if(markerGroup[court.Sportd])
-            {
-                markerGroup[court.Sportd].addLayer(marker);
+            if (markerGroup[court.sportId]) {
+                marker.addTo(markerGroup[court.sportId]);
+            } else {
+                console.warn("Không có group cho sportId:" + court.sportId);
             }
         });
-    }).catch(err => console.error('Lỗi khi lấy dữ liệu:', err));
-
-    function toggleMarkers(type){
-        if (map.hasLayer(markerGroup[type])) map.removeLayer(markerGroup[type])
-        else map.addLayer(markerGroup[type])
-    }
+        console.log("Markers loaded.");
+    })
+    .catch(err => console.error('Lỗi khi lấy dữ liệu:', err));
 
 
+$("#searchInput").on("keyup", function () {
+    var keyword = $(this).val().toLowerCase();
 
-    $("#searchInput").on("keyup", function () {
-        var keyword = $(this).val().toLowerCase();
-
-        $.ajax({
-            url: '/Court/FilterByKeyword',
-            type: 'GET',
-            data: { keyword: keyword },
-            success: function (data) {
-                $("#courtList").html(data); // Cập nhật danh sách
-            },
-            error: function (xhr, status, error) {
-                console.error("Lỗi AJAX:", error);
-            }
-        });
+    $.ajax({
+        url: '/Court/FilterByKeyword',
+        type: 'GET',
+        data: { keyword: keyword },
+        success: function (data) {
+            $("#courtList").html(data); // Cập nhật danh sách
+        },
+        error: function (xhr, status, error) {
+            console.error("Lỗi AJAX:", error);
+        }
     });
-
 });
-
