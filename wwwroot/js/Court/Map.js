@@ -1,5 +1,4 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-
     //top navbar slider
     const slider = document.querySelector(".slider");
     if (slider) {
@@ -92,8 +91,18 @@
     locateBtn.addEventListener('click', function () {
         map.locate({ setView: true, maxZoom: 16 });
     });
+    
+    // Add layergroup to manage markers
+    var markerGroup ={};
 
-    var markers = [];
+    //get sport list
+    fetch('Court/GetSportTypes')
+    .then(res => res.json())
+    .then(data  => {
+        data.forEach(type => {
+            markerGroup[type.SportId] = L.layerGroup();
+        })
+    });
 
     // Add a marker at a every court's location
     fetch('/Court/GetCourts')
@@ -104,14 +113,22 @@
                 .addTo(map)
                 .bindPopup(`<b>${court.courtName}</b><br>${court.courtAddress}`);
 
-            marker.courtID = court.courtID  
             marker.on('dbclick', function (e) {
                 window.location.href = `/Court/Booking?courtID=${court.courtId}`
             })
 
-            markers.push(marker);
+            if(markerGroup[court.Sportd])
+            {
+                markerGroup[court.Sportd].addLayer(marker);
+            }
         });
     }).catch(err => console.error('Lỗi khi lấy dữ liệu:', err));
+
+    function toggleMarkers(type){
+        if (map.hasLayer(markerGroup[type])) map.removeLayer(markerGroup[type])
+        else map.addLayer(markerGroup[type])
+    }
+
 
 
     $("#searchInput").on("keyup", function () {
