@@ -34,7 +34,6 @@ public partial class QuanLySanTheThaoContext : DbContext
 
     public virtual DbSet<TStatus> TStatuses { get; set; }
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TAccount>(entity =>

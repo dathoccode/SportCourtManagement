@@ -83,7 +83,6 @@ CREATE TABLE tBookingDetail(
     EndTime TIME NOT NULL,
     FOREIGN KEY (BookingID) REFERENCES tBooking(BookingID),
     FOREIGN KEY (CourtID) REFERENCES tCourt(CourtID),
-    FOREIGN KEY (SlotID) REFERENCES tSlot(SlotID)
 );
 
 CREATE TABLE tFavoriteCourt(
