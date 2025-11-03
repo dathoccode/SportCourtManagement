@@ -46,9 +46,10 @@
                 var courtNameInPartial = $(response).find('h6').first().text() || "Thông tin sân";
                 modalTitle.text(courtNameInPartial);
 
-                var bookingUrl = '/Booking/Create?courtId=' + courtId; 
+                var bookingUrl = '/Court/Booking?courtId=' + courtId; 
                 modalBookButton.attr('href', bookingUrl);
 
+                modalBookButton.removeClass('disabled');
             },
             error: function (xhr, status, error) {
                 modalBody.html('<p class="text-danger text-center">Lỗi khi tải thông tin sân.</p>');

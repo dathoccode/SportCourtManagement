@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SportCourtManagement.Services.API;
 using SportCourtManagement.Services.Data;
+using SportCourtManagement.Models;
+
 
 namespace SportCourtManagement.Controllers
 {
@@ -76,7 +78,7 @@ namespace SportCourtManagement.Controllers
             catch (Exception ex)
             {
                 // Log this in console output for debugging
-                Console.WriteLine("🔥 ERROR in GetCourts: " + ex.Message);
+                Console.WriteLine("ERROR in GetCourts: " + ex.Message);
                 return StatusCode(500, new { error = ex.Message });
             }
         }
@@ -128,7 +130,6 @@ namespace SportCourtManagement.Controllers
                 if (court == null)
                     return NotFound();
                 ViewBag.CourtID = courtId;
-                Console.WriteLine("court id in Booking" + courtId);
                 return View(court);
             }
             return View();
