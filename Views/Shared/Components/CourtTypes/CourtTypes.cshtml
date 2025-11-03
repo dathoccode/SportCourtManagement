@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TSport>
 @foreach (var s in Model)
 {
-    <button class="bg-white text-black px-3 py-2 rounded-full flex-shrink-0">
+    <button class="bg-white text-black px-3 py-2 rounded-full flex-shrink-0" onclick="toggleMarkers(@s.SportId)">
         <i class="fa-solid fa-location-dot me-2"></i>@s.SportName
     </button>
 }

@@ -125,5 +125,13 @@ namespace SportCourtManagement.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSportTypes()
+        {
+            var res = db.TSports.ToList();
+            return Ok(res);
+        }
+
     }
 }
