@@ -95,8 +95,6 @@ locateBtn.addEventListener('click', function () {
     map.locate({ setView: true, maxZoom: 16 });
 });
 
-
-// Add layergroup to manage markers
 // Add layergroup to manage markers
 var markerGroup = {};
 
@@ -107,20 +105,21 @@ fetch('/Court/GetSportTypes')
         data.forEach(type => {
             markerGroup[type.sportId] = L.layerGroup();
         });
-        console.log("Sport types loaded:", markerGroup);
     });
 
-// Hàm toggle bật/tắt nhóm marker
-function toggleMarkers(type) {
-    const group = markerGroup[type];
-    if (!group) {
-        console.warn("markerGroup not found for type:", type);
-        return;
-    }
 
+
+$('.sportTypeBtn').on('click', function () {
+    const group = markerGroup[$(this).val()]
+    $('.sportTypeBtn').removeClass('active');
+    $(this).addClass('active');
+
+    $('#sportId').val($(this).val());
+    console.log("value: " + $('#sportId').val());
+    filterCourts();
     if (map.hasLayer(group)) map.removeLayer(group);
     else map.addLayer(group);
-}
+});
 
 // Lấy danh sách sân
 fetch('/Court/GetCourts')
@@ -140,24 +139,28 @@ fetch('/Court/GetCourts')
                 console.warn("Không có group cho sportId:" + court.sportId);
             }
         });
-        console.log("Markers loaded.");
+        for (var key in markerGroup) {
+            map.addLayer(markerGroup[key]);
+        }
+
     })
     .catch(err => console.error('Lỗi khi lấy dữ liệu:', err));
 
-    function toggleMarkers(type){
-        if (map.hasLayer(markerGroup[type])) map.removeLayer(markerGroup[type])
-        else map.addLayer(markerGroup[type])
-    }
 
 
 
 $("#searchInput").on("keyup", function () {
-    var keyword = $(this).val().toLowerCase();
+    filterCourts();
+});
 
+function filterCourts() {
+    var keyword = $("#searchInput").val().toLowerCase();
+    var id = $('#sportId').val();
+    console.log("filter called with " + keyword, ", " + id);
     $.ajax({
         url: '/Court/FilterByKeyword',
         type: 'GET',
-        data: { keyword: keyword },
+        data: { keyword: keyword, id: id },
         success: function (data) {
             $("#courtList").html(data); // Cập nhật danh sách
         },
@@ -165,4 +168,4 @@ $("#searchInput").on("keyup", function () {
             console.error("Lỗi AJAX:", error);
         }
     });
-});
+}

@@ -6,11 +6,11 @@ using System.Security.Claims;
 
 namespace SportCourtManagement.Controllers
 {
-    public class Booking1Controller : Controller
+    public class BookingController : Controller
     {
         private readonly QuanLySanTheThaoContext _context;
 
-        public Booking1Controller(QuanLySanTheThaoContext context)
+        public BookingController(QuanLySanTheThaoContext context)
         {
             _context = context;
         }

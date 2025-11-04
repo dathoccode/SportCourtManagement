@@ -29,9 +29,9 @@ namespace SportCourtManagement.Controllers
             return View();
         }
 
-        public IActionResult FilterByKeyword(string keyword)
+        public IActionResult FilterByKeyword(string keyword, string id)
         {
-            return ViewComponent("CourtList", keyword);
+            return ViewComponent("CourtList", new { keyword, id});
         }
 
         [HttpGet]

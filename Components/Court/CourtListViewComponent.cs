@@ -11,10 +11,11 @@ namespace SportCourtManagement.Components.Court
         {
             db = context;
         }
-        public async Task<IViewComponentResult> InvokeAsync(string? keyword)
+        public async Task<IViewComponentResult> InvokeAsync(string? keyword, string? id)
         {
            var courts = db.TCourts
                 .Where(c => string.IsNullOrEmpty(keyword) || c.CourtName.ToLower().Contains(keyword))
+                .Where(c => string.IsNullOrEmpty(id) || c.SportId == id)
                 .ToList();
             return View("CourtList", courts);
         }
