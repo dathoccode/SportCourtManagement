@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SportCourtManagement.Services.API;
 using SportCourtManagement.Services.Data;
+using SportCourtManagement.Models;
+
 
 namespace SportCourtManagement.Controllers
 {
@@ -39,21 +41,31 @@ namespace SportCourtManagement.Controllers
             {
                 var courts = db.TCourts.ToList();
 
+                int updatedCount = 0;
                 foreach (var c in courts)
                 {
                     if (c.Latitude == null || c.Longitude == null)
                     {
                         var res = await geoCoding.GetCoordinatesAsync(c.CourtAddress);
                         if (res == null) continue;
+
                         c.Latitude = res.Value.lat;
                         c.Longitude = res.Value.lon;
+                        updatedCount++;
+
+                        if (updatedCount % 5 == 0) // cứ 5 sân lưu 1 lần
+                            await db.SaveChangesAsync();
                     }
                 }
+                if (updatedCount % 5 != 0)
+                    await db.SaveChangesAsync();
+
 
                 var result = courts
                     .Where(c => c.Latitude.HasValue && c.Longitude.HasValue)
                     .Select(c => new {
                         c.CourtId,
+                        c.SportId,
                         c.CourtName,
                         c.CourtAddress,
                         c.Latitude,
@@ -66,7 +78,7 @@ namespace SportCourtManagement.Controllers
             catch (Exception ex)
             {
                 // Log this in console output for debugging
-                Console.WriteLine("🔥 ERROR in GetCourts: " + ex.Message);
+                Console.WriteLine("ERROR in GetCourts: " + ex.Message);
                 return StatusCode(500, new { error = ex.Message });
             }
         }
@@ -118,10 +130,17 @@ namespace SportCourtManagement.Controllers
                 if (court == null)
                     return NotFound();
                 ViewBag.CourtID = courtId;
-                Console.WriteLine("court id in Booking" + courtId);
                 return View(court);
             }
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSportTypes()
+        {
+            var res = db.TSports.ToList();
+            return Ok(res);
+        }
+
     }
 }

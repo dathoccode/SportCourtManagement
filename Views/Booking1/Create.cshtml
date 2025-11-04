@@ -1,0 +1,131 @@
+﻿@model SportCourtManagement.Models.TBooking
+@{
+    Layout = null;
+    // Tên / SĐT có thể đến từ ViewBag do controller đã set trước
+    var customerName = ViewBag.CustomerName as string ?? "";
+    var phoneNumber = ViewBag.PhoneNumber as string ?? "";
+}
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>Đặt lịch - Create</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="~/css/Booking/Booking.css" />
+</head>
+<body>
+    <div class="page-root">
+
+        <!-- Header -->
+        <header class="bk-header">
+            <a class="bk-back" href="javascript:history.back()">&larr;</a>
+            <div class="bk-title">Đặt lịch ngày trực quan</div>
+            <div class="bk-spacer"></div>
+        </header>
+
+        <main class="bk-main">
+
+            <!-- Thông tin sân -->
+            <section class="card info-court">
+                <div class="card-title">
+                    <span class="icon">📚</span>
+                    <span>Thông tin sân</span>
+                </div>
+                <div class="card-body">
+                    @{
+                        var detail = Model.TBookingDetails.FirstOrDefault();
+                    }
+
+                    @if (detail != null && detail.Court != null)
+                    {
+                        <p><strong>Tên CLB:</strong> @detail.Court.CourtName</p>
+                        <p><strong>Địa chỉ:</strong> @detail.Court.CourtAddress</p>
+                       
+                    }
+                    else
+                    {
+                        <p>Không có thông tin sân nào cho booking này.</p>
+                    }
+                </div>
+            </section>
+
+            <!-- Thông tin lịch đặt -->
+            <section class="card info-booking">
+                <div class="card-title">
+                    <span class="icon">🗓️</span>
+                    <span>Thông tin lịch đặt</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>Ngày:</strong> @Model.BookingDate.ToString("dd/MM/yyyy")</p>
+
+                    @* Hiển thị từng chi tiết giờ (start - end | price giả nếu có) *@
+                    @foreach (var d in Model.TBookingDetails)
+                    {
+                        <p class="slot-line">
+                            - @d.Court?.CourtName: @d.StartTime.ToString() - @d.EndTime.ToString()
+                            @* nếu có giá hiển thị: | 30.000 đ *@
+                            @if (Model.Price > 0)
+                            {
+                                <span class="price"> | @Model.Price.ToString("N0") đ</span>
+                            }
+                        </p>
+                    }
+
+                    <p><strong>Đối tượng:</strong> Học sinh - sinh viên</p>
+                    <p>
+                        <strong>Tổng giờ:</strong>
+                        @{
+                            // tính tổng phút từ booking details
+                            var totalMinutes = Model.TBookingDetails.Sum(x => (x.EndTime.ToTimeSpan() - x.StartTime.ToTimeSpan()).TotalMinutes);
+                            var totalHoursStr = string.Format("{0}h{1:00}", (int)(totalMinutes / 60), (int)(totalMinutes % 60));
+                        }
+                        @totalHoursStr
+                    </p>
+                    <p class="total-line"><strong>Tổng tiền:</strong> <span class="total-amount">@Model.Price.ToString("N0") đ</span></p>
+                </div>
+            </section>
+
+            
+
+            <!-- Form nhập thông tin -->
+            <form asp-action="Confirm" method="post" class="bk-form">
+                <input type="hidden" name="BookingId" value="@Model.BookingId" />
+
+                <label class="lbl">TÊN CỦA BẠN</label>
+                <input class="input" type="text" name="CustomerName" value="@customerName" placeholder="Nhập tên của bạn" required />
+
+                <label class="lbl">SỐ ĐIỆN THOẠI</label>
+                <div class="phone-row">
+                    <button type="button" class="phone-flag">🇻🇳 <span class="code">+84</span> ▾</button>
+                    <input class="input phone-input" type="tel" name="PhoneNumber" value="@phoneNumber" placeholder="Nhập số điện thoại" required />
+                </div>
+
+                <label class="lbl">GHI CHÚ CHO CHỦ SÂN</label>
+                <textarea name="Note" class="textarea" placeholder="Nhập ghi chú"></textarea>
+
+                <div class="note-box">
+                    <div class="note-title">⚠️ Lưu ý:</div>
+                    <ul>
+                        <li>Việc thanh toán được thực hiện trực tiếp giữa bạn và chủ sân.</li>
+                        <li>Chúng tôi đóng vai trò kết nối, hỗ trợ bạn tìm và đặt sân dễ dàng hơn.</li>
+                        <li>Mỗi sân có thể có quy định và chính sách riêng, hãy đọc kỹ để đảm bảo quyền lợi.</li>
+                    </ul>
+                    <p>
+                        Bằng việc bấm Xác nhận và Thanh toán, bạn xác nhận đã đọc và đồng ý với
+                        <a href="#">Điều khoản đặt sân</a> và
+                        <a href="#">Chính sách hoàn tiền và hủy lịch</a>.
+                    </p>
+                </div>
+
+                <button type="submit" class="btn-confirm">XÁC NHẬN &amp; THANH TOÁN</button>
+            </form>
+
+        </main>
+    </div>
+
+    <!-- optional small script to prevent page jumping on mobile when focusing inputs -->
+    <script>
+        // nothing required for now
+    </script>
+</body>
+</html>

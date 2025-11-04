@@ -16,7 +16,7 @@ CREATE TABLE tCourt(
     OpenTime TIME NOT NULL,
     CloseTime TIME NOT NULL,
 	Latitude float null,
-	Longtitude float null,
+	Longitude float null,
     Img NVARCHAR(200) NULL,
     Rating FLOAT NULL,
     FOREIGN KEY (SportID) REFERENCES tSport(SportID)
@@ -82,7 +82,7 @@ CREATE TABLE tBookingDetail(
     StartTime TIME NOT NULL,
     EndTime TIME NOT NULL,
     FOREIGN KEY (BookingID) REFERENCES tBooking(BookingID),
-    FOREIGN KEY (CourtID) REFERENCES tCourt(CourtID)
+    FOREIGN KEY (CourtID) REFERENCES tCourt(CourtID),
 );
 
 CREATE TABLE tFavoriteCourt(
