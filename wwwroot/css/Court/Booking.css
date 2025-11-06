@@ -45,7 +45,7 @@ main{
 /*-----------TIMELINE------------*/
 .timeline-container {
     width: 100%;
-    height: 68vh;
+    height: 60vh;
     border: 1px solid #ccc;
 }
 
@@ -61,7 +61,7 @@ main{
 .timeline-body-wrapper {
     overflow-x: scroll; /* scroll ngang tại đây */
     max-width: 100%;
-    height: 60vh;
+    height: 52vh;
 }
 
 
@@ -98,3 +98,19 @@ main{
     background-color: dimgray;
 }
 
+.available-slot.selected{
+    background-color: aquamarine;
+}
+
+.selection-confirm{
+    height: 8vh;
+    border-radius: 16px;
+    background-color: rgb(218, 189, 45);
+    font-size: 20px;   
+}
+
+.payment-btn{
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}

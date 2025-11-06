@@ -51,11 +51,9 @@ namespace SportCourtManagement.Controllers
             // Lưu thông tin đăng nhập vào Session
             HttpContext.Session.SetString("AccountID", acc.AccountId);
             HttpContext.Session.SetString("AccName", acc.AccName ?? "");
-            HttpContext.Session.SetString("RoleID", acc.RoleId?.ToString() ?? "0");
+            HttpContext.Session.SetString("RoleID", acc.RoleId?.ToString() ?? "R001");
             HttpContext.Session.SetString("Email", acc.Email ?? "");
 
-            // Chuyển hướng sau đăng nhập thành công
-            // Sau khi đăng nhập thành công
             return RedirectToAction("Loading", "Account", new { target = Url.Action("Index", "Home") });
 
         }
@@ -81,10 +79,9 @@ namespace SportCourtManagement.Controllers
 
             return View(acc);
         }
-        // ===== BẮT ĐẦU CODE BẠN CẦN THÊM =====
 
         [HttpPost]
-        [ValidateAntiForgeryToken] // Thêm dòng này để bảo mật
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Profile(TAccount model, IFormFile? AvatarFile)
         {
             // 1. Lấy ID user từ session
@@ -143,7 +140,6 @@ namespace SportCourtManagement.Controllers
             return RedirectToAction("Profile");
         }
 
-        // ===== KẾT THÚC CODE BẠN CẦN THÊM =====
         public IActionResult Loading(string target)
         {
             ViewBag.TargetUrl = target;
@@ -154,13 +150,11 @@ namespace SportCourtManagement.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            
             return View();
         }
 
         // ======= [POST] XỬ LÝ ĐĂNG KÝ =======
         [HttpPost]
-        
         public IActionResult Register(string FullName, string email, string phone, string password)
         {
            
