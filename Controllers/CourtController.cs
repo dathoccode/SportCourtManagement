@@ -29,9 +29,9 @@ namespace SportCourtManagement.Controllers
             return View();
         }
 
-        public IActionResult FilterByKeyword(string keyword)
+        public IActionResult FilterByKeyword(string keyword, string id)
         {
-            return ViewComponent("CourtList", keyword);
+            return ViewComponent("CourtList", new { keyword, id});
         }
 
         [HttpGet]
@@ -85,7 +85,7 @@ namespace SportCourtManagement.Controllers
 
 
         [HttpGet("Court/GetSlotsDetails/{courtId}")]
-        public async Task<IActionResult> GetSlotsDetails(string courtId)
+        public async Task<IActionResult> GetSlotsDetails(string courtId, DateTime? date)
         {
             var result = db.TCourts
                 .Where(c => c.CourtId == courtId)
@@ -102,7 +102,7 @@ namespace SportCourtManagement.Controllers
                             s.SlotId,
                             s.SlotName,
                             Bookings = db.TBookingDetails
-                                .Where(bd => bd.SlotId == s.SlotId)
+                                .Where(bd => bd.SlotId == s.SlotId && bd.CourtId == courtId)
                                 .Join(db.TBookings,
                                     bd => bd.BookingId,
                                     b => b.BookingId,
@@ -112,7 +112,7 @@ namespace SportCourtManagement.Controllers
                                         b.BookingDate,
                                         bd.StartTime,
                                         bd.EndTime
-                                    })
+                                    }).Where(b => !date.HasValue || b.BookingDate.Date == date.Value.Date)
                                 .ToList()
                         })
                         .ToList()

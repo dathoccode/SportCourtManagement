@@ -1,9 +1,7 @@
-﻿@model SportCourtManagement.Models.TBooking
+﻿@model List<SportCourtManagement.Models.TBookingDetail>
 @{
     Layout = null;
     // Tên / SĐT có thể đến từ ViewBag do controller đã set trước
-    var customerName = ViewBag.CustomerName as string ?? "";
-    var phoneNumber = ViewBag.PhoneNumber as string ?? "";
 }
 <!doctype html>
 <html lang="vi">
@@ -11,7 +9,9 @@
     <meta charset="utf-8" />
     <title>Đặt lịch - Create</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="~/css/Booking/Booking.css" />
+    <link rel="stylesheet" href="~/css/Payment/Payment.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
     <div class="page-root">
@@ -32,20 +32,8 @@
                     <span>Thông tin sân</span>
                 </div>
                 <div class="card-body">
-                    @{
-                        var detail = Model.TBookingDetails.FirstOrDefault();
-                    }
-
-                    @if (detail != null && detail.Court != null)
-                    {
-                        <p><strong>Tên CLB:</strong> @detail.Court.CourtName</p>
-                        <p><strong>Địa chỉ:</strong> @detail.Court.CourtAddress</p>
-                       
-                    }
-                    else
-                    {
-                        <p>Không có thông tin sân nào cho booking này.</p>
-                    }
+                    <p><strong>Tên Sân: @ViewBag.CourtInf[0].CourtName</strong></p>
+                    <p><strong>Tên Sân: @ViewBag.CourtInf[0].CourtAddress</strong></p>
                 </div>
             </section>
 
@@ -56,48 +44,28 @@
                     <span>Thông tin lịch đặt</span>
                 </div>
                 <div class="card-body">
-                    <p><strong>Ngày:</strong> @Model.BookingDate.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Ngày:</strong> @DateTime.Now</p>
 
-                    @* Hiển thị từng chi tiết giờ (start - end | price giả nếu có) *@
-                    @foreach (var d in Model.TBookingDetails)
-                    {
-                        <p class="slot-line">
-                            - @d.Court?.CourtName: @d.StartTime.ToString() - @d.EndTime.ToString()
-                            @* nếu có giá hiển thị: | 30.000 đ *@
-                            @if (Model.Price > 0)
-                            {
-                                <span class="price"> | @Model.Price.ToString("N0") đ</span>
-                            }
-                        </p>
-                    }
 
                     <p><strong>Đối tượng:</strong> Học sinh - sinh viên</p>
-                    <p>
-                        <strong>Tổng giờ:</strong>
-                        @{
-                            // tính tổng phút từ booking details
-                            var totalMinutes = Model.TBookingDetails.Sum(x => (x.EndTime.ToTimeSpan() - x.StartTime.ToTimeSpan()).TotalMinutes);
-                            var totalHoursStr = string.Format("{0}h{1:00}", (int)(totalMinutes / 60), (int)(totalMinutes % 60));
-                        }
-                        @totalHoursStr
-                    </p>
-                    <p class="total-line"><strong>Tổng tiền:</strong> <span class="total-amount">@Model.Price.ToString("N0") đ</span></p>
+                    <p><strong>Tổng giờ: @ViewBag.TotalTime</strong></p>
+                    <p class="total-line"><strong>Tổng tiền:</strong> <span class="total-amount"> @(ViewBag.TotalTime * 70000)đ</span></p>
                 </div>
             </section>
 
             
 
             <!-- Form nhập thông tin -->
-            <form asp-action="Confirm" method="post" class="bk-form">
-                <input type="hidden" name="BookingId" value="@Model.BookingId" />
+            <form asp-action="Confirm" id="bkForm" method="post" class="bk-form">
+                <input type="hidden" name="BookingId" value="" />
 
                 <label class="lbl">TÊN CỦA BẠN</label>
-                <input class="input" type="text" name="CustomerName" value="@customerName" placeholder="Nhập tên của bạn" required />
+                <input class="input" type="text" name="CustomerName" value="@ViewBag.UserName" placeholder="Nhập tên của bạn" required />
 
                 <label class="lbl">SỐ ĐIỆN THOẠI</label>
                 <div class="phone-row">
                     <button type="button" class="phone-flag">🇻🇳 <span class="code">+84</span> ▾</button>
-                    <input class="input phone-input" type="tel" name="PhoneNumber" value="@phoneNumber" placeholder="Nhập số điện thoại" required />
+                    <input class="input phone-input" type="tel" name="PhoneNumber" id="phone" value="@ViewBag.UserPhone" placeholder="Nhập số điện thoại" required />
                 </div>
 
                 <label class="lbl">GHI CHÚ CHO CHỦ SÂN</label>
@@ -117,7 +85,7 @@
                     </p>
                 </div>
 
-                <button type="submit" class="btn-confirm">XÁC NHẬN &amp; THANH TOÁN</button>
+                <button class="btn-confirm" id="confirmBtn">XÁC NHẬN &amp; THANH TOÁN</button>
             </form>
 
         </main>
@@ -125,7 +93,31 @@
 
     <!-- optional small script to prevent page jumping on mobile when focusing inputs -->
     <script>
-        // nothing required for now
+        document.getElementById('confirmBtn').addEventListener('click', function(e) {
+            console.log("button clicked");
+          e.preventDefault();
+
+          const phone = document.getElementById('phone').value.trim();
+          const regex = /^(0|\+84)[0-9]{9}$/;
+
+          if (!regex.test(phone)) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Sai định dạng!',
+              text: 'Vui lòng nhập đúng số điện thoại Việt Nam.'
+            });
+            return;
+          }
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Thành công!',
+            text: 'Đơn hàng của bạn đã được xử lý thành công!',
+            timer: 3000
+          }).then(() => {
+            window.location.href = "/Home/Index";
+          });
+        });
     </script>
 </body>
 </html>

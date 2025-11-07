@@ -17,7 +17,7 @@ namespace SportCourtManagement.Controllers
         // Trang chủ
         public async Task<IActionResult> Index()
         {
-            string curAccountId = HttpContext.Session.GetString("AccountID");
+            string? curAccountId = HttpContext.Session.GetString("AccountID");
 
             if (!string.IsNullOrEmpty(curAccountId))
             {
@@ -52,7 +52,7 @@ namespace SportCourtManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> ToggleFavorite(string courtId)
         {
-            string curAccountId = HttpContext.Session.GetString("AccountID");
+            string? curAccountId = HttpContext.Session.GetString("AccountID");
 
             if (string.IsNullOrEmpty(curAccountId))
                 return Json(new { success = false, requiresLogin = true, loginUrl = Url.Action("Login", "Account") });
@@ -92,7 +92,7 @@ namespace SportCourtManagement.Controllers
         [HttpGet]
         public async Task<IActionResult> GetFavoriteCourtIds()
         {
-            string curAccountId = HttpContext.Session.GetString("AccountID");
+            string? curAccountId = HttpContext.Session.GetString("AccountID");
 
             if (string.IsNullOrEmpty(curAccountId))
             {

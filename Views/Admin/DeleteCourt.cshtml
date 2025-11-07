@@ -1,0 +1,60 @@
+﻿@model SportCourtManagement.Models.TCourt
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["Title"] = "Xác nhận xóa sân";
+    bool hasBookings = ViewBag.HasBookings ?? false;
+}
+
+
+<link rel="stylesheet" href="~/css/login/dashboard.css" />
+<link rel="stylesheet" href="~/css/admin/admin.css" />
+
+<div class="dashboard-content">
+    <div class="dashboard-container">
+        <div class="content-header">
+            <h4>@ViewData["Title"]</h4>
+        </div>
+
+        <!-- Form xoá sân -->
+        <div class="admin-form-container">
+            <h4 class="admin-delete-title">Bạn có chắc chắn muốn xóa sân này?</h4>
+
+            <div>
+                <dl class="row">
+                    <dt class="col-sm-3">ID Sân:</dt>
+                    <dd class="col-sm-9">@Model.CourtId</dd>
+
+                    <dt class="col-sm-3">Tên sân:</dt>
+                    <dd class="col-sm-9">@Model.CourtName</dd>
+
+                    <dt class="col-sm-3">Địa chỉ:</dt>
+                    <dd class="col-sm-9">@Model.CourtAddress</dd>
+                </dl>
+            </div>
+
+            @if (hasBookings)
+            {
+                <div class="alert alert-danger admin-delete-alert">
+                    <strong>Không thể xóa!</strong> Sân này đã có lịch sử đặt sân.
+                    Bạn không thể xóa sân này để đảm bảo tính toàn vẹn của lịch sử booking.
+                </div>
+            }
+
+            <form asp-action="DeleteCourt" method="post">
+                <input type="hidden" asp-for="CourtId" />
+
+                <div class="admin-form-actions">
+                    <a asp-action="ManageCourts" class="btn-admin-secondary">
+                        Hủy
+                    </a>
+
+                    <button type="submit" class="btn-admin-danger"
+                            @(hasBookings ? "disabled" : "")>
+                        Xác nhận Xóa
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -48,8 +48,7 @@ VALUES
 ('C024', N'Hoàng Quốc Việt Tennis', N'76 Hoàng Quốc Việt, Cầu Giấy, Hà Nội', 'SP004', '0918667788', '06:30', '21:30', NULL, 4.7),
 ('C025', N'Kim Mã Basketball Court', N'95 Kim Mã, Ba Đình, Hà Nội', 'SP003', '0903556677', '07:00', '22:00', NULL, 4.4);
 
-INSERT INTO tSlot (SlotID, CourtID, SlotName)
-VALUES
+INSERT INTO tSlot (SlotID, CourtID, SlotName) VALUES
 (N'S001', 'C001', N'Sân 1'),
 (N'S002', 'C001', N'Sân 2'),
 (N'S003', 'C001', N'Sân 3'),
@@ -124,7 +123,7 @@ VALUES
 (N'S003', 'C024', N'Sân 3'),
 (N'S001', 'C025', N'Sân 1'),
 (N'S002', 'C025', N'Sân 2'),
-(N'S003', 'C025', N'Sân 3');
+(N'S003', 'C025', N'Sân 3')
 
 INSERT INTO tStatus(StatusID, StatusName) values
 ('STT001', N'Đã thanh toán'),
@@ -155,7 +154,8 @@ INSERT INTO tBooking (BookingID, AccountID, BookingDate, StatusID, Price) VALUES
 ('B007', 'ACC001', '2025-10-14', 'STT001', 0),
 ('B008', 'ACC001', '2025-10-15', 'STT002', 0),
 ('B009', 'ACC001', '2025-10-17', 'STT001', 0),
-('B010', 'ACC001', '2025-10-20', 'STT001', 0);
+('B010', 'ACC001', '2025-10-20', 'STT001', 0),
+('B011', 'ACC005', '2025-11-05', 'STT001', 0);
 
 
 --------------------
@@ -169,4 +169,8 @@ INSERT INTO tBookingDetail (DetailID, BookingID, CourtID, SlotID, StartTime, End
 ('BD007', 'B004', 'C015', 'S001', '17:00', '18:30'),
 ('BD008', 'B004', 'C015', 'S003', '18:30', '20:00'),
 ('BD009', 'B005', 'C020', 'S002', '15:00', '16:30'),
-('BD010', 'B005', 'C020', 'S003', '16:30', '18:00');
+('BD010', 'B005', 'C020', 'S003', '16:30', '18:00'),
+('BD011', 'B011', 'C001', 'S003', '16:30', '18:00'),
+('BD012', 'B011', 'C001', 'S002', '13:30', '17:00');
+
+select * from tBooking
