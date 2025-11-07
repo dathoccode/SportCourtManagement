@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SportCourtManagement.Models.TCourt>
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["Title"] = "Quản lý sân";
+}
+
+<link rel="stylesheet" href="~/css/login/dashboard.css" />
+<link rel="stylesheet" href="~/css/admin/admin.css" />
+
+<div class="dashboard-content">
+    <div class="dashboard-container">
+        <div class="content-header">
+            <h4>@ViewData["Title"]</h4>
+        </div>
+
+        <!-- Danh sách sân -->
+        <div class="dashboard-table-container">
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>ID Sân</th>
+                        <th>Tên sân</th>
+                        <th>Địa chỉ</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var court in Model)
+                    {
+                        <tr>
+                            <td data-label="ID Sân">@court.CourtId</td>
+                            <td data-label="Tên sân">@court.CourtName</td>
+                            <td data-label="Địa chỉ">@court.CourtAddress</td>
+                            <td data-label="Thao tác">
+
+                                <a asp-controller="Admin" asp-action="EditCourt" asp-route-id="@court.CourtId" class="btn btn-warning btn-sm btn-edit">Sửa</a>
+                                <a asp-controller="Admin" asp-action="DeleteCourt" asp-route-id="@court.CourtId" class="btn btn-danger btn-sm">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="admin-actions-container">
+            <a asp-controller="Admin" asp-action="AddCourt" class="btn-admin-primary">
+                Thêm sân mới
+            </a>
+        </div>
+    </div>
+</div>

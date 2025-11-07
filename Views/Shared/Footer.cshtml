@@ -15,9 +15,23 @@
             <span>Bản đồ</span>
         </a>
 
-        <a class="nav-item @(curController.Equals("Account", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-controller="Account" asp-action="MyBookings">
-            <i class="fas fa-user"></i>
-            <span>Tài khoản</span>
-        </a>
+        @{
+            var roleId = Context.Session.GetString("RoleID");
+        }
+
+        @if (roleId == "R002")
+        {
+            <a class="nav-item @(curController.Equals("Admin", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-controller="Admin" asp-action="ManageCourts">
+                <i class="fas fa-user"></i>
+                <span>Tài khoản</span>
+            </a>
+        }
+        else
+        {
+            <a class="nav-item @(curController.Equals("Account", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-controller="Account" asp-action="MyBookings">
+                <i class="fas fa-user"></i>
+                <span>Tài khoản</span>
+            </a>
+        }
     </div>
 </nav>
