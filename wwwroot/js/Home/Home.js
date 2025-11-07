@@ -80,14 +80,14 @@
     $('.search-bar').on('click', '.clear-search-btn', function () {
         var searchInput = $(this).siblings('.form-control');
         searchInput.val('');
-        searchInput.focus();
+        $('#searchInput').trigger('focus');
         searchInput.trigger('keyup');
     });
 
     //Icon tìm kiếm    
     $('.search-bar').on('click', '.search-icon-btn', function () {
         var searchInput = $(this).siblings('.form-control');
-        searchInput.focus();
+        $('#searchInput').trigger('focus');
     });
 
     // Nút yêu thích

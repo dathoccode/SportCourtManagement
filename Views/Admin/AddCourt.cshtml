@@ -1,0 +1,78 @@
+﻿@model SportCourtManagement.Models.TCourt
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml"; 
+    ViewData["Title"] = "Thêm sân mới";
+}
+
+<link rel="stylesheet" href="~/css/login/dashboard.css" />
+<link rel="stylesheet" href="~/css/admin/admin.css" />
+
+<div class="dashboard-content">
+    <div class="dashboard-container">
+        <div class="content-header">
+            <h4>@ViewData["Title"]</h4>
+        </div>
+
+        <!-- Form thêm sân -->
+        <div class="admin-form-container">
+            <form asp-action="AddCourt" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger admin-validation-summary"></div>
+
+                <div class="form-group">
+                    <label asp-for="CourtName">Tên sân</label>
+                    <input asp-for="CourtName" class="form-control" />
+                    <span asp-validation-for="CourtName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CourtAddress">Địa chỉ</label>
+                    <input asp-for="CourtAddress" class="form-control" />
+                    <span asp-validation-for="CourtAddress" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Contact">Số điện thoại liên hệ</label>
+                    <input asp-for="Contact" class="form-control" type="tel" />
+                    <span asp-validation-for="Contact" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SportId">Loại thể thao</label>
+                    <select asp-for="SportId" class="form-control" asp-items="@ViewBag.Sports">
+                        <option value="">-- Chọn loại thể thao --</option>
+                    </select>
+                    <span asp-validation-for="SportId" class="text-danger"></span>
+                </div>
+
+                <div class="admin-form-row">
+                    <div class="form-group">
+                        <label asp-for="OpenTime">Giờ mở cửa</label>
+                        <input name="OpenTimeString" class="form-control" type="time" />
+                        <span asp-validation-for="OpenTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CloseTime">Giờ đóng cửa</label>
+                        <input name="CloseTimeString" class="form-control" type="time" />
+                        <span asp-validation-for="CloseTime" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="admin-form-actions">
+                    <a asp-action="ManageCourts" class="btn-admin-secondary">
+                        Hủy
+                    </a>
+                    <button type="submit" class="btn-admin-primary">
+                        Lưu
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

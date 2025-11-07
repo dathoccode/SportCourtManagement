@@ -44,13 +44,13 @@ namespace SportCourtManagement.Controllers
                 int updatedCount = 0;
                 foreach (var c in courts)
                 {
-                    if (c.Latitude == null || c.Longitude == null)
+                    if (c.Latitude == null || c.Longtitude == null)
                     {
                         var res = await geoCoding.GetCoordinatesAsync(c.CourtAddress);
                         if (res == null) continue;
 
                         c.Latitude = res.Value.lat;
-                        c.Longitude = res.Value.lon;
+                        c.Longtitude = res.Value.lon;
                         updatedCount++;
 
                         if (updatedCount % 5 == 0) // cứ 5 sân lưu 1 lần
@@ -62,14 +62,14 @@ namespace SportCourtManagement.Controllers
 
 
                 var result = courts
-                    .Where(c => c.Latitude.HasValue && c.Longitude.HasValue)
+                    .Where(c => c.Latitude.HasValue && c.Longtitude.HasValue)
                     .Select(c => new {
                         c.CourtId,
                         c.SportId,
                         c.CourtName,
                         c.CourtAddress,
                         c.Latitude,
-                        c.Longitude
+                        c.Longtitude
                     })
                     .ToList();
 
