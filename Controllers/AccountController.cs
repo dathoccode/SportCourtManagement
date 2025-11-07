@@ -212,9 +212,12 @@ namespace SportCourtManagement.Controllers
             // ===== KẾT THÚC CODE THÊM MỚI =====
             ViewData["Title"] = "Lịch đã đặt";
             var bookings = _context.TBookings
-                                   .Where(b => b.AccountId == accountId)
-                                   .OrderByDescending(b => b.BookingDate)
-                                   .ToList();
+            .Include(b => b.Status) 
+            .Include(b => b.TBookingDetails) 
+                .ThenInclude(bd => bd.Court) 
+            .Where(b => b.AccountId == accountId)
+            .OrderByDescending(b => b.BookingDate)
+            .ToList();
 
             return View(bookings);
         }

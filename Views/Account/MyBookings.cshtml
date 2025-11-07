@@ -1,5 +1,6 @@
-﻿@{
-    // BÁO VỚI HỆ THỐNG DÙNG LAYOUT DASHBOARD MỚI
+﻿
+@model List<TBooking> 
+@{
     Layout = "_DashboardLayout";
     ViewData["Title"] = "Lịch đã đặt";
 }
@@ -9,48 +10,53 @@
     <div class="content-header">
         <h4>Danh sách đặt lịch</h4>
         <div class="dropdown">
-
-            <a href="#" class="view-all-btn dropdown-toggle"
-               id="date-filter-anchor"
-               data-bs-toggle="dropdown"
-               aria-expanded="false">
+            <a href="#" class="view-all-btn dropdown-toggle" id="date-filter-anchor"
+               data-bs-toggle="dropdown" aria-expanded="false">
                 Xem tất cả <i class="fas fa-calendar-alt ms-1"></i>
             </a>
-
-            <ul class="dropdown-menu date-filter-dropdown">
-                <li>
-                    <a class="dropdown-item date-filter-item" href="#" id="btn-chon-ngay">
-                        <strong>Chọn khoảng ngày</strong>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item date-filter-item" href="#" id="btn-chon-thang">
-                        <strong>Chọn tháng</strong>
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item date-filter-item" href="#" id="btn-chon-nam">
-                        <strong>Chọn năm</strong>
-                    </a>
-                </li>
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                    <a class="dropdown-item date-filter-item" href="#" id="btn-xem-tat-ca">
-                        Xem tất cả
-                    </a>
-                </li>
-            </ul>
-        </div>
+            </div>
     </div>
 
-    <div class="empty-state">
-        <p>bạn chưa có lịch đặt</p>
-    </div>
+    @if (Model != null && Model.Any())
+    {
+            <div class="booking-list-container" style="max-height: 65vh; overflow-y: auto;">
+                @foreach (var booking in Model)
+                {
+                        <div class="card mb-3">
+                            <div class="card-header d-flex justify-content-between">
+                                <strong>Ngày đặt: @booking.BookingDate.ToString("dd/MM/yyyy")</strong>
+                                <span class="badge bg-success">@booking.Status.StatusName</span>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Tổng tiền:</strong> @booking.Price.ToString("N0") VNĐ</p>
+                                <strong>Chi tiết:</strong>
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var detail in booking.TBookingDetails)
+                                    {
+                                            <li class="list-group-item">
+                                                <strong>@detail.Court.CourtName</strong> (Slot: @detail.SlotId)
+                                                <br>
+                                                <small>Giờ: @detail.StartTime.ToString(@"hh\:mm") - @detail.EndTime.ToString(@"hh\:mm")</small>
+                                            </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                }
+            </div>
+    }
+    else
+    {
+            <div class="empty-state">
+                <p>bạn chưa có lịch đặt</p>
+            </div>
+    }
+
     <input type="text" id="date-range-picker" style="display: none;" />
     <input type="text" id="month-picker" style="display: none;" />
     <input type="text" id="year-picker" style="display: none;" />
 
 </div>
 @section Scripts {
-    <script src="~/js/login/dashboard.js" asp-append-version="true"></script>
+        <script src="~/js/login/dashboard.js" asp-append-version="true"></script>
 }
