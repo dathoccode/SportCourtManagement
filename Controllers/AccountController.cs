@@ -16,18 +16,15 @@ namespace SportCourtManagement.Controllers
             _context = context;
         }
 
-        // ======= [GET] TRANG ĐĂNG NHẬP =======
         [HttpGet]
         public IActionResult Login()
         {
-            // Nếu đã đăng nhập rồi → chuyển về trang chủ
             if (HttpContext.Session.GetString("AccountID") != null)
                 return RedirectToAction("Index", "Home");
 
             return View();
         }
 
-        // ======= [POST] XỬ LÝ ĐĂNG NHẬP =======
         [HttpPost]
         public IActionResult Login(string TaiKhoan, string Password)
         {
@@ -37,7 +34,6 @@ namespace SportCourtManagement.Controllers
                 return View();
             }
 
-            // Tìm tài khoản theo email hoặc số điện thoại
             var acc = _context.TAccounts
                 .FirstOrDefault(a => (a.Email == TaiKhoan || a.Phone == TaiKhoan)
                                   && a.AccPassword == Password);
@@ -58,7 +54,6 @@ namespace SportCourtManagement.Controllers
 
         }
 
-        // ======= [GET] TRANG HỒ SƠ CÁ NHÂN =======
         [HttpGet]
         public IActionResult Profile()
         {
@@ -84,35 +79,27 @@ namespace SportCourtManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Profile(TAccount model, IFormFile? AvatarFile)
         {
-            // 1. Lấy ID user từ session
             var accountId = HttpContext.Session.GetString("AccountID");
             if (accountId == null)
             {
                 return RedirectToAction("Login");
             }
 
-            // 2. Tìm user gốc trong CSDL
             var userInDb = await _context.TAccounts.FindAsync(accountId);
             if (userInDb == null)
             {
                 return NotFound("Không tìm thấy tài khoản.");
             }
 
-            // 3. Cập nhật thông tin từ form (biến "model") vào user CSDL
-            // ASP.NET đã tự động điền thông tin từ form vào biến "model"
             userInDb.AccName = model.AccName;
             userInDb.Email = model.Email;
             userInDb.Phone = model.Phone;
 
-            // === ĐÂY LÀ 2 DÒNG BẠN HỎI ===
-            userInDb.Gender = model.Gender;           // Cập nhật giới tính
-            userInDb.DateOfBirth = model.DateOfBirth; // Cập nhật ngày sinh
-                                                      // =============================
-
-            // 4. Xử lý ảnh đại diện (nếu user có tải file mới)
+            userInDb.Gender = model.Gender;           
+            userInDb.DateOfBirth = model.DateOfBirth; 
+                                                     
             if (AvatarFile != null && AvatarFile.Length > 0)
             {
-                // Chuyển file ảnh thành dạng byte[] để lưu vào CSDL
                 using (var memoryStream = new MemoryStream())
                 {
                     await AvatarFile.CopyToAsync(memoryStream);
@@ -120,23 +107,18 @@ namespace SportCourtManagement.Controllers
                 }
             }
 
-            // 5. Lưu tất cả thay đổi vào Database
             try
             {
-                _context.Update(userInDb); // Báo cho EF biết là đối tượng này đã bị thay đổi
-                await _context.SaveChangesAsync(); // Thực thi lệnh UPDATE
+                _context.Update(userInDb);
+                await _context.SaveChangesAsync();
 
-                // Cập nhật lại tên trong Session phòng khi user đổi tên
                 HttpContext.Session.SetString("AccName", userInDb.AccName);
             }
             catch (DbUpdateException ex)
             {
-                // Xử lý lỗi (ví dụ: email bị trùng)
                 ModelState.AddModelError("", "Không thể lưu thay đổi. Email có thể đã bị trùng.");
-                return View(model); // Trả về trang Profile và hiển thị lỗi
+                return View(model);
             }
-
-            // 6. Quay về trang Profile sau khi lưu thành công
             return RedirectToAction("Profile");
         }
 
@@ -146,14 +128,12 @@ namespace SportCourtManagement.Controllers
             return View();
         }
 
-        // ======= [GET] TRANG ĐĂNG KÝ =======
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        // ======= [POST] XỬ LÝ ĐĂNG KÝ =======
         [HttpPost]
         public IActionResult Register(string FullName, string email, string phone, string password)
         {
@@ -181,35 +161,29 @@ namespace SportCourtManagement.Controllers
             _context.TAccounts.Add(acc);
             _context.SaveChanges();
 
-
-            // Sau khi đăng ký thành công
             return RedirectToAction("Loading", "Account", new { target = Url.Action("Login", "Account") });
 
         }
 
-        // ======= [GET] QUÊN MẬT KHẨU =======
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
-        // ======= [GET] DANH SÁCH LỊCH ĐẶT =======
         [HttpGet]
         public IActionResult MyBookings()
         {
             var accountId = HttpContext.Session.GetString("AccountID");
             if (accountId == null)
                 return RedirectToAction("Login");
-            // ===== BẮT ĐẦU CODE THÊM MỚI =====
             var user = _context.TAccounts.Find(accountId);
             if (user != null)
             {
                 ViewBag.UserName = user.AccName;
                 ViewBag.UserAvatar = (user.AccImg != null)
                     ? "data:image/jpeg;base64," + Convert.ToBase64String(user.AccImg)
-                    : Url.Content("~/images/userAvatar.jpg"); // Ảnh đại diện mặc định
+                    : Url.Content("~/images/userAvatar.jpg"); 
             }
-            // ===== KẾT THÚC CODE THÊM MỚI =====
             ViewData["Title"] = "Lịch đã đặt";
             var bookings = _context.TBookings
             .Include(b => b.Status) 
@@ -222,7 +196,6 @@ namespace SportCourtManagement.Controllers
             return View(bookings);
         }
 
-        // ======= ĐĂNG XUẤT =======
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

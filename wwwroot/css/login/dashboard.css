@@ -1,5 +1,4 @@
 ﻿body {
-    /* Dùng lại gradient nền của bạn */
     background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
     background-attachment: fixed;
 }
@@ -8,7 +7,6 @@ div.row {
     height: calc(88vh - 3rem);
 }
 
-/* === CỘT MENU BÊN TRÁI (SIDEBAR) === */
 .dashboard-sidebar {
     background-color: #fff;
     border-radius: 10px;
@@ -21,7 +19,6 @@ div.row {
     .dashboard-sidebar::-webkit-scrollbar {
         display: none;
     }
-    /* Phần thông tin người dùng */
     .user-info {
         display: flex;
         align-items: center;
@@ -51,7 +48,6 @@ div.row {
         font-size: 1.1rem;
     }
 
-/* 4 nút hành động nhanh */
 .quick-actions {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -65,9 +61,7 @@ div.row {
     align-items: center;
     justify-content: center;
     padding: 0.75rem 0.25rem;
-    /* Nền xanh lá nhạt */
     background-color: #E6F8F0;
-    /* Viền xanh */
     border: 1px solid #09D1C7;
     border-radius: 8px;
     font-size: 0.75rem;
@@ -88,7 +82,6 @@ div.row {
         opacity: 0.8;
     }
 
-/* Menu chính (dùng list-group của Bootstrap) */
 .dashboard-menu .list-group-item {
     border: none;
     padding: 0.9rem 0.25rem;
@@ -114,17 +107,15 @@ div.row {
         color: #aaa;
     }
 
-    /*-----------------------------*/
-    /*phải*/
+
 .dashboard-content {
-    background-color: #f0f2f5; /* Nền xám nhạt như trong ảnh */
+    background-color: #f0f2f5; 
     border-radius: 10px;
     padding: 1.5rem;
     height: calc(88vh - 3rem);
 }
 
 .content-header {
-    /* Tiêu đề nền gradient */
     background: linear-gradient(90deg, #0C6478 0%, #46DFB1 100%);
     color: #fff;
     padding: 1.25rem 1.5rem;
@@ -156,9 +147,8 @@ div.row {
     color: #777;
     font-weight: 500;
 }
-/* === CSS CHO DROPDOWN LỌC NGÀY (ẢNH 3) === */
 .date-filter-dropdown {
-    background-color: #FEF9E7; /* Nền vàng nhạt */
+    background-color: #FEF9E7;
     border: 1px solid #F7DC6F;
     border-radius: 8px;
     padding: 0.5rem 0;
@@ -166,32 +156,28 @@ div.row {
 }
 
 .date-filter-item {
-    color: #1A5276; /* Màu chữ xanh đậm */
+    color: #1A5276; 
     font-weight: 500;
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
 }
 
     .date-filter-item:hover {
-        background-color: #F9E79F; /* Nền vàng đậm hơn khi hover */
+        background-color: #F9E79F;
         color: #1A5276;
     }
 
 .date-filter-dropdown .dropdown-divider {
     border-top-color: #F7DC6F;
 }
-/* === CSS CHO LỊCH CHỌN NĂM === */
 
-/* Ẩn các tháng, chỉ hiện bảng chọn năm */
 .year-picker-container .flatpickr-monthSelect-months {
     display: none !important;
 }
 
-/* Ẩn chữ "Select Month" (nếu có) */
 .year-picker-container .flatpickr-monthSelect-sub-header {
     display: none !important;
 }
-/* === CSS CHO MODAL "TÍNH NĂNG SẮP RA MẮT" === */
 .modal-header-custom {
     background: linear-gradient(90deg, #0C6478 0%, #46DFB1 100%);
     color: white;
@@ -206,13 +192,13 @@ div.row {
     }
 
 .btn-primary-custom {
-    background-color: #0C6478; /* Màu xanh đậm */
+    background-color: #0C6478;
     border-color: #0C6478;
     color: white;
 }
 
     .btn-primary-custom:hover {
-        background-color: #15919B; /* Màu xanh nhạt hơn */
+        background-color: #15919B;
         border-color: #15919B;
         color: white;
     }

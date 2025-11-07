@@ -1,9 +1,8 @@
 ﻿body {
     background: linear-gradient(180deg, #0C6478 0%, #8DEE98 100%);
-    color: #333; /* Đổi màu chữ mặc định thành màu tối */
+    color: #333; 
 }
 
-/* Thêm position relative cho cột chính */
 .profile-column {
     position: relative;
 }
@@ -15,14 +14,13 @@
     background-position: center;
 }
 
-/* CSS CHO AVATAR */
 .profile-avatar-container {
     position: absolute;
     width: 100%;
-    top: 100px; /* Điều chỉnh nếu avatar bị lệch */
+    top: 100px; 
     display: flex;
     justify-content: center;
-    z-index: 10; /* Đảm bảo avatar nằm trên banner và form */
+    z-index: 10; 
 }
 
 .profile-avatar {
@@ -30,35 +28,31 @@
     height: 100px;
     object-fit: cover;
     border: 4px solid #fff;
-    background-color: #fff; /* Nền trắng phòng khi ảnh vỡ hoặc chưa có */
-    /* THÊM DÒNG NÀY ĐỂ AVATAR CŨNG CÓ POSITION RELATIVE */
+    background-color: #fff; 
 }
 
-/* CSS CHO ICON MÁY ẢNH */
 .avatar-camera-icon {
     position: absolute;
-    bottom: 0; /* Nằm ở dưới cùng của avatar */
-    right: 0; /* Nằm ở bên phải cùng của avatar */
-    background-color: #09D1C7; /* Màu xanh từ bảng màu của bạn */
+    bottom: 0; 
+    right: 0; 
+    background-color: #09D1C7; 
     color: white;
-    border-radius: 50%; /* Làm tròn thành hình tròn */
-    width: 25px; /* Kích thước icon */
-    height: 25px; /* Kích thước icon */
+    border-radius: 50%; 
+    width: 25px; 
+    height: 25px; 
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 0.8rem;
     cursor: pointer;
-    border: 2px solid white; /* Viền trắng */
+    border: 2px solid white; 
     z-index: 5;
 }
 
-/* CSS CHO CARD FORM */
 .profile-card {
-    background-color: #fff; /* Đổi thành màu trắng đục */
+    background-color: #fff; 
     border: none;
     color: #333;
-    /* Thêm padding-top để chừa chỗ cho avatar */
     padding-top: 70px !important;
 }
 
@@ -73,7 +67,6 @@
     }
 
     .profile-avatar-container {
-        /* Đẩy avatar lên 1 chút trên mobile */
         top: 120px;
     }
 }
