@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace SportCourtManagement.Models.Account
+namespace SportCourtManagement.ViewModels.Account
 {
     public class ForgotPasswordViewModel
     {

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SportCourtManagement.Services.API;
 using SportCourtManagement.Services.Data; // namespace chứa QuanLySanTheThaoContext
+using System.Text.Json.Serialization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,8 @@ builder.Services.AddDbContext<QuanLySanTheThaoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Sessions and MVC
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(
+    );
 
 // Cấu hình Session
 builder.Services.AddSession(options =>

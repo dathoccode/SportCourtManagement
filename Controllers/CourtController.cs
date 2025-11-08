@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SportCourtManagement.Services.API;
 using SportCourtManagement.Services.Data;
-using SportCourtManagement.Models;
 
 
 namespace SportCourtManagement.Controllers

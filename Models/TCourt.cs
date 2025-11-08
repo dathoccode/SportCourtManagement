@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace SportCourtManagement.Models;
 
@@ -11,9 +10,7 @@ public partial class TCourt
     public string CourtName { get; set; } = null!;
 
     public string CourtAddress { get; set; } = null!;
-    [Required(ErrorMessage = "Vui lòng nhập số điện thoại.")]
-    [RegularExpression(@"(0[3|5|7|8|9])+([0-9]{8})\b", ErrorMessage = "Số điện thoại không hợp lệ (Phải có 10 số và bắt đầu bằng 03, 05, 07, 08 hoặc 09).")]
-    [MaxLength(10)]
+
     public string? Contact { get; set; }
 
     public string SportId { get; set; } = null!;

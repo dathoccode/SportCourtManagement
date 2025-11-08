@@ -13,7 +13,7 @@ public partial class TPrice
 
     public TimeOnly EndTime { get; set; }
 
-    public decimal UnitPrice { get; set; }
+    public double UnitPrice { get; set; }
 
     public virtual TCourt Court { get; set; } = null!;
 }
