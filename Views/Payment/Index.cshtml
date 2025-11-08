@@ -1,7 +1,6 @@
-﻿@model List<SportCourtManagement.Models.TBookingDetail>
+﻿@model SportCourtManagement.Models.BookingInfoViewModel
 @{
     Layout = null;
-    // Tên / SĐT có thể đến từ ViewBag do controller đã set trước
 }
 <!doctype html>
 <html lang="vi">
@@ -32,8 +31,8 @@
                     <span>Thông tin sân</span>
                 </div>
                 <div class="card-body">
-                    <p><strong>Tên Sân: @ViewBag.CourtInf[0].CourtName</strong></p>
-                    <p><strong>Tên Sân: @ViewBag.CourtInf[0].CourtAddress</strong></p>
+                    <p><strong>Tên Sân: @Model.court.CourtName</strong></p>
+                    <p><strong>Tên Sân: @Model.court.CourtAddress</strong></p>
                 </div>
             </section>
 
@@ -44,12 +43,18 @@
                     <span>Thông tin lịch đặt</span>
                 </div>
                 <div class="card-body">
-                    <p><strong>Ngày:</strong> @DateTime.Now</p>
-
+                    <p><strong>Ngày:</strong> @Model.booking.BookingDate</p>
+                    <p><strong>Khung giờ:</strong></p>
+                    <ul>
+                    @foreach(var sl in Model.detail)
+                    {
+                            <li>@Model.slot.FirstOrDefault(s => s.SlotId == sl.SlotId)?.SlotName:@sl.StartTime - @sl.EndTime</li>
+					}
+                    </ul>
 
                     <p><strong>Đối tượng:</strong> Học sinh - sinh viên</p>
                     <p><strong>Tổng giờ: @ViewBag.TotalTime</strong></p>
-                    <p class="total-line"><strong>Tổng tiền:</strong> <span class="total-amount"> @(ViewBag.TotalTime * 70000)đ</span></p>
+                    <p class="total-line"><strong>Tổng tiền:</strong> <span class="total-amount"> @Model.booking.Price đ</span></p>
                 </div>
             </section>
 
@@ -57,15 +62,12 @@
 
             <!-- Form nhập thông tin -->
             <form asp-action="Confirm" id="bkForm" method="post" class="bk-form">
-                <input type="hidden" name="BookingId" value="" />
-
                 <label class="lbl">TÊN CỦA BẠN</label>
-                <input class="input" type="text" name="CustomerName" value="@ViewBag.UserName" placeholder="Nhập tên của bạn" required />
-
+                <input class="input" type="text" name="CustomerName" value="@Model.account.AccName" placeholder="Nhập tên của bạn" required />
                 <label class="lbl">SỐ ĐIỆN THOẠI</label>
                 <div class="phone-row">
                     <button type="button" class="phone-flag">🇻🇳 <span class="code">+84</span> ▾</button>
-                    <input class="input phone-input" type="tel" name="PhoneNumber" id="phone" value="@ViewBag.UserPhone" placeholder="Nhập số điện thoại" required />
+                    <input class="input phone-input" type="tel" name="PhoneNumber" id="phone" value="@Model.account.Phone" placeholder="Nhập số điện thoại" required />
                 </div>
 
                 <label class="lbl">GHI CHÚ CHO CHỦ SÂN</label>
@@ -93,31 +95,38 @@
 
     <!-- optional small script to prevent page jumping on mobile when focusing inputs -->
     <script>
-        document.getElementById('confirmBtn').addEventListener('click', function(e) {
-            console.log("button clicked");
-          e.preventDefault();
+        const rawModel = {
+            booking: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.booking)),
+            detail: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.detail)),
+        };
 
-          const phone = document.getElementById('phone').value.trim();
-          const regex = /^(0|\+84)[0-9]{9}$/;
+		//gửi dữ liệu lên server để thêm vào database
+        document.getElementById('bkForm').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-          if (!regex.test(phone)) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Sai định dạng!',
-              text: 'Vui lòng nhập đúng số điện thoại Việt Nam.'
+            // Lấy toàn bộ ViewModel từ hidden
+            let vm = rawModel;
+
+
+            fetch('/Payment/Confirm', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(vm)
+            })
+            .then(r => r.json())
+            .then(success => {
+                if (success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Đặt lịch thành công!',
+                    }).then(() => window.location.href = '/Home/Index');
+                } else {
+                    Swal.fire({ icon: 'error', title: 'Đặt lịch thất bại!' });
+                }
             });
-            return;
-          }
-
-          Swal.fire({
-            icon: 'success',
-            title: 'Thành công!',
-            text: 'Đơn hàng của bạn đã được xử lý thành công!',
-            timer: 3000
-          }).then(() => {
-            window.location.href = "/Home/Index";
-          });
         });
+
+
     </script>
 </body>
 </html>

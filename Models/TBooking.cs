@@ -15,7 +15,7 @@ public partial class TBooking
 
     public string StatusId { get; set; } = null!;
 
-    public decimal Price { get; set; }
+    public double Price { get; set; }
 
     public virtual TAccount Account { get; set; } = null!;
 

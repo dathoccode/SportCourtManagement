@@ -35,8 +35,8 @@ CREATE TABLE tPrice(
     SlotID NVARCHAR(10) NOT NULL,
     StartTime TIME NOT NULL,
     EndTime TIME NOT NULL,
-    UnitPrice MONEY NOT NULL,
-    PRIMARY KEY (CourtID, SlotID),
+    UnitPrice float NOT NULL,
+    PRIMARY KEY (CourtID, SlotID, StartTime),
     FOREIGN KEY (CourtID) REFERENCES tCourt(CourtID)
 );
 
@@ -69,7 +69,7 @@ CREATE TABLE tBooking(
     BookingDate DATETIME NOT NULL,
     Sale FLOAT NULL,
     StatusID NVARCHAR(10) NOT NULL,
-    Price MONEY NOT NULL,
+    Price float NOT NULL,
     FOREIGN KEY (AccountID) REFERENCES tAccount(AccountID),
     FOREIGN KEY (StatusID) REFERENCES tStatus(StatusID)
 );
