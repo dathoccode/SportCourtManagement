@@ -16,7 +16,7 @@ VALUES
 
 INSERT INTO tRole(RoleID, RoleName) values
 ('R001', N'User'),
-('R002', N'Admin'),
+('R002', N'Admin');
 
 INSERT INTO tCourt(CourtID, CourtName, CourtAddress, SportID, Contact, OpenTime, CloseTime, Img, Rating)
 VALUES
